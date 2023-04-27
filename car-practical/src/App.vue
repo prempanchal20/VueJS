@@ -1,22 +1,21 @@
 <template>
-  <navbar></navbar>
-  <cardDemo :cars="cars" :getPrice="getPrice"></cardDemo>
+  <navbar/>
+  <GalleryCard :cars="cars" :getPrice="getPrice"></GalleryCard>
 </template>
 
 <script>
-import cardDemo from "./components/cardDemo.vue";
+import GalleryCard from "./components/GalleryCard.vue";
 import navbar from "./components/Navbar.vue";
 
 export default {
   name: "App",
   components: {
-    cardDemo,
+    GalleryCard,
     navbar,
   },
   
   methods: {
     getPrice(price, carName) {
-      console.log(price, carName);
       alert(`${carName}, ${price}`);
     },
   },
