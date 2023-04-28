@@ -66,7 +66,7 @@ export default {
                 },
                 {
                     name: "Maruti Suzuki Alto",
-                    price: "₹3.04 - ₹4.41 Lakh",
+                    price: "",
                     description: "The Maruti Suzuki Alto is a budget-friendly hatchback with a simple yet functional design. It comes with a choice of petrol engines and offers great fuel efficiency, making it a top choice for first-time car buyers.",
                     image: "https://marutisuzukiarenaprodcdn.azureedge.net/-/media/images/maruti/marutisuzuki/car/car-profile-shots/alto-800/alto800_blazing_red/alto800_blazing_red_new.ashx",
                 },
