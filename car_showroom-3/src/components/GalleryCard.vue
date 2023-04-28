@@ -1,6 +1,6 @@
 <template>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<div class="container-content">
+<div class="container-content" >
     <div class="container" v-for="item in cars">
         <div class="card">
             <div class="box">
@@ -21,7 +21,7 @@
                     <div class="button">
                         <a v-if="item.price === ''" class="card-btn">Available Soon </a>
 
-                        <a v-else class="card-button" v-on:click="emitPrice(item.price, item.name)">Price
+                        <a v-else class="card-button" v-on:click="emitPrice(item.price, item.name)">Info
                         </a>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-    name: "galleryCard",
+    name: "GalleryCard",
     methods: {
         truncatedDescription(description) {
             let maxLength = 50;
@@ -58,13 +58,12 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+
 }
 
 body {
@@ -154,7 +153,7 @@ body {
     display: inline-block;
     padding: 8px 20px;
     background: #e91e63;
-    margin-top: 15px;
+    margin-top: 35px;
     text-decoration: none;
     border-radius: 20px;
     font-weight: 400;
