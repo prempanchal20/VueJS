@@ -1,17 +1,15 @@
 <template>
-  <navbar/>
   <GalleryCard :cars="cars" :getPrice="getPrice"></GalleryCard>
 </template>
 
 <script>
 import GalleryCard from "./components/GalleryCard.vue";
-import navbar from "./components/Navbar.vue";
 
 export default {
   name: "App",
   components: {
     GalleryCard,
-    navbar,
+  
   },
   
   methods: {
