@@ -1,22 +1,22 @@
 <template>
-<section class="car_content">
-    <div class="car_details" v-for="item in cars" :key="item.getPrice">
-        <div class="card">
-            <div class="box">
-                <div class="content">
+<section class="car-content">
+    <div class="car-details" v-for="item in cars" :key="item.getPrice">
+        <div class="car-card">
+            <div class="car-box">
+                <div class="car-container">
                     <div class="car-name">
                         <h3>{{ item.name }}</h3>
                     </div>
-                    <div class="images">
+                    <div class="car-images">
                         <img :src="item.image" v-bind:alt="car - image" />
                     </div>
 
                     <p>{{ truncatedDescription(item.description) }}</p>
 
                     <div class="button">
-                        <a v-if="item.price === ''" class="avilable">Available Soon </a>
+                        <a v-if="item.price === ''" class="avilable-btn">Available Soon </a>
 
-                        <a v-else class="info" v-on:click="emitPrice(item.price, item.name)">Info 
+                        <a v-else class="info-btn" v-on:click="emitPrice(item.price, item.name)">Info
                         </a>
                     </div>
                 </div>
@@ -69,11 +69,11 @@ body {
     background: #232427;
 }
 
-.car_details {
+.car-details {
     margin: 40px 0;
 }
 
-.card {
+.car-card {
     position: relative;
     min-width: 320px;
     height: 440px;
@@ -84,7 +84,7 @@ body {
     margin: 30px;
 }
 
-.box {
+.car-box {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -98,13 +98,12 @@ body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.content {
+.car-container {
     padding: 20px;
     text-align: center;
 }
 
-
-.content h2 {
+.car-container h2 {
     position: absolute;
     top: -10px;
     right: 30px;
@@ -112,13 +111,13 @@ body {
     color: rgba(255, 255, 255, 0.05);
 }
 
-.content h3 {
+.car-container h3 {
     font-size: 1.8em;
     color: rgba(255, 255, 255, 0.5);
     z-index: 1;
 }
 
-.content p {
+.car-container p {
     font-size: 16px;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.5);
@@ -129,7 +128,7 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.content a {
+.car-container a {
     position: relative;
     display: inline-block;
     padding: 5px 40px;
@@ -139,11 +138,11 @@ body {
     color: #fff;
 }
 
-.images img {
+.car-images img {
     width: 90%;
 }
 
-.images {
+.car-images {
     height: 170px;
 }
 
@@ -151,7 +150,7 @@ body {
     height: 90px;
 }
 
-.car_content {
+.car-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -161,8 +160,8 @@ body {
     cursor: pointer;
 }
 
-.button .avilable {
-    background-color: #1e1f23 !important;
+.button .avilable-btn {
+    background-color: #1e1f23;
     cursor: default;
 }
 </style>
