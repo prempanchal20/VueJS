@@ -1,14 +1,14 @@
 <template>
-<div class="container-content">
-    <div class="container" v-for="item in cars" :key="item.getPrice">
-        <div class="card">
-            <div class="box">
-                <div class="content">
+<section class="car-content">
+    <div class="car-details" v-for="item in cars" :key="item.getPrice">
+        <div class="car-card">
+            <div class="car-box">
+                <div class="car-container">
                     <div class="car-name">
                         <h3>{{ item.name }}</h3>
                     </div>
-                    <div class="images">
-                        <img :src="item.image" v-bind:alt="car - image" />
+                    <div class="car-images">
+                        <img :src="item.image" v-bind:alt="car-image" />
                     </div>
 
                     <p>{{ truncatedDescription(item.description) }}</p>
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 </template>
 
 <script>
@@ -60,19 +60,14 @@ export default {
 }
 
 body {
-    background: #232427 !important;
+    background: #232427;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    max-width: 1600px;
+.car-details {
     margin: 40px 0;
 }
 
-.container .card {
+.car-card {
     position: relative;
     min-width: 320px;
     height: 440px;
@@ -83,7 +78,7 @@ body {
     margin: 30px;
 }
 
-.container .card .box {
+.car-box {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -95,25 +90,14 @@ body {
     border: 2px solid #1e1f23;
     border-radius: 15px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    transition: 0.5s;
-    overflow: hidden;
 }
 
-.container .card .box:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgba(212, 182, 182, 0.05);
-    pointer-events: none;
-}
-
-.container .card .box .content {
+.car-container {
     padding: 20px;
     text-align: center;
 }
 
-.container .card .box .content h2 {
+.car-container h2 {
     position: absolute;
     top: -10px;
     right: 30px;
@@ -121,44 +105,38 @@ body {
     color: rgba(255, 255, 255, 0.05);
 }
 
-.container .card .box .content h3 {
+.car-container h3 {
     font-size: 1.8em;
     color: rgba(255, 255, 255, 0.5);
     z-index: 1;
-    transition: 0.5s;
 }
 
-.container .card .box .content p {
+.car-container p {
     font-size: 16px;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.5);
-    z-index: 1;
-    transition: 0.5s;
 }
 
-.container .card:hover .box .content h3,
-.container .card:hover .box .content p {
+.card:hover h3,
+.card:hover p {
     color: rgba(255, 255, 255, 1);
 }
 
-.container .card .box .content a {
+.car-container a {
     position: relative;
     display: inline-block;
-    padding: 8px 20px;
+    padding: 5px 40px;
     background: #e91e63;
     margin-top: 15px;
-    text-decoration: none;
     border-radius: 20px;
-    font-weight: 400;
     color: #fff;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.images img {
+.car-images img {
     width: 90%;
 }
 
-.images {
+.car-images {
     height: 170px;
 }
 
@@ -166,9 +144,13 @@ body {
     height: 90px;
 }
 
-.container-content {
+.car-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.button .card-button  {
+    text-decoration: none;
 }
 </style>
