@@ -1,7 +1,7 @@
 <template>
-<header class="header">
-    <nav>
-        <div class="logo">
+<section class="header-go">
+    <div class="header-content">
+        <div class="header-logo">
             <a href="index.html">Classic Cruisers</a>
         </div>
         <input type="checkbox" id="menu-toggle" />
@@ -9,8 +9,8 @@
         <ul class="menu">
             <li><a href="#">Home</a></li>
         </ul>
-    </nav>
-</header>
+    </div>
+</section>
 </template>
 
 <style>
@@ -25,7 +25,7 @@
     list-style: none;
 }
 
-.header {
+.header-go {
     position: sticky;
     top: 0;
     width: 100%;
@@ -34,20 +34,20 @@
     z-index: 1;
 }
 
-nav {
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
 }
 
-.logo a {
+.header-logo a {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
 }
 
-.logo a span {
+.header-logo a span {
     color: #8739fa;
 }
 
