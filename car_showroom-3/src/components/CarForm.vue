@@ -1,27 +1,59 @@
 <template>
+<!-- Add Car Modal -->
 <vee-form class="modal" :validation-schema="schema">
     <div class="modal-content">
         <h2>Add Car</h2>
+
         <div class="car-details">
             <label for="name">Car Name:</label>
-            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" />
+            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="name" />
             <ErrorMessage class="error-text" name="name" />
 
             <label for="description">Car Description:</label>
-            <textarea id="description" name="description" rows="4" cols="50" placeholder="enter car description"></textarea>
+            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="description"></vee-field>
 
             <ErrorMessage class="error-text" name="description" />
 
             <label for="price">Car Price:</label>
-            <vee-field type="number" id="car-price" name="price" placeholder="enter car price" />
+            <vee-field type="number" id="car-price" name="price" placeholder="enter car price" v-model="price" />
             <ErrorMessage class="error-text" name="price" />
 
-            <label for="image">Car Image:</label>
-            <vee-field type="text" id="car-image" name="image" placeholder="enter Image URL" />
-            <ErrorMessage class="error-text" name="image" />
+            <label for="url">Car Image:</label>
+            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="url" />
+            <ErrorMessage class="error-text" name="url" />
+
             <div class="button">
-                <button type="reset" class="cancel">Cancel</button>
-                <button type="submit" class="submit" @submit="modal"> Submit</button>
+                <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
+            </div>
+        </div>
+    </div>
+</vee-form>
+
+<!--Edit Button Modal-->
+<vee-form class="edit-modal" :validation-schema="schema">
+    <div class="modal-content">
+        <h2>Edit Car</h2>
+
+        <div class="car-details">
+            <label for="name">Car Name:</label>
+            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="name" />
+            <ErrorMessage class="error-text" name="name" />
+
+            <label for="description">Car Description:</label>
+            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="description"></vee-field>
+
+            <ErrorMessage class="error-text" name="description" />
+
+            <label for="price">Car Price:</label>
+            <vee-field type="number" id="car-price" name="price" placeholder="enter car price" v-model="price" />
+            <ErrorMessage class="error-text" name="price" />
+
+            <label for="url">Car Image:</label>
+            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="url" />
+            <ErrorMessage class="error-text" name="url" />
+
+            <div class="button">
+                <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
             </div>
         </div>
     </div>
@@ -29,23 +61,35 @@
 </template>
 
 <script>
-import { ErrorMessage } from 'vee-validate';
+import {
+    ErrorMessage
+} from 'vee-validate';
+
 export default {
+    name: 'CarForm',
+
+    props:[],
     data() {
         return {
             schema: {
                 name: "required",
                 description: "required|min:30|max:120",
-                image: "required",
+                url: "required|url",
                 price: "required",
             }
         }
     },
+
     methods: {
-        modal(values) {
-            console.log(values);
-        }
-    },
+        getFormData() {
+            alert(` 
+            "Created Data"\n\n
+            "Car Name is-" ${this.name}, 
+            "Car Description is- " ${this.description}, 
+            "Car Price is- " ${this.price}, 
+            "Car URL is- " ${this.url}`)
+        },
+    }
 }
 </script>
 
@@ -57,6 +101,10 @@ export default {
     text-decoration: none;
     list-style: none;
     color: white;
+}
+
+.car-details {
+    display: grid;
 }
 
 .modal {
@@ -92,7 +140,7 @@ export default {
     cursor: pointer;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
 }
@@ -103,6 +151,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="url"],
 textarea {
     padding: 10px;
     margin-top: 5px;
@@ -124,17 +173,6 @@ button[type="submit"] {
     margin-right: 10%;
 }
 
-button[type="reset"] {
-    background-color: red;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 30%;
-}
-
 .button {
     display: flex;
     justify-content: space-evenly;
@@ -147,5 +185,11 @@ h2 {
 
 .error-text {
     color: rgb(219, 81, 81);
+}
+
+/* Edit Modal */
+.edit-modal {
+    height: 100vh;
+    display: none;
 }
 </style>

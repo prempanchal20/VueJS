@@ -2,7 +2,7 @@
 <div class="fonts" :style="{fontFamily:'Poppins, sans-serif'}">
     <navbar />
     <GalleryCard :cars="cars" v-on:emitAlert="emitPrice"></GalleryCard>
-    <CarForm v-if="toggleBtn" />
+    <CarForm v-if="toggleBtn" {{editModalopen}} />
 </div>
 </template>
 

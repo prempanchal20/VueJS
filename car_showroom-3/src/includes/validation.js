@@ -5,7 +5,7 @@ import {
   ErrorMessage,
   configure,
 } from "vee-validate";
-import { required, min, max } from "@vee-validate/rules";
+import { required, min, max, url } from "@vee-validate/rules";
 
 export default {
   install(app) {
@@ -16,6 +16,7 @@ export default {
     defineRule("required", required);
     defineRule("min", min);
     defineRule("max", max);
+    defineRule("url", url);
 
     configure({
       generateMessage: (ctx) => {
@@ -25,13 +26,14 @@ export default {
           min: `This Field ${ctx.field} is Too Short`,
 
           max: `This Field ${ctx.field} is Too Long`,
+
+          url: `This Field ${ctx.field} is not Valid URL`,
         };
 
         const message = messages[ctx.rule.name]
           ? messages[ctx.rule.name]
           : "Invalid Field";
-
-        return message
+        return message;
       },
     });
   },

@@ -1,7 +1,7 @@
 <template >
-<header class="header">
+<section class="header">
     <nav>
-        <div  class="logo">
+        <div class="logo">
             <a href="index.html">Classic Cruisers</a></div>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
@@ -10,10 +10,9 @@
             <li><a href="#">Home</a></li>
             <li><a href="#" v-on:click="toggle">Add Car</a></li>
           </ul>
-        
     </nav>
     <CarForm v-if="toggleBtn" />
-</header>
+</section>
 </template>
 
 <script>

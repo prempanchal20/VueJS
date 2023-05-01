@@ -1,6 +1,6 @@
 <template>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<div class="container-content" >
+<div class="container-content">
     <div class="container" v-for="item in cars">
         <div class="card">
             <div class="box">
@@ -14,13 +14,12 @@
 
                     <p>{{ truncatedDescription(item.description) }}</p>
                     <div class="icons">
-                        <i class="bi bi-pencil"></i>
-                        <i class="bi bi-trash"></i>
+                        <i class="bi bi-pencil" v-on:click="editData"></i>
+                        <i class="bi bi-trash" v-on:click="deleteData(item.name)"></i>
                     </div>
 
                     <div class="button">
                         <a v-if="item.price === ''" class="card-btn">Available Soon </a>
-
                         <a v-else class="card-button" v-on:click="emitPrice(item.price, item.name)">Info
                         </a>
                     </div>
@@ -32,12 +31,13 @@
 </template>
 
 <script>
+import CarForm from './CarForm.vue';
+
 export default {
     name: "GalleryCard",
     methods: {
         truncatedDescription(description) {
             let maxLength = 50;
-
             if (description.length > maxLength) {
                 return description.slice(0, maxLength) + "...";
             } else {
@@ -45,7 +45,14 @@ export default {
             }
         },
         emitPrice(price, carName) {
-            this.$emit('emitAlert', price, carName)
+            this.$emit("emitAlert", price, carName);
+        },
+        deleteData(carName) {
+            alert(`Deleted ${carName}`);
+        },
+
+        editData() {
+            this.$emit("CarForm");
         },
     },
 
@@ -54,11 +61,13 @@ export default {
             type: Object,
         },
     },
+    components: {
+        CarForm,
+    }
 };
 </script>
 
 <style>
-
 * {
     margin: 0;
     padding: 0;
@@ -198,5 +207,10 @@ body {
 .bi-trash {
     position: absolute;
     left: 240px;
+    cursor: pointer;
+}
+
+.bi-pencil {
+    cursor: pointer;
 }
 </style>
