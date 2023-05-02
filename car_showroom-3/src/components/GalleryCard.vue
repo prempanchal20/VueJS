@@ -9,7 +9,7 @@
                         <h3>{{ item.name }}</h3>
                     </div>
                     <div class="images">
-                        <img :src="item.image" v-bind:alt="car - image" />
+                        <img :src="item.image" alt="car - image" />
                     </div>
 
                     <p>{{ truncatedDescription(item.description) }}</p>
@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import CarForm from './CarForm.vue';
-
 export default {
     name: "GalleryCard",
     methods: {
@@ -50,20 +48,25 @@ export default {
         deleteData(carName) {
             alert(`Deleted ${carName}`);
         },
-
         editData() {
-            this.$emit("CarForm");
+            this.$emit('editData')
+        },
+
+        getEditData() {
+            alert(` 
+            "Edited Data"\n\n
+            "Car Name is-" ${this.name}, 
+            "Car Description is- " ${this.description}, 
+            "Car Price is- " ${this.price}, 
+            "Car URL is- " ${this.url}`);
         },
     },
-
+    emits: ['editData'],
     props: {
         cars: {
             type: Object,
         },
     },
-    components: {
-        CarForm,
-    }
 };
 </script>
 
@@ -72,7 +75,6 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 body {

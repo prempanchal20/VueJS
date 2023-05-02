@@ -1,8 +1,9 @@
 <template>
-<div class="fonts" :style="{fontFamily:'Poppins, sans-serif'}">
+<div class="fonts" :style="{ fontFamily: 'Poppins, sans-serif' }">
     <navbar />
-    <GalleryCard :cars="cars" v-on:emitAlert="emitPrice"></GalleryCard>
-    <CarForm v-if="toggleBtn" {{editModalopen}} />
+    <GalleryCard :cars="cars" v-on:emitAlert="emitPrice" v-on:editData="editData"></GalleryCard>
+    <CarForm v-if="toggleBtn" />
+    <CarForm v-if="editModel" :editModel="editModel"/>
 </div>
 </template>
 
@@ -23,10 +24,15 @@ export default {
         emitPrice(price, carName) {
             alert(`${carName}, ${price}`);
         },
+
+        editData() {
+            this.editModel = true
+        },
     },
 
     data() {
         return {
+            editModel: false,
             cars: [{
                     name: "Maruti Suzuki Swift",
                     price: "₹5.81 - ₹8.56 Lakh",

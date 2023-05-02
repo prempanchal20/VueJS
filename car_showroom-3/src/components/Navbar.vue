@@ -1,4 +1,4 @@
-<template >
+<template>
 <section class="header">
     <nav>
         <div class="logo">
@@ -9,7 +9,7 @@
         <ul class="menu">
             <li><a href="#">Home</a></li>
             <li><a href="#" v-on:click="toggle">Add Car</a></li>
-          </ul>
+        </ul>
     </nav>
     <CarForm v-if="toggleBtn" />
 </section>
@@ -63,6 +63,9 @@ nav {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
+    border: solid white 1px;
+    padding: 10px;
+    border-radius:10px;
 }
 
 .logo a span {

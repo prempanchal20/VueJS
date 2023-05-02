@@ -1,39 +1,8 @@
 <template>
-<!-- Add Car Modal -->
 <vee-form class="modal" :validation-schema="schema">
     <div class="modal-content">
-        <h2>Add Car</h2>
-
-        <div class="car-details">
-            <label for="name">Car Name:</label>
-            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="name" />
-            <ErrorMessage class="error-text" name="name" />
-
-            <label for="description">Car Description:</label>
-            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="description"></vee-field>
-
-            <ErrorMessage class="error-text" name="description" />
-
-            <label for="price">Car Price:</label>
-            <vee-field type="number" id="car-price" name="price" placeholder="enter car price" v-model="price" />
-            <ErrorMessage class="error-text" name="price" />
-
-            <label for="url">Car Image:</label>
-            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="url" />
-            <ErrorMessage class="error-text" name="url" />
-
-            <div class="button">
-                <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
-            </div>
-        </div>
-    </div>
-</vee-form>
-
-<!--Edit Button Modal-->
-<vee-form class="edit-modal" :validation-schema="schema">
-    <div class="modal-content">
-        <h2>Edit Car</h2>
-
+        <h2 v-if="editModel">Edit car</h2>
+        <h2 v-else>Add car</h2>
         <div class="car-details">
             <label for="name">Car Name:</label>
             <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="name" />
@@ -62,13 +31,12 @@
 
 <script>
 import {
-    ErrorMessage
+    ErrorMessage,
 } from 'vee-validate';
 
 export default {
-    name: 'CarForm',
-
-    props:[],
+    name: "CarForm",
+    components: "GalleryCard",
     data() {
         return {
             schema: {
@@ -77,19 +45,26 @@ export default {
                 url: "required|url",
                 price: "required",
             }
-        }
+        };
+    },
+
+    props: {
+        editModel: {
+            type: Boolean,
+        },
     },
 
     methods: {
         getFormData() {
             alert(` 
-            "Created Data"\n\n
+            "Created Data"\n
             "Car Name is-" ${this.name}, 
             "Car Description is- " ${this.description}, 
             "Car Price is- " ${this.price}, 
-            "Car URL is- " ${this.url}`)
+            "Car URL is- " ${this.url}`);
         },
-    }
+
+    },
 }
 </script>
 
@@ -113,7 +88,7 @@ export default {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #151418;
     border-radius: 10px;
 }
 
@@ -185,11 +160,5 @@ h2 {
 
 .error-text {
     color: rgb(219, 81, 81);
-}
-
-/* Edit Modal */
-.edit-modal {
-    height: 100vh;
-    display: none;
 }
 </style>
