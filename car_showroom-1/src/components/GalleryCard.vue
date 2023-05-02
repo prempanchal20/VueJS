@@ -8,13 +8,13 @@
                         <h3>{{ item.name }}</h3>
                     </div>
                     <div class="car-images">
-                        <img :src="item.image" v-bind:alt="car-image" />
+                        <img :src="item.image" alt="car-image" />
                     </div>
 
                     <p>{{ truncatedDescription(item.description) }}</p>
 
                     <div class="button">
-                        <a href="" class="card-button" v-on:click="getPrice(item.price, item.name)">Info
+                        <a href="" class="card-button" v-on:click.prevent="getPrice(item.price, item.name)">Info
                         </a>
                     </div>
                 </div>
@@ -28,6 +28,11 @@
 export default {
     name: "GalleryCard",
     methods: {
+
+        getPrice(carName, price) {
+            alert(`${carName}, ${price}`);
+        },
+
         truncatedDescription(description) {
             let maxLength = 50;
             if (description.length > maxLength) {
@@ -39,9 +44,6 @@ export default {
     },
 
     props: {
-        getPrice: {
-            type: Function,
-        },
         cars: {
             type: Object,
         },
@@ -150,7 +152,7 @@ body {
     justify-content: center;
 }
 
-.button .card-button  {
+.button .card-button {
     text-decoration: none;
 }
 </style>
