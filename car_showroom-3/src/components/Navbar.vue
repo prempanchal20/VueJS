@@ -2,12 +2,11 @@
 <section class="header">
     <nav>
         <div class="logo">
-            <a href="index.html">Classic Cruisers</a></div>
+            <a href="index.html">Car Showroom</a></div>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
         <ul class="menu">
-            <li><a href="#">Home</a></li>
             <li><a href="#" v-on:click="toggle">Add Car</a></li>
         </ul>
     </nav>
@@ -28,7 +27,6 @@ export default {
     methods: {
         toggle() {
             this.$emit('toggleBtn');
-            console.log("object");
         }
     },
 };
@@ -48,7 +46,7 @@ export default {
     top: 0;
     width: 100%;
     box-shadow: 0 4px 20px hsla(207, 24%, 35%, 0.1);
-    background-color: #151418;
+    background-color: #1a1a1a;
     z-index: 1;
 }
 

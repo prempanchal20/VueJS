@@ -1,37 +1,40 @@
 <template>
-<vee-form class="modal" :validation-schema="schema">
-    {{ editCar }}
-    <div class="modal-content">
+    <vee-form class="modal" :validation-schema="schema">
+        {{ editCar }}
+        <div class="modal-content">
 
-        <h2 v-if="editCar">Edit car</h2>
-        <h2 v-else>Add car</h2>
+            <h2 v-if="editCar">Edit car</h2>
+            <h2 v-else>Add car</h2>
 
-        <div class="car-details">
-            <label for="name">Car Name: </label>
-            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="editCar.name" />
-            <ErrorMessage class="error-text" name="name" />
+            <div class="car-details">
+                <label for="name">Car Name: </label>
+                <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="editCar.name" />
+                <ErrorMessage class="error-text" name="name" />
 
-            <label for="description">Car Description:</label>
-            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="editCar.description"></vee-field>
+                <label for="description">Car Description:</label>
+                <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50"
+                    placeholder="enter car description" v-model="editCar.description"></vee-field>
 
-            <ErrorMessage class="error-text" name="description" />
+                <ErrorMessage class="error-text" name="description" />
 
-            <label for="price">Car Price:</label>
-            <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="editCar.price" />
-            <ErrorMessage class="error-text" name="price" />
+                <label for="price">Car Price:</label>
+                <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="editCar.price" />
+                <ErrorMessage class="error-text" name="price" />
 
-            <label for="url">Car Image:</label>
-            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="editCar.image" />
-            <ErrorMessage class="error-text" name="url" />
+                <label for="url">Car Image:</label>
+                <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="editCar.image" />
+                <ErrorMessage class="error-text" name="url" />
 
-            <div class="button">
-                <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
+                <div class="button">
+                    <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
 
-                <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
+                    <button type="submit" class="submit" v-on:click.prevent="updateData" v-if="editCar">Submit</button>
+
+                    <button type="submit" class="submit" v-on:click.prevent="getFormData" v-else>Submit</button>
+                </div>
             </div>
         </div>
-    </div>
-</vee-form>
+    </vee-form>
 </template>
 
 <script>
@@ -91,13 +94,19 @@ export default {
             "Car Description is- " ${this.description}, 
             "Car Price is- " ${this.price}, 
             "Car URL is- " ${this.url}`);
+        },
 
+        alertUpdateData() {
+            alert(` 
+            "Edited Data"\n
+            "Car Name is-" ${this.editCar.name}, 
+            "Car Description is- " ${this.editCar.description}, 
+            "Car Price is- " ${this.editCar.price}, 
+            "Car URL is- " ${this.editCar.image}`);
         },
 
         onCancel() {
-            this.isAddModel = false;
-            this.editModel = false;
-            console.log('cancel works..!!');
+            this.$emit('onCancel');
         }
     },
 }

@@ -1,33 +1,33 @@
 <template>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-<div class="container-content">
-    <div class="container" v-for="item in cars">
-        <div class="card">
-            <div class="box">
-                <div class="content">
-                    <div class="car-name">
-                        <h3>{{ item.name }}</h3>
-                    </div>
-                    <div class="images">
-                        <img :src="item.image" alt="car - image" />
-                    </div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <div class="container-content">
+        <div class="container" v-for="item in cars">
+            <div class="card">
+                <div class="box">
+                    <div class="content">
+                        <div class="car-name">
+                            <h3>{{ item.name }}</h3>
+                        </div>
+                        <div class="images">
+                            <img :src="item.image" alt="car - image" />
+                        </div>
 
-                    <p>{{ truncatedDescription(item.description) }}</p>
-                    <div class="icons">
-                        <i class="bi bi-pencil" v-on:click="editData(item)"></i>
-                        <i class="bi bi-trash" v-on:click="deleteData(item.name)"></i>
-                    </div>
+                        <p>{{ truncatedDescription(item.description) }}</p>
+                        <div class="icons">
+                            <i class="bi bi-pencil" v-on:click="editData(item)"></i>
+                            <i class="bi bi-trash" v-on:click="deleteData(item.name)"></i>
+                        </div>
 
-                    <div class="button">
-                        <a v-if="item.price === ''" class="card-btn">Available Soon </a>
-                        <a v-else class="card-button" v-on:click="emitPrice(item.price, item.name)">Info
-                        </a>
+                        <div class="button">
+                            <a v-if="item.price === ''" class="card-btn">Available Soon </a>
+                            <a v-else class="card-button" v-on:click="emitPrice(item.price, item.name)">Info
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -50,15 +50,6 @@ export default {
         },
         editData(car) {
             this.$emit('editData', car)
-        },
-
-        getEditData() {
-            alert(` 
-            "Edited Data"\n\n
-            "Car Name is-" ${this.name}, 
-            "Car Description is- " ${this.description}, 
-            "Car Price is- " ${this.price}, 
-            "Car URL is- " ${this.url}`);
         },
     },
     emits: ['editData'],
