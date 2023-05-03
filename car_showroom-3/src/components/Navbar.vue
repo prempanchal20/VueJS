@@ -6,12 +6,11 @@
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-        <ul class="menu">
+        <ul class="menu"> 
             <li><a href="#">Home</a></li>
             <li><a href="#" v-on:click="toggle">Add Car</a></li>
         </ul>
     </nav>
-    <CarForm v-if="toggleBtn" />
 </section>
 </template>
 
@@ -20,7 +19,7 @@ import CarForm from "./CarForm.vue";
 export default {
     data() {
         return {
-            toggleBtn: false,
+           
         };
     },
     components: {
@@ -28,8 +27,9 @@ export default {
     },
     methods: {
         toggle() {
-            return (this.toggleBtn = !this.toggleBtn);
-        },
+            this.$emit('toggleBtn');
+            console.log("object");
+        }
     },
 };
 </script>
@@ -65,7 +65,7 @@ nav {
     color: #fff;
     border: solid white 1px;
     padding: 10px;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 .logo a span {

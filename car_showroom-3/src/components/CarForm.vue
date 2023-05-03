@@ -1,27 +1,32 @@
 <template>
 <vee-form class="modal" :validation-schema="schema">
+    {{ editCar }}
     <div class="modal-content">
-        <h2 v-if="editModel">Edit car</h2>
+
+        <h2 v-if="editCar">Edit car</h2>
         <h2 v-else>Add car</h2>
+
         <div class="car-details">
-            <label for="name">Car Name:</label>
-            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="name" />
+            <label for="name">Car Name: </label>
+            <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="editCar.name" />
             <ErrorMessage class="error-text" name="name" />
 
             <label for="description">Car Description:</label>
-            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="description"></vee-field>
+            <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50" placeholder="enter car description" v-model="editCar.description"></vee-field>
 
             <ErrorMessage class="error-text" name="description" />
 
             <label for="price">Car Price:</label>
-            <vee-field type="number" id="car-price" name="price" placeholder="enter car price" v-model="price" />
+            <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="editCar.price" />
             <ErrorMessage class="error-text" name="price" />
 
             <label for="url">Car Image:</label>
-            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="url" />
+            <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="editCar.image" />
             <ErrorMessage class="error-text" name="url" />
 
             <div class="button">
+                <button type="reset" class="reset" v-on:click.prevent="resetData">Cancel</button>
+
                 <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
             </div>
         </div>
@@ -36,7 +41,6 @@ import {
 
 export default {
     name: "CarForm",
-    components: "GalleryCard",
     data() {
         return {
             schema: {
@@ -44,14 +48,39 @@ export default {
                 description: "required|min:30|max:120",
                 url: "required|url",
                 price: "required",
-            }
+            },
+
+            editCar: {
+                name: '',
+                price: '',
+                image: '',
+                description: '',
+            },
         };
     },
-
     props: {
         editModel: {
             type: Boolean,
         },
+
+        editCar: {
+            type: Object,
+        },
+
+        isAddModel: {
+            type: Boolean,
+        }
+    },
+
+    computed: {
+        updateData() {
+            return {
+                carName: this.cars.name || "",
+                carDescription: this.cars.description || "",
+                carPrice: this.cars.price || "",
+                carURL: this.cars.image || "",
+            }
+        }
     },
 
     methods: {
@@ -62,7 +91,10 @@ export default {
             "Car Description is- " ${this.description}, 
             "Car Price is- " ${this.price}, 
             "Car URL is- " ${this.url}`);
+
         },
+    },
+    resetData() {
 
     },
 }
@@ -138,6 +170,18 @@ textarea {
 
 button[type="submit"] {
     background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 30%;
+    margin-right: 10%;
+}
+
+button[type="reset"] {
+    background-color: rgb(209, 91, 91);
     color: white;
     padding: 10px;
     border: none;

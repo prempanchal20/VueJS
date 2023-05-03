@@ -14,7 +14,7 @@
 
                     <p>{{ truncatedDescription(item.description) }}</p>
                     <div class="icons">
-                        <i class="bi bi-pencil" v-on:click="editData"></i>
+                        <i class="bi bi-pencil" v-on:click="editData(item)"></i>
                         <i class="bi bi-trash" v-on:click="deleteData(item.name)"></i>
                     </div>
 
@@ -48,8 +48,8 @@ export default {
         deleteData(carName) {
             alert(`Deleted ${carName}`);
         },
-        editData() {
-            this.$emit('editData')
+        editData(car) {
+            this.$emit('editData', car)
         },
 
         getEditData() {
