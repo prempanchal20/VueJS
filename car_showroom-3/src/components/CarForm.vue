@@ -25,7 +25,7 @@
             <ErrorMessage class="error-text" name="url" />
 
             <div class="button">
-                <button type="reset" class="reset" v-on:click.prevent="resetData">Cancel</button>
+                <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
 
                 <button type="submit" class="submit" v-on:click.prevent="getFormData"> Submit</button>
             </div>
@@ -93,9 +93,12 @@ export default {
             "Car URL is- " ${this.url}`);
 
         },
-    },
-    resetData() {
 
+        onCancel() {
+            this.isAddModel = false;
+            this.editModel = false;
+            console.log('cancel works..!!');
+        }
     },
 }
 </script>
