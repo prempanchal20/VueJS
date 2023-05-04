@@ -1,30 +1,29 @@
 <template>
     <section class="car-content">
-        <div class="car-details">
-            <div class="car-card">
-                <div class="car-box">
-                    <div class="car-container">
-                        <div class="car-name">
-                            <h3>{{ name }}</h3>
-                        </div>
-                        <div class="car-images">
-                            <img :src="image" alt="car - image" />
-                        </div>
+        <div class="car-card">
+            <div class="car-box">
+                <div class="car-container">
+                    <div class="car-name">
+                        <h3>{{ name }}</h3>
+                    </div>
+                    <div class="car-images">
+                        <img :src="image" alt="car - image" />
+                    </div>
 
-                        <p>{{ truncatedDescription(description) }}</p>
+                    <p>{{ truncatedDescription(description) }}</p>
 
-                        <div class="button">
-                            <a v-if="price === ''" class="avilable-btn">Available Soon </a>
+                    <div class="button">
+                        <button v-if="price === ''" class="avilable-btn">Available Soon </button>
 
-                            <a v-else class="info-btn" v-on:click="emitPrice(price, item.name)">Info
-                            </a>
-                        </div>
+                        <button v-else class="info-btn" v-on:click="emitPrice(price, item.name)">Info
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </template>
+
 
 <script>
 export default {
@@ -67,9 +66,6 @@ body {
     background-color: #212A3E;
 }
 
-.car-details {
-    margin: 40px 0;
-}
 
 .car-card {
     position: relative;
@@ -80,6 +76,13 @@ body {
         5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     margin: 30px;
+}
+
+.cars-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .car-box {
@@ -126,7 +129,7 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.car-container a {
+.car-container button {
     position: relative;
     display: inline-block;
     padding: 5px 40px;
@@ -134,6 +137,8 @@ body {
     margin-top: 15px;
     border-radius: 20px;
     color: #fff;
+    cursor: pointer;
+    border: none;
 }
 
 .car-images img {

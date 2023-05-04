@@ -1,7 +1,9 @@
 <template>
     <div class="main-section">
         <Navbar />
-        <GalleryCard v-for="item in cars" v-bind="item" :v-on:emitAlert="emitPrice" />
+        <div class="cars-data">
+            <GalleryCard v-for="item in cars" v-bind="item" :v-on:emitAlert="emitPrice" />
+        </div>
     </div>
 </template>
 

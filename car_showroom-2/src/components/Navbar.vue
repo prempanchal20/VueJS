@@ -1,16 +1,17 @@
 <template>
-<section class="header-go">
-    <div class="header-content">
-        <div class="header-logo">
-            <a href="index.html">Car Showroom</a>
+    <section class="header-go">
+        <div class="header-content">
+            <div class="header-logo">
+                <a href="index.html">Car Showroom</a>
+            </div>
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+            <div class="button">
+                <button class="menu">Home</button>
+            </div>
         </div>
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="menu-icon">&#9776;</label>
-        <ul class="menu">
-            <li><a href="#">Home</a></li>
-        </ul>
-    </div>
-</section>
+    </section>
 </template>
 
 <style>
@@ -50,23 +51,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-.menu a {
+
+.menu button {
     display: block;
     padding: 7px 15px;
     font-size: 17px;
     font-weight: 500;
     transition: 0.2s all ease-in-out;
-    color: #fff;
-}
-
-.menu:hover a {
-    opacity: 0.4;
-}
-
-.menu a:hover {
-    opacity: 1;
     color: #fff;
 }
 
