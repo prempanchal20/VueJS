@@ -2,7 +2,7 @@
 <section class="header-go">
     <div class="header-content">
         <div class="header-logo">
-            <a href="index.html">Classic Cruisers</a>
+            <a href="index.html">Car Showroom</a>
         </div>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
@@ -29,8 +29,7 @@
     position: sticky;
     top: 0;
     width: 100%;
-    box-shadow: 0 4px 20px hsla(207, 24%, 35%, 0.1);
-    background-color: #151418;
+    background-color: black;
     z-index: 1;
 }
 
@@ -45,10 +44,6 @@
     font-size: 24px;
     font-weight: bold;
     color: #fff;
-}
-
-.header-logo a span {
-    color: #8739fa;
 }
 
 .menu {

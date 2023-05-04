@@ -1,29 +1,29 @@
 <template>
-<section class="car-content">
-    <div class="car-details" v-for="item in cars" :key="item.getPrice">
-        <div class="car-card">
-            <div class="car-box">
-                <div class="car-container">
-                    <div class="car-name">
-                        <h3>{{ item.name }}</h3>
-                    </div>
-                    <div class="car-images">
-                        <img :src="item.image" v-bind:alt="car - image" />
-                    </div>
+    <section class="car-content">
+        <div class="car-details">
+            <div class="car-card">
+                <div class="car-box">
+                    <div class="car-container">
+                        <div class="car-name">
+                            <h3>{{ name }}</h3>
+                        </div>
+                        <div class="car-images">
+                            <img :src="image" alt="car - image" />
+                        </div>
 
-                    <p>{{ truncatedDescription(item.description) }}</p>
+                        <p>{{ truncatedDescription(description) }}</p>
 
-                    <div class="button">
-                        <a v-if="item.price === ''" class="avilable-btn">Available Soon </a>
+                        <div class="button">
+                            <a v-if="price === ''" class="avilable-btn">Available Soon </a>
 
-                        <a v-else class="info-btn" v-on:click="emitPrice(item.price, item.name)">Info
-                        </a>
+                            <a v-else class="info-btn" v-on:click="emitPrice(price, item.name)">Info
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </template>
 
 <script>
@@ -45,13 +45,11 @@ export default {
     },
 
     props: {
-        getPrice: {
-            type: Function,
-        },
-        cars: {
-            type: Object,
-        },
-    },
+        name: String,
+        image: String,
+        price: Int8Array,
+        description: String,
+    }
 };
 </script>
 
@@ -66,7 +64,7 @@ export default {
 }
 
 body {
-    background: #232427;
+    background-color: #212A3E;
 }
 
 .car-details {
