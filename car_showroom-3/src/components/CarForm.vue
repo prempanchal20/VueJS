@@ -28,7 +28,7 @@
                 <div class="button">
                     <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
 
-                    <button type="submit" class="submit" v-on:click.prevent="updateData" v-if="editCar">Submit</button>
+                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-if="editCar">Submit</button>
 
                     <button type="submit" class="submit" v-on:click.prevent="getFormData" v-else>Submit</button>
                 </div>
@@ -54,10 +54,10 @@ export default {
             },
 
             editCar: {
-                name: '',
-                price: '',
-                image: '',
-                description: '',
+                name: this.editCar.name,
+                price: this.editCar.price,
+                image: this.editCar.image,
+                description: this.editCar.description,
             },
         };
     },
@@ -72,17 +72,6 @@ export default {
 
         isAddModel: {
             type: Boolean,
-        }
-    },
-
-    computed: {
-        updateData() {
-            return {
-                carName: this.cars.name || "",
-                carDescription: this.cars.description || "",
-                carPrice: this.cars.price || "",
-                carURL: this.cars.image || "",
-            }
         }
     },
 
