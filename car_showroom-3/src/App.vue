@@ -5,6 +5,7 @@
         <CarForm v-if="editModel" :editModel="editModel" :editCar="editCar" v-on:onCancel="onCancel" />
     </div>
 </template>
+
 <script>
 import CarForm from "./components/CarForm.vue";
 import GalleryCard from "./components/GalleryCard.vue";

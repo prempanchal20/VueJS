@@ -2,7 +2,7 @@
 <section class="header">
     <nav>
         <div class="logo">
-            <a href="index.html">Car Showroom</a></div>
+            <a href="">Car Showroom</a></div>
         <input type="checkbox" id="menu-toggle" />
         <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
@@ -69,10 +69,6 @@ nav {
 .logo :hover {
     background-color: white;
     color: black;
-}
-
-.logo a span {
-    color: #8739fa;
 }
 
 .menu {

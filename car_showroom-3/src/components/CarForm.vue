@@ -54,7 +54,7 @@ export default {
             },
 
             editCar: {
-                name: this.editCar.name,
+                name: this.editCar.name ,
                 price: this.editCar.price,
                 image: this.editCar.image,
                 description: this.editCar.description,
@@ -79,7 +79,7 @@ export default {
         getFormData() {
             alert(` 
             "Created Data"\n
-            "Car Name is-" ${this.name}, 
+            "Car Name is-" ${this.editCar.name}, 
             "Car Description is- " ${this.description}, 
             "Car Price is- " ${this.price}, 
             "Car URL is- " ${this.url}`);
