@@ -1,8 +1,9 @@
 <template>
-    <div class="main-section">
+    <div>
         <Navbar />
         <div class="cars-data">
-            <GalleryCard v-for="item in cars" v-bind="item" :v-on:emitAlert="emitPrice" />
+            <GalleryCard v-for="car in cars" :name="car.name" :price="car.price" :description="car.description"
+                :image="car.image" v-on:emitPriceAlert="emitPrice" />
         </div>
     </div>
 </template>
@@ -16,7 +17,7 @@ export default {
     },
 
     methods: {
-        emitPrice(price, carName) {
+        emitPrice(carName, price) {
             alert(`${carName}, ${price}`);
         },
     },

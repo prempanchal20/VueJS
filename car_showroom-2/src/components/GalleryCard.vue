@@ -15,7 +15,7 @@
                     <div class="button">
                         <button v-if="price === ''" class="avilable-btn">Available Soon </button>
 
-                        <button v-else class="info-btn" v-on:click="emitPrice(price, item.name)">Info
+                        <button v-else class="info-btn" v-on:click="emitPrice(name, price)">Info
                         </button>
                     </div>
                 </div>
@@ -28,7 +28,11 @@
 <script>
 export default {
     name: "GalleryCard",
+
     methods: {
+        emitPrice(carName, price) {
+            this.$emit('emitPriceAlert', carName, price)
+        },
         truncatedDescription(description) {
             let maxLength = 50;
             if (description.length > maxLength) {
@@ -36,20 +40,17 @@ export default {
             } else {
                 return description;
             }
-        },
-
-        emitPrice(price, carName) {
-            this.$emit('emitAlert', price, carName)
-        },
+        }
     },
 
     props: {
         name: String,
         image: String,
-        price: Int8Array,
+        price: String,
         description: String,
-    }
-};
+    },
+}
+
 </script>
 
 <style>
