@@ -1,6 +1,5 @@
 <template>
-    <vee-form class="modal" :validation-schema="schema">
-        {{ editCar }}
+    <vee-form class="modal" :validation-schema="schema" @submit="getFormData">
         <div class="modal-content">
 
             <h2 v-if="editCar">Edit car</h2>
@@ -8,29 +7,29 @@
 
             <div class="car-details">
                 <label for="name">Car Name: </label>
-                <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="editCar.name" />
+                <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="carData.name" />
                 <ErrorMessage class="error-text" name="name" />
 
                 <label for="description">Car Description:</label>
                 <vee-field id="car-description" name="description" as="textarea" rows="4" cols="50"
-                    placeholder="enter car description" v-model="editCar.description"></vee-field>
+                    placeholder="enter car description" v-model="carData.description"></vee-field>
 
                 <ErrorMessage class="error-text" name="description" />
 
                 <label for="price">Car Price:</label>
-                <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="editCar.price" />
+                <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="carData.price" />
                 <ErrorMessage class="error-text" name="price" />
 
                 <label for="url">Car Image:</label>
-                <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="editCar.image" />
+                <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="carData.image" />
                 <ErrorMessage class="error-text" name="url" />
 
                 <div class="button">
                     <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
 
-                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-if="editCar">Submit</button>
 
-                    <button type="submit" class="submit" v-on:click.prevent="getFormData" v-else>Submit</button>
+                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData">{{ editModel ? "Update" :
+                        "Submit" }}</button>
                 </div>
             </div>
         </div>
@@ -53,11 +52,11 @@ export default {
                 price: "required",
             },
 
-            editCar: {
-                name: this.editCar.name ,
-                price: this.editCar.price,
-                image: this.editCar.image,
-                description: this.editCar.description,
+            carData: {
+                name: this.editCar.name || "",
+                price: this.editCar.price || "",
+                image: this.editCar.image || "",
+                description: this.editCar.description || "",
             },
         };
     },
@@ -66,32 +65,35 @@ export default {
             type: Boolean,
         },
 
-        editCar: {
-            type: Object,
-        },
+        editCar: { type: Object },
 
         isAddModel: {
             type: Boolean,
-        }
+        },
+
+        editData: {
+            type: Boolean,
+        },
     },
 
     methods: {
         getFormData() {
             alert(` 
             "Created Data"\n
-            "Car Name is-" ${this.editCar.name}, 
+            "Car Name is-" ${this.name}, 
             "Car Description is- " ${this.description}, 
             "Car Price is- " ${this.price}, 
-            "Car URL is- " ${this.url}`);
+            "Car URL is- " ${this.image}`);
         },
 
         alertUpdateData() {
             alert(` 
             "Edited Data"\n
-            "Car Name is-" ${this.editCar.name}, 
-            "Car Description is- " ${this.editCar.description}, 
-            "Car Price is- " ${this.editCar.price}, 
-            "Car URL is- " ${this.editCar.image}`);
+            "Car Name is-" ${this.carData.name}, 
+            "Car Description is- " ${this.carData.description}, 
+            "Car Price is- " ${this.carData.price}, 
+            "Car URL is- " ${this.carData.image}`);
+            this.onCancel()
         },
 
         onCancel() {
@@ -196,6 +198,8 @@ button[type="reset"] {
 .button {
     display: flex;
     justify-content: space-evenly;
+    position: relative;
+    top: 3px;
 }
 
 h2 {
