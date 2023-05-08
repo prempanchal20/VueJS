@@ -49,7 +49,7 @@ export default {
                 name: "required",
                 description: "required|min:30|max:120",
                 url: "required|url",
-                price: "required|number",
+                price: "required",
             },
 
             carData: {
@@ -62,9 +62,7 @@ export default {
     },
     props: {
 
-        toggle: {
-            type: Boolean,
-        },
+
         editModel: {
             type: Boolean,
         },
@@ -226,9 +224,9 @@ h2 {
 
 
 @media only screen and (max-width: 958px) and (min-width: 350px) {
-.modal-content{
-    margin-top: 30%;
-    width: 80%;
+    .modal-content {
+        margin-top: 30%;
+        width: 80%;
+    }
 }
-} 
 </style>

@@ -12,7 +12,7 @@
                 :description="car.description" v-on:emitPriceAlert="emitPrice" v-on:editData="editData" />
 
 
-            <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar" :toggle="toggle"
+            <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
                 v-on:onCancel="onCancel" />
         </div>
     </div>
