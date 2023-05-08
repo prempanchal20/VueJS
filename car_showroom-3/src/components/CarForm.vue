@@ -223,4 +223,12 @@ h2 {
 .error-text {
     color: rgb(219, 81, 81);
 }
+
+
+@media only screen and (max-width: 958px) and (min-width: 350px) {
+.modal-content{
+    margin-top: 30%;
+    width: 80%;
+}
+} 
 </style>

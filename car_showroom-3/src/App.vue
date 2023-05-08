@@ -85,7 +85,7 @@ export default {
 .menu {
     position: absolute;
     top: 80px;
-    right: 50px;
+    right: 10px;
 }
 
 .menu button {

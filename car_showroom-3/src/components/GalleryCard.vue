@@ -223,4 +223,12 @@ body {
     bottom: 25px;
     font-size: 20px;
 }
+
+
+@media only screen and (max-width: 958px) and (min-width: 350px) {
+.car-content{
+    margin-top: 10%;
+}
+}
+
 </style>
