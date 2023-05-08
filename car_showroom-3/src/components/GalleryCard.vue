@@ -1,6 +1,7 @@
 <template>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <section class="car-content">
+
         <div class="car-card">
             <div class="car-box">
                 <div class="car-container">
@@ -28,6 +29,7 @@
         </div>
     </section>
 </template>
+
 
 <script>
 export default {
@@ -211,13 +213,13 @@ body {
 }
 
 #edit-icon {
-    right: 50px;
+    right: 55px;
     bottom: 25px;
     font-size: 20px;
 }
 
 #delete-icon {
-    left: 50px;
+    left: 55px;
     bottom: 25px;
     font-size: 20px;
 }

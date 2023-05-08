@@ -1,12 +1,19 @@
 <template>
     <div class="fonts" :style="{ fontFamily: 'Poppins, sans-serif' }">
-        <Navbar v-on:toggleBtn="toggleBtn" />
+
+        <Navbar />
         <div class="cars-data">
+
+            <ul class="menu">
+                <li><button v-on:click="toggle">Add Car</button></li>
+            </ul>
 
             <GalleryCard v-for="car in cars" :name="car.name" :image="car.image" :price="car.price"
                 :description="car.description" v-on:emitPriceAlert="emitPrice" v-on:editData="editData" />
-               
-            <CarForm v-if="editModel" :editModel="editModel" :editCar="editCar" v-on:onCancel="onCancel" />
+
+
+            <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar" :toggle="toggle"
+                v-on:onCancel="onCancel" />
         </div>
     </div>
 </template>
@@ -28,13 +35,14 @@ export default {
         },
 
         editData(data) {
-            this.editModel = true;
             this.editCar = data;
+            this.editModel = true;
             this.isAddModel = false;
         },
 
-        toggleBtn(value) {
+        toggle() {
             this.editModel = true;
+            this.isAddModel = true;
         },
 
         onCancel() {
@@ -72,3 +80,24 @@ export default {
     },
 };
 </script>
+
+<style>
+.menu {
+    position: absolute;
+    top: 80px;
+    right: 50px;
+}
+
+.menu button {
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.menu button {
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+}
+</style>

@@ -1,8 +1,9 @@
 <template>
     <vee-form class="modal" :validation-schema="schema" @submit="getFormData">
+
         <div class="modal-content">
 
-            <h2 v-if="editCar">Edit car</h2>
+            <h2 v-if="!isAddModel">Edit car</h2>
             <h2 v-else>Add car</h2>
 
             <div class="car-details">
@@ -27,9 +28,8 @@
                 <div class="button">
                     <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
 
-
-                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData">{{ editModel ? "Update" :
-                        "Submit" }}</button>
+                    <button type="submit" class="submit" v-if="isAddModel">Submit</button>
+                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>Update</button>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@ export default {
                 name: "required",
                 description: "required|min:30|max:120",
                 url: "required|url",
-                price: "required",
+                price: "required|number",
             },
 
             carData: {
@@ -61,11 +61,17 @@ export default {
         };
     },
     props: {
+
+        toggle: {
+            type: Boolean,
+        },
         editModel: {
             type: Boolean,
         },
 
-        editCar: { type: Object },
+        editCar: {
+            type: Object
+        },
 
         isAddModel: {
             type: Boolean,
@@ -76,14 +82,16 @@ export default {
         },
     },
 
+
     methods: {
         getFormData() {
             alert(` 
             "Created Data"\n
-            "Car Name is-" ${this.name}, 
-            "Car Description is- " ${this.description}, 
-            "Car Price is- " ${this.price}, 
-            "Car URL is- " ${this.image}`);
+            "Car Name is-" ${this.carData.name}, 
+            "Car Description is- " ${this.carData.description}, 
+            "Car Price is- " ${this.carData.price}, 
+            "Car URL is- " ${this.carData.image}`);
+            this.$emit('onCancel');
         },
 
         alertUpdateData() {
@@ -93,14 +101,19 @@ export default {
             "Car Description is- " ${this.carData.description}, 
             "Car Price is- " ${this.carData.price}, 
             "Car URL is- " ${this.carData.image}`);
-            this.onCancel()
+            this.$emit('onCancel');
         },
 
         onCancel() {
             this.$emit('onCancel');
+            this.editCar.name = ""
+            this.editCar.description = ""
+            this.editCar.price = ""
+            this.editCar.image = ""
         }
     },
 }
+
 </script>
 
 <style scoped>
