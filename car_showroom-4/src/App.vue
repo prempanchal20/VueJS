@@ -6,7 +6,7 @@
         </ul>
 
         <div class="cars-data">
-            <GalleryCard v-on:emitPriceAlert="emitPrice" v-on:editData="editData"  />
+            <GalleryCard v-on:emitPriceAlert="emitPrice" v-on:editData="editData" v-on:carsData="carsData" />
 
             <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
                 v-on:onCancel="onCancel" />
@@ -54,9 +54,10 @@ export default {
             this.editModel = false;
         },
 
-        // carsData() {
-        //     this.carsData
-        // },
+        carsData() {
+            this.carsData
+            console.log('Emit Pass..!!');
+        },
     },
 };
 </script>

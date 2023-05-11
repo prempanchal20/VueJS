@@ -10,8 +10,9 @@
                     <div class="car-images">
                         <img :src="item.image" alt="car - image" />
                     </div>
-
-                    <p>{{ truncatedDescription(item.details) }}</p>
+                    <div class="description">
+                        <p>{{ truncatedDescription(item.details) }}</p>
+                    </div>
 
                     <div class="button">
                         <button v-if="item.price === ''" class="avilable-btn">
@@ -24,7 +25,7 @@
                     </div>
                     <div class="icons">
                         <button class="bi bi-pencil" id="edit-icon" v-on:click="editData(item)"></button>
-                        <button class="bi bi-trash" id="delete-icon" v-on:click="deleteData(item.name)"></button>
+                        <button class="bi bi-trash" id="delete-icon" v-on:click="deleteData(item.id, item.name)"></button>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@ export default {
 
     data() {
         return {
-            data: ''
+            data: "",
         };
     },
 
@@ -61,10 +62,6 @@ export default {
             this.$emit("emitPriceAlert", carName, price);
         },
 
-        deleteData(name) {
-            alert(`Deleted ${name}`);
-        },
-
         editData(cars) {
             this.$emit("editData", cars);
         },
@@ -74,17 +71,26 @@ export default {
             const result = await axios.get(
                 "https://testapi.io/api/dartya/resource/cardata"
             );
-            this.data = result.data.data
-            // this.$emit('carsData', this.carsData);
+            this.data = result.data.data;
+            this.$emit("carsData", this.carsData);
         },
 
-        //GET Method for ID - Axios API
-        async carsID() {
-            const result = await axios.get("https://testapi.io/api/dartya/resource/cardata/id");
-            this.data = result.data.data.id
-            console.log(result)
-            console.log(carsID);
-        }
+        // DELETE Method - Axios API
+        async deleteData(itemId, itemName) {
+            // Delete Alert
+            const deleteAlert = window.confirm(
+                `Are You Sure Want to Delete ${itemName}`
+            );
+
+            if (deleteAlert == true) {
+                await axios
+                    .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
+                    .then((response) => console.log(response));
+                this.carsData();
+            } else {
+                alert("Your Data is Safe...!");
+            }
+        },
     },
 };
 </script>
@@ -134,7 +140,6 @@ body {
 }
 
 .car-container {
-    padding: 20px;
     text-align: center;
 }
 
@@ -176,15 +181,17 @@ body {
 }
 
 .car-images img {
-    width: 90%;
+    width: 100%;
+    height: 100%;
 }
 
 .car-images {
-    height: 170px;
+    height: 45%;
 }
 
 .car-name {
-    height: 90px;
+    height: 25%;
+    padding: 12%;
 }
 
 .car-content {
@@ -226,13 +233,13 @@ body {
 }
 
 #edit-icon {
-    right: 55px;
+    right: 35px;
     bottom: 25px;
     font-size: 20px;
 }
 
 #delete-icon {
-    left: 55px;
+    left: 70px;
     bottom: 25px;
     font-size: 20px;
 }

@@ -27,7 +27,8 @@
                 <div class="button">
                     <button type="reset" class="reset" v-on:click="onCancel">Cancel</button>
 
-                    <button type="submit" class="submit" v-if="isAddModel" v-on:click.prevent="getFormData">Submit</button>
+                    <button type="submit" class="submit" v-if="isAddModel" v-on:click.prevent="getFormData"
+                        v-on:click="carsData">Submit</button>
                     <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>Update</button>
                 </div>
             </div>
@@ -41,7 +42,6 @@ import {
 } from 'vee-validate';
 
 import axios from "axios";
-
 export default {
     name: "CarForm",
     data() {
@@ -58,6 +58,7 @@ export default {
                 price: this.editCar.price || "",
                 image: this.editCar.image || "",
                 details: this.editCar.details || "",
+                id: this.editCar.id,
             },
         };
     },
@@ -79,21 +80,21 @@ export default {
             type: Boolean,
         },
 
-        // carsData: {
-        //     type: Object,
-        // }
+        carsData: {
+            type: Function,
+        }
     },
 
     methods: {
-        alertUpdateData() {
-            alert(` 
-            "Edited Data"\n
-            "Car Name is-" ${this.carData.name}, 
-            "Car Description is- " ${this.carData.details}, 
-            "Car Price is- " ${this.carData.price}, 
-            "Car URL is- " ${this.carData.image}`);
-            this.$emit('onCancel');
-        },
+        // alertUpdateData() {
+        //     alert(` 
+        //     "Edited Data"\n
+        //     "Car Name is-" ${this.carData.name}, 
+        //     "Car Description is- " ${this.carData.details}, 
+        //     "Car Price is- " ${this.carData.price}, 
+        //     "Car URL is- " ${this.carData.image}`);
+        //     this.$emit('onCancel');
+        // },
 
         onCancel() {
             this.$emit('onCancel');
@@ -103,14 +104,27 @@ export default {
             this.carData.image = ""
         },
 
+
         // Post Method - Axios API
         getFormData() {
             axios.post(
                 "https://testapi.io/api/dartya/resource/cardata", this.carData
             ).then(response => console.log(response));
-            console.log('abcd', this.carData);
-            // this.carsData()
-            this.onCancel()
+            this.carsData;
+        },
+
+        // Put Method - Axios API
+        async alertUpdateData() {
+            await axios.put(
+                `https://testapi.io/api/dartya/resource/cardata/${this.carData.id}`,
+                {
+                    name: 'carData.name',
+                    details: 'carData.details',
+                    price: 'carData.price',
+                    image: 'carData.image',
+                }
+            )
+                .then((response) => console.log(response))
         },
     },
 }
