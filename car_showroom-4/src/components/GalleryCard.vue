@@ -23,9 +23,13 @@
                             Info
                         </button>
                     </div>
+
                     <div class="icons">
-                        <button class="bi bi-pencil" id="edit-icon" v-on:click="editData(item)"></button>
-                        <button class="bi bi-trash" id="delete-icon" v-on:click="deleteData(item.id, item.name)"></button>
+                        <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)">
+                        </button>
+
+                        <button class="bi bi-trash" id="delete-icon" v-on:click.prevent="deleteData(item.id, item.name)">
+                        </button>
                     </div>
                 </div>
             </div>
@@ -38,14 +42,18 @@ import axios from "axios";
 export default {
     name: "GalleryCard",
 
+    // props: {
+    //     data: Object
+    // },
+
     data() {
         return {
-            data: "",
+            data: Object
         };
     },
 
     created() {
-        this.carsData();
+        this.carsData()
     },
 
     methods: {
@@ -67,17 +75,19 @@ export default {
         },
 
         // GET Method - Axios API
-        async carsData() {
-            const result = await axios.get(
+        carsData() {
+            axios.get(
                 "https://testapi.io/api/dartya/resource/cardata"
-            );
-            this.data = result.data.data;
-            this.$emit("carsData", this.carsData);
+            ).then(response => {
+                this.data = response.data.data
+            })
         },
+    
 
         // DELETE Method - Axios API
         async deleteData(itemId, itemName) {
-            // Delete Alert
+
+            // Delete Data Alert
             const deleteAlert = window.confirm(
                 `Are You Sure Want to Delete ${itemName}`
             );

@@ -1,49 +1,62 @@
 <template>
-    <vee-form class="modal" :validation-schema="schema">
-        <div class="modal-content">
+    <div>
+        <vee-form class="modal" :validation-schema="schema">
+            <div class="modal-content">
 
-            <h2 v-if="!isAddModel">Edit car</h2>
-            <h2 v-else>Add car</h2>
+                <!-- <GalleryCard ref="functionCall" /> -->
 
-            <div class="car-details">
-                <label for="name">Car Name: </label>
-                <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="carData.name" />
-                <ErrorMessage class="error-text" name="name" />
+                <h2 v-if="!isAddModel">Edit car</h2>
+                <h2 v-else>Add car</h2>
 
-                <label for="details">Car Description:</label>
-                <vee-field id="car-details" name="details" as="textarea" rows="4" cols="50"
-                    placeholder="enter car description" v-model="carData.details"></vee-field>
+                <div class="car-details">
+                    <label for="name">Car Name: </label>
+                    <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="carData.name" />
+                    <ErrorMessage class="error-text" name="name" />
 
-                <ErrorMessage class="error-text" name="details" />
+                    <label for="details">Car Description:</label>
+                    <vee-field id="car-details" name="details" as="textarea" rows="4" cols="50"
+                        placeholder="enter car description" v-model="carData.details">
+                    </vee-field>
 
-                <label for="price">Car Price:</label>
-                <vee-field type="number" id="price" name="price" placeholder="enter car price" v-model="carData.price" />
-                <ErrorMessage class="error-text" name="price" />
+                    <ErrorMessage class="error-text" name="details" />
 
-                <label for="url">Car Image:</label>
-                <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="carData.image" />
-                <ErrorMessage class="error-text" name="url" />
+                    <label for="price">Car Price:</label>
+                    <vee-field type="number" id="price" name="price" placeholder="enter car price"
+                        v-model="carData.price" />
+                    <ErrorMessage class="error-text" name="price" />
 
-                <div class="button">
-                    <button type="reset" class="reset" v-on:click="onCancel">Cancel</button>
+                    <label for="url">Car Image:</label>
+                    <vee-field name="url" type="url" id="car-url" placeholder="enter Image URL" v-model="carData.image" />
+                    <ErrorMessage class="error-text" name="url" />
 
-                    <button type="submit" class="submit" v-if="isAddModel" v-on:click.prevent="getFormData"
-                        v-on:click="carsData">Submit</button>
-                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>Update</button>
+                    <div class="button">
+                        <button type="reset" class="reset" @click="onCancel">Cancel</button>
+
+                        <button type="submit" class="submit" v-if="isAddModel" v-on:click.prevent="getFormData">
+                            Submit
+                        </button>
+
+                        <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>
+                            Update
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </vee-form>
+        </vee-form>
+    </div>
 </template>
 
 <script>
-import {
-    ErrorMessage,
-} from 'vee-validate';
+import GalleryCard from "./GalleryCard.vue";
+import { ErrorMessage } from "vee-validate";
 
 import axios from "axios";
 export default {
     name: "CarForm",
+    components: {
+        GalleryCard,
+    },
+
     data() {
         return {
             schema: {
@@ -69,7 +82,7 @@ export default {
         },
 
         editCar: {
-            type: Object
+            type: Object,
         },
 
         isAddModel: {
@@ -79,38 +92,41 @@ export default {
         editData: {
             type: Boolean,
         },
-
-        carsData: {
-            type: Function,
-        }
     },
 
     methods: {
-        // alertUpdateData() {
-        //     alert(` 
-        //     "Edited Data"\n
-        //     "Car Name is-" ${this.carData.name}, 
-        //     "Car Description is- " ${this.carData.details}, 
-        //     "Car Price is- " ${this.carData.price}, 
-        //     "Car URL is- " ${this.carData.image}`);
-        //     this.$emit('onCancel');
-        // },
-
         onCancel() {
-            this.$emit('onCancel');
-            this.carData.name = ""
-            this.carData.details = ""
-            this.carData.price = ""
-            this.carData.image = ""
+            this.$emit("onCancel");
         },
 
+        // getAPI() {
+        //     this.$refs.functionCall.carsData();
+        //     console.log("dfghs");
+        // },
 
         // Post Method - Axios API
         getFormData() {
             axios.post(
-                "https://testapi.io/api/dartya/resource/cardata", this.carData
-            ).then(response => console.log(response));
-            this.carsData;
+                "https://testapi.io/api/dartya/resource/cardata",
+                this.carData,
+            ).then((response) => {
+                axios.get(
+                    "https://testapi.io/api/dartya/resource/cardata"
+                ).then(response => {
+                    this.data = response.data.data
+                })
+                console.log(response, 'Hello')
+            }
+            );
+
+
+
+            alert(`"Created Data"\n
+                    "Car Name is-" ${this.carData.name}, 
+                    "Car Description is- " ${this.carData.details}, 
+                    "Car Price is- " ${this.carData.price}, 
+                    "Car URL is- " ${this.carData.image}`);
+            this.$emit("getFormData", this.carData);
         },
 
         // Put Method - Axios API
@@ -118,16 +134,37 @@ export default {
             await axios.put(
                 `https://testapi.io/api/dartya/resource/cardata/${this.carData.id}`,
                 {
-                    name: 'carData.name',
-                    details: 'carData.details',
-                    price: 'carData.price',
-                    image: 'carData.image',
+                    name: this.carData.name,
+                    price: this.carData.price,
+                    image: this.carData.image,
+                    details: this.carData.details,
                 }
             )
-                .then((response) => console.log(response))
+                .then((response) => {
+                    axios.get(
+                        "https://testapi.io/api/dartya/resource/cardata"
+                    ).then(response => {
+                        let dataT = response.data.data
+                        console.log("object",dataT);
+                        this.$emit("updatedData",dataT)
+                    }
+                    )
+                    console.log(response, 'Hello')
+                }
+                );
+
+            // this.getAPI();
+            
+
+            // Edit Data Alert
+            alert(`"Edited Data"\n
+                    "Car Name is-" ${this.carData.name}, 
+                    "Car Description is- " ${this.carData.details}, 
+                    "Car Price is- " ${this.carData.price}, 
+                    "Car URL is- " ${this.carData.image}`);
         },
     },
-}
+};
 </script>
 
 <style scoped>
@@ -199,7 +236,7 @@ textarea {
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     padding: 10px;
     border: none;
@@ -237,7 +274,6 @@ h2 {
 .error-text {
     color: rgb(219, 81, 81);
 }
-
 
 @media only screen and (max-width: 958px) and (min-width: 350px) {
     .modal-content {

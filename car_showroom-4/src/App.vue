@@ -6,34 +6,48 @@
         </ul>
 
         <div class="cars-data">
-            <GalleryCard v-on:emitPriceAlert="emitPrice" v-on:editData="editData" v-on:carsData="carsData" />
+            <GalleryCard :data="data" v-on:emitPriceAlert="emitPrice" v-on:editData="editData" ref="carsDataRef" />
 
-            <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
-                v-on:onCancel="onCancel" />
+            <CarForm v-if="editModel" v-on:getFormData="apiCall" :editModel="editModel" :isAddModel="isAddModel"
+                :editCar="editCar" v-on:onCancel="onCancel" @updatedData="updatedData"/>
         </div>
     </div>
 </template>
-    
+
 <script>
 import CarForm from "./components/CarForm.vue";
 import GalleryCard from "./components/GalleryCard.vue";
+// import axios from "axios";
 
 export default {
     name: "App",
+
     components: {
         GalleryCard,
         CarForm,
     },
 
+    // created() {
+    //     this.getapi();
+    // },
+
     data() {
         return {
+            data: "",
             editModel: false,
             isAddModel: true,
-            editCar: {},
         };
     },
 
     methods: {
+        // getapi() {
+        //     axios.get(
+        //         "https://testapi.io/api/dartya/resource/cardata"
+        //     ).then(response => {
+        //         this.data = response.data.data
+        //     })
+        // },
+
         emitPrice(carName, price) {
             alert(`${carName}, ₹${price}`);
         },
@@ -47,6 +61,7 @@ export default {
         toggle() {
             this.editModel = true;
             this.isAddModel = true;
+            this.editCar = {}
         },
 
         onCancel() {
@@ -54,9 +69,20 @@ export default {
             this.editModel = false;
         },
 
-        carsData() {
-            this.carsData
-            console.log('Emit Pass..!!');
+        updatedData(dataT){
+            console.log("object pass",dataT);
+        },
+
+        // apiCall() {
+        //     // this.getapi();
+        //     this.carData()
+        //     console.log("demo");
+        //     console.log(this.editData());
+        // },
+
+        apiCall(prem) {
+            // this.carData
+            // console.log("object",prem);
         },
     },
 };
