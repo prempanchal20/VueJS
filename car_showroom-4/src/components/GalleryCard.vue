@@ -11,17 +11,18 @@
                     <div class="car-name">
                         <h3>{{ item.name }}</h3>
                     </div>
+
                     <div class="description">
                         <p>{{ truncatedDescription(item.details) }}</p>
                     </div>
 
-                    <div class="buttons-icons">
+                    <!-- <div class="buttons-icons">
                         <div class="button">
                             <button v-if="item.price === ''" class="avilable-btn">
                                 Available Soon
                             </button>
 
-                            <button v-else class="info-btn" v-on:click="emitPrice(item.name, item.price)">
+                            <button v-else class="info-btn" @click=emitPrice(item.name,item.price)>
                                 Info
                             </button>
 
@@ -29,8 +30,33 @@
                                 <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)"></button>
 
                                 <button class="bi bi-trash" id="delete-icon"
-                                    v-on:click.prevent="deleteData(item.id, item.name)"></button>
+                                    v-on:click.prevent="deleteData(item.id, item.name)">
+                                </button>
                             </div>
+                        </div>
+                    </div> -->
+
+
+
+                    <div class="buttons-icon">
+                        <div class="edit-icon">
+                            <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)"></button>
+                        </div>
+
+                        <div class="info-button">
+                            <button v-if="item.price === ''" class="avilable-btn">
+                                Available Soon
+                            </button>
+
+                            <button v-else class="info-btn" @click="emitPrice(item.name, item.price)">
+                                Info
+                            </button>
+                        </div>
+
+                        <div class="delete-icon">
+                            <button class="bi bi-trash" id="delete-icon"
+                                v-on:click.prevent="deleteData(item.id, item.name)">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -57,8 +83,8 @@ export default {
             }
         },
 
-        emitPrice(carName, price) {
-            this.$emit("emitPriceAlert", carName, price);
+        emitPrice(carName, carPrice) {
+            this.$emit("emitPrice", carName, carPrice);
         },
 
         editData(cars) {
@@ -66,7 +92,7 @@ export default {
         },
 
         deleteData(itemID, itemName) {
-            this.$emit("deleteData",itemID, itemName);
+            this.$emit("deleteData", itemID, itemName);
         },
     },
 };
@@ -143,8 +169,7 @@ body {
 
 .car-container button {
     position: relative;
-    display: inline-block;
-    padding: 8px 50px;
+    padding: 8px 36px;
     background: #e91e63;
     margin-top: 15px;
     border-radius: 20px;
@@ -172,6 +197,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.buttons-icon {
+    display: flex;
 }
 
 .card-button {
@@ -213,14 +242,6 @@ body {
 #delete-icon {
     background-color: transparent;
     font-size: 20px;
-}
-
-#edit-icon {
-    right: 30px;
-}
-
-#delete-icon {
-    left: 30px;
 }
 
 @media only screen and (max-width: 958px) and (min-width: 350px) {

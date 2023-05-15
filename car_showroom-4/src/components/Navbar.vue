@@ -21,7 +21,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color:#009688;
+  background-color:#334756;
   z-index: 1;
 }
 

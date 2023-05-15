@@ -5,7 +5,7 @@
             <li><button v-on:click="toggle">Add Car</button></li>
         </ul>
         <div class="cars-data">
-            <GalleryCard :data="data" @emitPriceAlert="emitPrice" @editData="editData" @deleteData="deleteData" />
+            <GalleryCard :data="data" @emitPrice="emitPrice" @editData="editData" @deleteData="deleteData" />
 
             <CarForm v-if="editModel" @getFormData="getFormData" :editModel="editModel" :isAddModel="isAddModel"
                 :editCar="editCar" v-on:onCancel="onCancel" @updatedData="updatedData" @alertUpdateData="alertUpdateData" />
@@ -39,8 +39,8 @@ export default {
     },
 
     methods: {
-        emitPrice(carName, price) {
-            alert(`${carName}, ₹${price}`);
+        emitPrice(carName, carPrice) {
+            alert(`${carName}, ₹${carPrice}`);
         },
 
         editData(data) {
@@ -90,20 +90,6 @@ export default {
             this.onCancel()
         },
 
-        // DELETE Method - Axios API
-        async deleteData(itemId, itemName) {
-            // Delete Data Alert
-            const deleteAlert = window.confirm(
-                `Are You Sure Want to Delete ${itemName}`
-            );
-
-            if (deleteAlert == true) {
-                await axios
-                    .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
-                    .then((response) => console.log(response));
-                this.carsData();
-            }
-        },
 
         // Put Method - Axios API
         async alertUpdateData(carData) {
@@ -125,6 +111,21 @@ export default {
                     "Car URL is- " ${carData.image}`);
             this.carsData()
             this.onCancel()
+        },
+
+        // DELETE Method - Axios API
+        async deleteData(itemId, itemName) {
+            // Delete Data Alert
+            const deleteAlert = window.confirm(
+                `Are You Sure Want to Delete ${itemName}`
+            );
+
+            if (deleteAlert == true) {
+                await axios
+                    .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
+                    .then((response) => console.log(response));
+                this.carsData();
+            }
         },
     },
 };

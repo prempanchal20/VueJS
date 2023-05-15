@@ -5,7 +5,7 @@
 
                 <h2 v-if="!isAddModel">Edit car</h2>
                 <h2 v-else>Add car</h2>
-
+                
                 <div class="car-details">
                     <label for="name">Car Name: </label>
                     <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="carData.name" />
