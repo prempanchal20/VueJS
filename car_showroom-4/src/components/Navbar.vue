@@ -13,7 +13,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
   text-decoration: none;
   list-style: none;
 }
@@ -22,7 +21,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: black;
+  background-color:#009688;
   z-index: 1;
 }
 

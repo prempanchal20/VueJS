@@ -3,8 +3,6 @@
         <vee-form class="modal" :validation-schema="schema">
             <div class="modal-content">
 
-                <!-- <GalleryCard ref="functionCall" /> -->
-
                 <h2 v-if="!isAddModel">Edit car</h2>
                 <h2 v-else>Add car</h2>
 
@@ -50,7 +48,6 @@
 import GalleryCard from "./GalleryCard.vue";
 import { ErrorMessage } from "vee-validate";
 
-import axios from "axios";
 export default {
     name: "CarForm",
     components: {
@@ -99,69 +96,12 @@ export default {
             this.$emit("onCancel");
         },
 
-        // getAPI() {
-        //     this.$refs.functionCall.carsData();
-        //     console.log("dfghs");
-        // },
-
-        // Post Method - Axios API
         getFormData() {
-            axios.post(
-                "https://testapi.io/api/dartya/resource/cardata",
-                this.carData,
-            ).then((response) => {
-                axios.get(
-                    "https://testapi.io/api/dartya/resource/cardata"
-                ).then(response => {
-                    this.data = response.data.data
-                })
-                console.log(response, 'Hello')
-            }
-            );
-
-
-
-            alert(`"Created Data"\n
-                    "Car Name is-" ${this.carData.name}, 
-                    "Car Description is- " ${this.carData.details}, 
-                    "Car Price is- " ${this.carData.price}, 
-                    "Car URL is- " ${this.carData.image}`);
-            this.$emit("getFormData", this.carData);
+            this.$emit('getFormData',this.carData);
         },
 
-        // Put Method - Axios API
-        async alertUpdateData() {
-            await axios.put(
-                `https://testapi.io/api/dartya/resource/cardata/${this.carData.id}`,
-                {
-                    name: this.carData.name,
-                    price: this.carData.price,
-                    image: this.carData.image,
-                    details: this.carData.details,
-                }
-            )
-                .then((response) => {
-                    axios.get(
-                        "https://testapi.io/api/dartya/resource/cardata"
-                    ).then(response => {
-                        let dataT = response.data.data
-                        console.log("object",dataT);
-                        this.$emit("updatedData",dataT)
-                    }
-                    )
-                    console.log(response, 'Hello')
-                }
-                );
-
-            // this.getAPI();
-            
-
-            // Edit Data Alert
-            alert(`"Edited Data"\n
-                    "Car Name is-" ${this.carData.name}, 
-                    "Car Description is- " ${this.carData.details}, 
-                    "Car Price is- " ${this.carData.price}, 
-                    "Car URL is- " ${this.carData.image}`);
+        alertUpdateData(){
+            this.$emit('alertUpdateData',this.carData);
         },
     },
 };

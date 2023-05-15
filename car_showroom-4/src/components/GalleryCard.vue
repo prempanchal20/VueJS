@@ -4,32 +4,34 @@
         <div class="car-card">
             <div class="car-box">
                 <div class="car-container">
-                    <div class="car-name">
-                        <h3>{{ item.name }}</h3>
-                    </div>
                     <div class="car-images">
                         <img :src="item.image" alt="car - image" />
+                    </div>
+
+                    <div class="car-name">
+                        <h3>{{ item.name }}</h3>
                     </div>
                     <div class="description">
                         <p>{{ truncatedDescription(item.details) }}</p>
                     </div>
 
-                    <div class="button">
-                        <button v-if="item.price === ''" class="avilable-btn">
-                            Available Soon
-                        </button>
+                    <div class="buttons-icons">
+                        <div class="button">
+                            <button v-if="item.price === ''" class="avilable-btn">
+                                Available Soon
+                            </button>
 
-                        <button v-else class="info-btn" v-on:click="emitPrice(item.name, item.price)">
-                            Info
-                        </button>
-                    </div>
+                            <button v-else class="info-btn" v-on:click="emitPrice(item.name, item.price)">
+                                Info
+                            </button>
 
-                    <div class="icons">
-                        <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)">
-                        </button>
+                            <div class="icons">
+                                <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)"></button>
 
-                        <button class="bi bi-trash" id="delete-icon" v-on:click.prevent="deleteData(item.id, item.name)">
-                        </button>
+                                <button class="bi bi-trash" id="delete-icon"
+                                    v-on:click.prevent="deleteData(item.id, item.name)"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,22 +40,11 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
     name: "GalleryCard",
 
-    // props: {
-    //     data: Object
-    // },
-
-    data() {
-        return {
-            data: Object
-        };
-    },
-
-    created() {
-        this.carsData()
+    props: {
+        data: Object,
     },
 
     methods: {
@@ -74,32 +65,8 @@ export default {
             this.$emit("editData", cars);
         },
 
-        // GET Method - Axios API
-        carsData() {
-            axios.get(
-                "https://testapi.io/api/dartya/resource/cardata"
-            ).then(response => {
-                this.data = response.data.data
-            })
-        },
-    
-
-        // DELETE Method - Axios API
-        async deleteData(itemId, itemName) {
-
-            // Delete Data Alert
-            const deleteAlert = window.confirm(
-                `Are You Sure Want to Delete ${itemName}`
-            );
-
-            if (deleteAlert == true) {
-                await axios
-                    .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
-                    .then((response) => console.log(response));
-                this.carsData();
-            } else {
-                alert("Your Data is Safe...!");
-            }
+        deleteData(itemID, itemName) {
+            this.$emit("deleteData",itemID, itemName);
         },
     },
 };
@@ -110,7 +77,6 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -125,7 +91,7 @@ body {
         inset -5px -5px 15px rgba(255, 255, 255, 0.1),
         5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    margin: 30px;
+    margin: 20% 20px;
 }
 
 .cars-data {
@@ -143,9 +109,6 @@ body {
     bottom: 20px;
     display: flex;
     justify-content: center;
-    background: #2a2b2f;
-    border: 2px solid #1e1f23;
-    border-radius: 15px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -193,15 +156,16 @@ body {
 .car-images img {
     width: 100%;
     height: 100%;
+    border-radius: 5px;
 }
 
 .car-images {
-    height: 45%;
+    height: 50%;
 }
 
 .car-name {
     height: 25%;
-    padding: 12%;
+    padding: 6%;
 }
 
 .car-content {
@@ -224,8 +188,13 @@ body {
 
 .button {
     position: relative;
-    top: 23px;
+    top: 1px;
     cursor: pointer;
+}
+
+.description {
+    height: 10%;
+    width: 100%;
 }
 
 .button .avilable-btn {
@@ -233,25 +202,25 @@ body {
     cursor: default;
 }
 
+.icons {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    bottom: 50px;
+}
+
 #edit-icon,
 #delete-icon {
     background-color: transparent;
-}
-
-.icons {
-    display: flex;
+    font-size: 20px;
 }
 
 #edit-icon {
-    right: 35px;
-    bottom: 25px;
-    font-size: 20px;
+    right: 30px;
 }
 
 #delete-icon {
-    left: 70px;
-    bottom: 25px;
-    font-size: 20px;
+    left: 30px;
 }
 
 @media only screen and (max-width: 958px) and (min-width: 350px) {
