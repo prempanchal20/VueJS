@@ -28,10 +28,6 @@ export default {
         CarForm,
     },
 
-    created() {
-        this.carsData()
-    },
-
     data() {
         return {
             data: "",
@@ -39,6 +35,10 @@ export default {
             isAddModel: true,
             fontFamily: 'Poppins, sans-serif'
         };
+    },
+
+    created() {
+        this.carsData()
     },
 
     methods: {

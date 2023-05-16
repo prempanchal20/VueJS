@@ -30,13 +30,10 @@
                     <div class="button">
                         <button type="reset" class="reset" @click="onCancel">Cancel</button>
 
-                        <button type="submit" class="submit" v-if="isAddModel" @click.prevent="getFormData">
-                            Submit
+                        <button type="submit" class="submit" @click.prevent="submitForm">
+                            {{ buttonName }}
                         </button>
 
-                        <button type="submit" class="submit" @click.prevent="alertUpdateData" v-else>
-                            Update
-                        </button>
                     </div>
                 </div>
             </div>
@@ -73,6 +70,12 @@ export default {
         };
     },
 
+    computed: {
+        buttonName() {
+            return this.isAddModel ? 'Submit' : 'Update';
+        }
+    },
+
     props: {
         editModel: {
             type: Boolean,
@@ -94,6 +97,14 @@ export default {
     methods: {
         onCancel() {
             this.$emit("onCancel");
+        },
+
+        submitForm() {
+            if (this.isAddModel) {
+                this.getFormData();
+            } else {
+                this.alertUpdateData();
+            }
         },
 
         getFormData() {
