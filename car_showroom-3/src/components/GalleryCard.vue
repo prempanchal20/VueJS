@@ -17,12 +17,13 @@
                     <div class="button">
                         <button v-if="price === ''" class="avilable-btn">Available Soon </button>
 
-                        <button v-else class="info-btn" v-on:click="emitPrice(name, price)">Info
+                        <button v-else class="info-btn" @click="emitPrice(name, price)">Info
                         </button>
                     </div>
+
                     <div class="icons">
-                        <button class="bi bi-pencil" id='edit-icon' v-on:click="editData"></button>
-                        <button class="bi bi-trash" id='delete-icon' v-on:click="deleteData"></button>
+                        <button class="bi bi-pencil" id='edit-icon' @click="editData"></button>
+                        <button class="bi bi-trash" id='delete-icon' @click="deleteData"></button>
                     </div>
                 </div>
             </div>
@@ -51,6 +52,7 @@ export default {
             }
         }
     },
+
     methods: {
         truncatedDescription(description) {
             let maxLength = 50;
@@ -226,9 +228,8 @@ body {
 
 
 @media only screen and (max-width: 958px) and (min-width: 350px) {
-.car-content{
-    margin-top: 10%;
+    .car-content {
+        margin-top: 10%;
+    }
 }
-}
-
 </style>

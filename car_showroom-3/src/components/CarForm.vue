@@ -26,10 +26,10 @@
                 <ErrorMessage class="error-text" name="url" />
 
                 <div class="button">
-                    <button type="reset" class="reset" v-on:click.prevent="onCancel">Cancel</button>
+                    <button type="reset" class="reset" @click.prevent="onCancel">Cancel</button>
 
                     <button type="submit" class="submit" v-if="isAddModel">Submit</button>
-                    <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>Update</button>
+                    <button type="submit" class="submit" @click.prevent="alertUpdateData" v-else>Update</button>
                 </div>
             </div>
         </div>
@@ -60,9 +60,8 @@ export default {
             },
         };
     },
+
     props: {
-
-
         editModel: {
             type: Boolean,
         },
