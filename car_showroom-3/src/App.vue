@@ -1,5 +1,5 @@
 <template>
-    <div :style="{ fontFamily }">
+     <div :class="{ 'fonts': fontFamily }">
 
         <Navbar />
         <div class="cars-data">
@@ -34,7 +34,7 @@ export default {
             editModel: false,
             isAddModel: true,
             editCar: {},
-            fontFamily: 'Poppins, sans-serif',
+            fontFamily: true,
 
             cars: [{
                 name: "Maruti Suzuki Swift",
@@ -98,5 +98,9 @@ export default {
     background-color: transparent;
     color: white;
     font-size: 20px;
+}
+
+.fonts {
+    font-family: 'Poppins', sans-serif;
 }
 </style>

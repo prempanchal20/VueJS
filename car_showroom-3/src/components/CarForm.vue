@@ -1,5 +1,5 @@
 <template>
-    <vee-form class="modal" :validation-schema="schema" @submit="getFormData">
+    <vee-form class="modal" :validation-schema="schema">
 
         <div class="modal-content">
 
@@ -28,7 +28,7 @@
                 <div class="button">
                     <button type="reset" class="reset" @click.prevent="onCancel">Cancel</button>
 
-                    <button type="submit" class="submit" v-if="isAddModel">Submit</button>
+                    <button type="submit" class="submit" v-if="isAddModel" @submit="getFormData">Submit</button>
                     <button type="submit" class="submit" @click.prevent="alertUpdateData" v-else>Update</button>
                 </div>
             </div>
@@ -61,24 +61,7 @@ export default {
         };
     },
 
-    props: {
-        editModel: {
-            type: Boolean,
-        },
-
-        editCar: {
-            type: Object
-        },
-
-        isAddModel: {
-            type: Boolean,
-        },
-
-        editData: {
-            type: Boolean,
-        },
-    },
-
+    props: ["editModel", "editCar", "isAddModel", "editData"],
 
     methods: {
         getFormData() {

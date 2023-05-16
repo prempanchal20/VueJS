@@ -34,14 +34,10 @@
 
 <script>
 export default {
-    name: "GalleryCard",
-    props: {
-        name: String,
-        image: String,
-        price: Number,
-        description: String,
-    },
 
+    name: "GalleryCard",
+    props: ['name', 'image', 'price', 'description'],
+    emits: ['emitPriceAlert', 'editData'],
     data() {
         return {
             cars: {
