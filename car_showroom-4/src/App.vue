@@ -1,5 +1,5 @@
 <template>
-    <div :style="{ fontFamily }">
+    <div :class="{ 'fonts': fontFamily }">
         <Navbar />
 
         <ul class="menu">
@@ -9,8 +9,8 @@
         <div class="cars-data">
             <GalleryCard :data="data" @emitPrice="emitPrice" @editData="editData" @deleteData="deleteData" />
 
-            <CarForm v-if="editModel" @getFormData="getFormData" :editModel="editModel" :isAddModel="isAddModel"
-                :editCar="editCar" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />
+            <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
+                @getFormData="getFormData" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />
         </div>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default {
             data: "",
             editModel: false,
             isAddModel: true,
-            fontFamily: 'Poppins, sans-serif'
+            fontFamily: true,
         };
     },
 
@@ -159,5 +159,9 @@ export default {
     background-color: transparent;
     color: white;
     font-size: 20px;
+}
+
+.fonts {
+    font-family: 'Poppins', sans-serif;
 }
 </style>

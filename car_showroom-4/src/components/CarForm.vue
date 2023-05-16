@@ -33,7 +33,6 @@
                         <button type="submit" class="submit" @click.prevent="submitForm">
                             {{ buttonName }}
                         </button>
-
                     </div>
                 </div>
             </div>
@@ -76,23 +75,7 @@ export default {
         }
     },
 
-    props: {
-        editModel: {
-            type: Boolean,
-        },
-
-        editCar: {
-            type: Object,
-        },
-
-        isAddModel: {
-            type: Boolean,
-        },
-
-        editData: {
-            type: Boolean,
-        },
-    },
+    props: ["editModel", "editCar", "isAddModel", "editData"],
 
     methods: {
         onCancel() {
