@@ -1,14 +1,16 @@
 <template>
-    <div class="fonts" :style="{ fontFamily: 'Poppins, sans-serif' }">
+    <div :style="{ fontFamily }">
         <Navbar />
+
         <ul class="menu">
-            <li><button v-on:click="toggle">Add Car</button></li>
+            <li><button @click="toggle">Add Car</button></li>
         </ul>
+
         <div class="cars-data">
             <GalleryCard :data="data" @emitPrice="emitPrice" @editData="editData" @deleteData="deleteData" />
 
             <CarForm v-if="editModel" @getFormData="getFormData" :editModel="editModel" :isAddModel="isAddModel"
-                :editCar="editCar" v-on:onCancel="onCancel" @updatedData="updatedData" @alertUpdateData="alertUpdateData" />
+                :editCar="editCar" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />
         </div>
     </div>
 </template>
@@ -35,6 +37,7 @@ export default {
             data: "",
             editModel: false,
             isAddModel: true,
+            fontFamily: 'Poppins, sans-serif'
         };
     },
 
@@ -64,32 +67,35 @@ export default {
             this.deleteData(itemId, itemName);
         },
 
-
         //----------------Axios APIs - GET, Post, Put, Delete----------------//
 
         // GET Method - Axios API
         carsData() {
             axios.get(
                 "https://testapi.io/api/dartya/resource/cardata"
-            ).then(response => {
-                this.data = response.data.data
-            })
+            ).catch((error) => alert("Coudn't call the GET API... Please try Again"))
+                .then(response => {
+                    this.data = response.data.data
+                })
         },
 
         // Post Method - Axios API
         getFormData(carData) {
             axios.post(
                 "https://testapi.io/api/dartya/resource/cardata", carData
-            ).then(response => console.log(response));
+            ).then(response => this.carsData())
+
+                .catch(error => {
+                    alert("Coudn't Call The Post API... Please try Again")
+                })
+
             alert(`"Created Data"\n
                      "Car Name is-" ${carData.name}, 
                      "Car Description is- " ${carData.details}, 
                      "Car Price is- " ${carData.price}, 
                      "Car URL is- " ${carData.image}`);
-            this.carsData()
             this.onCancel()
         },
-
 
         // Put Method - Axios API
         async alertUpdateData(carData) {
@@ -101,7 +107,11 @@ export default {
                     image: carData.image,
                     details: carData.details,
                 }
-            ).then((response) => console.log(response));
+            ).then(response => this.carsData())
+
+                .catch(error => {
+                    alert("Coudn't Call The Put API... Please try Again")
+                })
 
             // Edit Data Alert
             alert(`"Edited Data"\n
@@ -115,6 +125,7 @@ export default {
 
         // DELETE Method - Axios API
         async deleteData(itemId, itemName) {
+
             // Delete Data Alert
             const deleteAlert = window.confirm(
                 `Are You Sure Want to Delete ${itemName}`
@@ -123,8 +134,10 @@ export default {
             if (deleteAlert == true) {
                 await axios
                     .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
-                    .then((response) => console.log(response));
-                this.carsData();
+                    .then((response) => this.carsData())
+                    .catch(error => {
+                        alert("Coudn't Call The Delete API... Please try Again")
+                    })
             }
         },
     },
@@ -143,9 +156,6 @@ export default {
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
-}
-
-.menu button {
     background-color: transparent;
     color: white;
     font-size: 20px;

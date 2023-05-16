@@ -1,6 +1,8 @@
 <template>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <section class="car-content" v-for="item in data" :key="item.id">
+    <div class="car-content" v-for="item in data" :key="item.id">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
         <div class="car-card">
             <div class="car-box">
                 <div class="car-container">
@@ -16,31 +18,9 @@
                         <p>{{ truncatedDescription(item.details) }}</p>
                     </div>
 
-                    <!-- <div class="buttons-icons">
-                        <div class="button">
-                            <button v-if="item.price === ''" class="avilable-btn">
-                                Available Soon
-                            </button>
-
-                            <button v-else class="info-btn" @click=emitPrice(item.name,item.price)>
-                                Info
-                            </button>
-
-                            <div class="icons">
-                                <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)"></button>
-
-                                <button class="bi bi-trash" id="delete-icon"
-                                    v-on:click.prevent="deleteData(item.id, item.name)">
-                                </button>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
                     <div class="buttons-icon">
                         <div class="edit-icon">
-                            <button class="bi bi-pencil" id="edit-icon" v-on:click.prevent="editData(item)"></button>
+                            <button class="bi bi-pencil" id="edit-icon" @click.prevent="editData(item)"></button>
                         </div>
 
                         <div class="info-button">
@@ -54,24 +34,23 @@
                         </div>
 
                         <div class="delete-icon">
-                            <button class="bi bi-trash" id="delete-icon"
-                                v-on:click.prevent="deleteData(item.id, item.name)">
+                            <button class="bi bi-trash" id="delete-icon" @click.prevent="deleteData(item.id, item.name)">
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
 export default {
     name: "GalleryCard",
 
-    props: {
-        data: Object,
-    },
+    props: ['data'],
+
+    emits: ["emitPrice", "editData", "deleteData"],
 
     methods: {
         truncatedDescription(details) {

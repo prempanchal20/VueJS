@@ -5,7 +5,7 @@
 
                 <h2 v-if="!isAddModel">Edit car</h2>
                 <h2 v-else>Add car</h2>
-                
+
                 <div class="car-details">
                     <label for="name">Car Name: </label>
                     <vee-field type="text" id="car-name" name="name" placeholder="enter car name" v-model="carData.name" />
@@ -30,11 +30,11 @@
                     <div class="button">
                         <button type="reset" class="reset" @click="onCancel">Cancel</button>
 
-                        <button type="submit" class="submit" v-if="isAddModel" v-on:click.prevent="getFormData">
+                        <button type="submit" class="submit" v-if="isAddModel" @click.prevent="getFormData">
                             Submit
                         </button>
 
-                        <button type="submit" class="submit" v-on:click.prevent="alertUpdateData" v-else>
+                        <button type="submit" class="submit" @click.prevent="alertUpdateData" v-else>
                             Update
                         </button>
                     </div>
@@ -97,11 +97,11 @@ export default {
         },
 
         getFormData() {
-            this.$emit('getFormData',this.carData);
+            this.$emit('getFormData', this.carData);
         },
 
-        alertUpdateData(){
-            this.$emit('alertUpdateData',this.carData);
+        alertUpdateData() {
+            this.$emit('alertUpdateData', this.carData);
         },
     },
 };
