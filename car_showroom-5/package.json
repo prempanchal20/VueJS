@@ -11,7 +11,8 @@
     "@vee-validate/rules": "^4.8.6",
     "axios": "^1.4.0",
     "vee-validate": "^4.8.6",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

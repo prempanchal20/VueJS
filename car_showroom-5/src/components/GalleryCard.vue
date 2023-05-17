@@ -1,8 +1,6 @@
 <template>
-    <div class="car-content" v-for="item in data" :key="item.id">
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <section class="car-content" v-for="item in data" :key="item.id">
         <div class="car-card">
             <div class="car-box">
                 <div class="car-container">
@@ -34,14 +32,15 @@
                         </div>
 
                         <div class="delete-icon">
-                            <button class="bi bi-trash" id="delete-icon" @click.prevent="deleteData(item.id, item.name)">
+                            <button class="bi bi-trash" id="delete-icon"
+                                @click.prevent="deleteData(item.id, item.name)">
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -49,8 +48,8 @@ export default {
     name: "GalleryCard",
 
     props: ['data'],
-
     emits: ["emitPrice", "editData", "deleteData"],
+
 
     methods: {
         truncatedDescription(details) {

@@ -1,4 +1,3 @@
-
 <template>
     <section class="register-form">
         <div class="register-form-title">
@@ -7,11 +6,12 @@
 
         <vee-form id="register-form-details" :validation-schema="registerSchema">
             <label for="email">Email:</label>
-            <vee-field type="email" id="email" name="email" placeholder="Enter your mail id" />
+            <vee-field type="email" id="email" name="email" placeholder="Enter your mail id" v-model="userData.email" />
             <ErrorMessage class="error-text" name="email" />
 
             <label for="password">Password:</label>
-            <vee-field type="password" id="password" name="password" placeholder="Enter your password" />
+            <vee-field type="password" id="password" name="password" placeholder="Enter your password"
+                v-model="userData.password" />
             <ErrorMessage class="error-text" name="password" />
 
             <label for="password">Confirm Password:</label>
@@ -19,7 +19,7 @@
             <ErrorMessage class="error-text" name="confirmation" />
 
             <label for="role">Role:</label>
-            <vee-field as="select" id="role" name="role">
+            <vee-field as="select" id="role" name="role" v-model="userData.role">
                 <option value="">Select Role</option>
                 <option value="admin">Admin</option>
                 <option value="employee">Employee</option>
@@ -31,7 +31,7 @@
                 <label class="gender">Gender:</label>
                 <div class="male-female">
                     <label for="male">
-                        <vee-field type="radio" id="male" name="gender" value="male" />Male
+                        <vee-field type="radio" id="male" name="gender" value="male" v-model="userData.gender" />Male
                     </label>
                     <label for="female">
                         <vee-field type="radio" id="female" name="gender" value="female" />Female
@@ -41,18 +41,18 @@
             <ErrorMessage class="error-text" name="gender" />
 
             <label for="age">Age:</label>
-            <vee-field type="number" id="age" name="age" placeholder="Enter your Age" />
+            <vee-field type="number" id="age" name="age" placeholder="Enter your Age" v-model="userData.age" />
             <ErrorMessage class="error-text" name="age" />
 
             <label for="dob">Date of Birth:</label>
-            <vee-field type="date" id="dob" name="dob" />
+            <vee-field type="date" id="dob" name="dob" v-model="userData.dob" />
             <ErrorMessage class="error-text" name="dob" />
 
             <div class="buttons">
                 <button type="reset" class="cancel-btn" @click="onCancel">Cancel
                 </button>
 
-                <button type="submit" class="register-btn" @register="register">Register</button>
+                <button type="submit" class="register-btn" @click.prevent="registerUser">Register</button>
             </div>
         </vee-form>
     </section>
@@ -60,6 +60,7 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
+import axios from "axios";
 export default {
     name: "RegisterForm",
 
@@ -74,8 +75,27 @@ export default {
                 age: "required|min_value:1|age",
                 dob: "required",
             },
+
+            userData: {
+                email: "",
+                password: "",
+                role: "",
+                gender: "",
+                age: "",
+                dob: "",
+            },
         };
     },
+
+    methods: {
+        //---------- Axios API - Register User------------//
+        registerUser() {
+            console.log(this.userData);
+            axios.post(
+                "https://testapi.io/api/dartya/resource/users", this.userData
+            ).then(response => console.log(response))
+        },
+    }
 }
 </script>
 

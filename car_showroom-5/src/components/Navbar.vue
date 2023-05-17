@@ -1,8 +1,11 @@
 <template>
   <section class="header-go">
     <div class="header-content">
-      <div class="header-logo">
-        <a href="">Car Showroom</a>
+      <a href="">Car Showroom</a>
+      <div class="header-data">
+        <RouterLink class="home" to="/">Home</RouterLink>
+        <RouterLink class="login" to="/login">Login</RouterLink>
+        <RouterLink class="register" to="/register">Register</RouterLink>
       </div>
     </div>
   </section>
@@ -20,36 +23,35 @@
 .header-go {
   position: sticky;
   top: 0;
-  width: 100%;
-  background-color:#334756;
+  background-color: #334756;
   z-index: 1;
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
+  justify-content: space-between;
 }
 
-.header-logo a {
-  font-size: 24px;
+.header-content a {
+  font-size: 20px;
   font-weight: bold;
   color: #fff;
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 10px;
 }
 
-.menu-icon {
-  display: none;
+.header-data {
+  display: flex;
+  justify-content: flex-end;
 }
 
-#menu-toggle {
-  display: none;
-}
-
-#menu-toggle:checked~.menu {
-  transform: scale(1, 1);
+.home,
+.login,
+.register {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  color: white;
+  padding-left: 30px;
 }
 </style>

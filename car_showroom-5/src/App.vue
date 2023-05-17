@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'fonts': fontFamily }">
         <Navbar />
-
+        <RouterView />
         <ul class="menu">
             <li><button @click="toggle">Add Car</button></li>
         </ul>
@@ -19,6 +19,7 @@
 import CarForm from "./components/CarForm.vue";
 import GalleryCard from "./components/GalleryCard.vue";
 import axios from "axios";
+import { RouterView } from "vue-router";
 
 export default {
     name: "App",
