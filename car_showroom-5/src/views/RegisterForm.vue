@@ -5,6 +5,11 @@
         </div>
 
         <vee-form id="register-form-details" :validation-schema="registerSchema">
+
+            <label for="text">Name:</label>
+            <vee-field type="name" id="name" name="name" placeholder="Enter your name" v-model="userData.name" />
+            <ErrorMessage class="error-text" name="name" />
+
             <label for="email">Email:</label>
             <vee-field type="email" id="email" name="email" placeholder="Enter your mail id" v-model="userData.email" />
             <ErrorMessage class="error-text" name="email" />
@@ -67,6 +72,7 @@ export default {
     data() {
         return {
             registerSchema: {
+                name: "required",
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",
                 confirmation: "required|confirmed:@password",
@@ -77,6 +83,7 @@ export default {
             },
 
             userData: {
+                name: "",
                 email: "",
                 password: "",
                 role: "",
@@ -90,10 +97,12 @@ export default {
     methods: {
         //---------- Axios API - Register User------------//
         registerUser() {
-            console.log(this.userData);
-            axios.post(
-                "https://testapi.io/api/dartya/resource/users", this.userData
-            ).then(response => console.log(response))
+            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => console.log(response))
+
+                .catch(error => {
+                    alert("User is not Register... Please try Again")
+                })
+            alert('User Registered')
         },
     }
 }
@@ -120,6 +129,7 @@ label {
     margin-bottom: 10px;
 }
 
+input[type="name"],
 input[type="email"],
 input[type="password"],
 select,

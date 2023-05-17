@@ -36,6 +36,18 @@ export default {
             },
         };
     },
+
+
+    methods: {
+        //---------- Axios API - Login User------------//
+        loginUser() {
+            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => console.log(response))
+                .catch(error => {
+                    alert("User is not Log in... Please try Again")
+                })
+            alert('User Login Sucessfully')
+        },
+    }
 }
 </script>
 
