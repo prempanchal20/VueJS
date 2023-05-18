@@ -1,5 +1,5 @@
 <template>
-     <div :class="{ 'fonts': fontFamily }">
+     <div class="fonts">
 
         <Navbar />
         <div class="cars-data">
@@ -34,7 +34,6 @@ export default {
             editModel: false,
             isAddModel: true,
             editCar: {},
-            fontFamily: true,
 
             cars: [{
                 name: "Maruti Suzuki Swift",
