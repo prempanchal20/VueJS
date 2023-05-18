@@ -1,5 +1,5 @@
 <template>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <section class="car-content" v-for="item in data" :key="item.id">
         <div class="car-card">
             <div class="car-box">
@@ -11,7 +11,7 @@
                     <div class="car-name">
                         <h3>{{ item.name }}</h3>
                     </div>
-
+                    
                     <div class="description">
                         <p>{{ truncatedDescription(item.details) }}</p>
                     </div>
@@ -27,7 +27,7 @@
                             </button>
 
                             <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn"
-                                @click="emitPrice(item.name, item.price)">
+                                >
                                 Info
                             </RouterLink>
                         </div>
@@ -48,8 +48,7 @@ export default {
     name: "GalleryCard",
 
     props: ['data'],
-    emits: ["emitPrice", "editData", "deleteData"],
-
+    emits: [ "editData", "deleteData"],
 
     methods: {
         truncatedDescription(details) {
@@ -60,11 +59,6 @@ export default {
                 return details;
             }
         },
-
-        emitPrice(carName, carPrice) {
-            this.$emit("emitPrice", carName, carPrice);
-        },
-
         editData(cars) {
             this.$emit("editData", cars);
         },
@@ -122,6 +116,8 @@ body {
 
 .car-container {
     text-align: center;
+    width: 100%;
+    overflow: hidden;
 }
 
 .car-container h2 {
@@ -149,15 +145,16 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.car-container button {
-    position: relative;
-    padding: 8px 36px;
+
+.info-btn {
+    padding: 8px 40px;
     background: #e91e63;
     margin-top: 15px;
     border-radius: 20px;
     color: #fff;
     cursor: pointer;
-    border: none;
+    font-size: 15px;
+    text-decoration: none;
 }
 
 .car-images img {
@@ -183,13 +180,15 @@ body {
 
 .buttons-icon {
     display: flex;
+    justify-content: space-around;
+    margin-top: 10%;
 }
 
 .card-button {
     cursor: pointer;
 }
 
-.info-btn {
+.info-btn a {
     font-size: 15px;
 }
 
@@ -210,7 +209,7 @@ body {
 
 .button .avilable-btn {
     background-color: #1e1f23;
-    cursor: default;
+    cursor: pointer;
 }
 
 .icons {
@@ -224,5 +223,7 @@ body {
 #delete-icon {
     background-color: transparent;
     font-size: 20px;
+    color: white;
+    border: none;
 }
 </style>

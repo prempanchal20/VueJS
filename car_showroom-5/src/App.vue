@@ -2,7 +2,6 @@
     <div :class="{ 'fonts': fontFamily }">
         <Navbar />
         <RouterView />
-        
     </div>
 </template>
 
@@ -27,13 +26,14 @@ export default {
 
 .menu button {
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 5px 15px;
     cursor: pointer;
     background-color: transparent;
     color: white;
     font-size: 20px;
-    margin-right: 20px;
+    margin-right: 50px;
+    margin-top: 20px;
 }
 
 .fonts {

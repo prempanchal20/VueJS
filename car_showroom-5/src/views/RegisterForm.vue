@@ -4,7 +4,7 @@
             <h2>Registration Form</h2>
         </div>
 
-        <vee-form id="register-form-details" :validation-schema="registerSchema">
+        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit.prevent="registerUser">
 
             <label for="text">Name:</label>
             <vee-field type="name" id="name" name="name" placeholder="Enter your name" v-model="userData.name" />
@@ -54,10 +54,7 @@
             <ErrorMessage class="error-text" name="dob" />
 
             <div class="buttons">
-                <button type="reset" class="cancel-btn" @click="onCancel">Cancel
-                </button>
-
-                <button type="submit" class="register-btn" @click.prevent="registerUser">Register</button>
+                <button type="submit" class="register-btn" >Register</button>
             </div>
         </vee-form>
     </section>
@@ -159,22 +156,12 @@ input[type="radio"] {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     float: right;
+    width:50%;
 }
 
-.cancel-btn {
-    border: none;
-    background-color: rgb(204, 33, 33);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: left;
-}
 
 .gender {
     display: flex;
@@ -190,7 +177,8 @@ input[type="radio"] {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content:center ;
+    margin-top: 20px;
 }
 
 #register-form-details {

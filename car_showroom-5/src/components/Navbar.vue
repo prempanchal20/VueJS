@@ -1,16 +1,17 @@
 <template>
   <section class="navbar">
     <div class="navbar-logo">
-      <button>Car Showroom</button>
-
-      <div class="navbar-links">
-        <RouterLink class="home" to="/">Home</RouterLink>
-        <RouterLink class="login" to="/login">Login</RouterLink>
-        <RouterLink class="register" to="/register">Register</RouterLink>
+      <div class="button-home">
+        <button>Car Showroom</button>
       </div>
 
-      <!-- <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-icon">&#9776;</label> -->
+      <div class="nav-menu">
+        <div class="navbar-links">
+          <RouterLink class="home" to="/">Home</RouterLink>
+          <RouterLink class="login" to="/login">Login</RouterLink>
+          <RouterLink class="register" to="/register">Register</RouterLink>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -62,63 +63,35 @@
 .register {
   border: none;
   background-color: transparent;
-  font-size: 15px;
+  font-size: 20px;
   color: white;
   padding-left: 30px;
 }
 
-/* .menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-}
 
-.menu-icon {
-  display: none;
-}
 
-#menu-toggle {
-  display: none;
-}
 
-#menu-toggle:checked~.menu {
-  transform: scale(1, 1);
-}
 
 @media only screen and (max-width: 950px) {
-  .menu {
-    flex-direction: column;
-    background-color: #151418;
-    align-items: start;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    transform: scale(1, 0);
-    transform-origin: top;
-    transition: transform 0.3s ease-in-out;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  .button-home {
+    width: 30%;
+
   }
 
-  .menu a {
-    margin-left: 12px;
+  .navbar-logo {
+    padding: 3%;
   }
 
-  .menu li {
-    margin-bottom: 10px;
+  .navbar-logo button {
+    font-size: 20px;
   }
 
-  .menu-icon {
-    display: block;
-    color: #fff;
-    font-size: 28px;
-    cursor: pointer;
+  .home,
+  .login,
+  .register {
+    font-size: 16px;
   }
-} */
-</style>
+
+}
+</style> 

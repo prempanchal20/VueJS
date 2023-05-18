@@ -1,24 +1,30 @@
 <template>
     <div>
-        <button class="back-btn" @click="goBack">Back</button>
-        <div class="car-details">
-            <div class="car-name">
-                {{ carDetail.name }}
-            </div>
+        <button class="back-btn" @click="goBack"> <i class="bi bi-chevron-left">
+            </i>Back</button>
 
-            <div class="car-details">
-                {{ carDetail.details }}
-            </div>
+        <!-- <div class="car-container"> -->
+            <div class="car-data">
+                <div class="car-image-container">
+                    <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
+                </div>
 
-            <div class="car-image">
-                <img :src="carDetail.image" :alt="carDetail.name">
-            </div>
+                <div class="car-info">
+                    <div class="car-name">
+                        <h1>Car Name: {{ carDetail.name }}</h1>
+                    </div>
 
-            <div class="car-price">
-                {{ carDetail.price }}
+                    <div class="car-details">
+                        <h3> Details: {{ carDetail.details }}</h3>
+                    </div>
+
+                    <div class="car-price">
+                        <h3>Price: ₹{{ carDetail.price }}</h3>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </template>
   
 <script>
@@ -44,7 +50,6 @@ export default {
             axios.get(`https://testapi.io/api/dartya/resource/cardata/${this.$route.params.id}`)
                 .then(response => {
                     this.carDetail = response.data;
-                    console.log(this.carDetail);
                 })
                 .catch(error => {
                     alert(error);
@@ -67,17 +72,98 @@ export default {
 }
 
 .back-btn {
-    border: none;
+    border: 1px solid white;
     background: transparent;
-    color: white;
     cursor: pointer;
     margin-left: 10%;
     margin-top: 5%;
     font-size: 25px;
+    border-radius: 10px;
+    padding: 2px 20px;
 }
 
-.car-name {
+.car-name,
+.back-btn,
+.car-details,
+.car-price {
     color: white;
+    margin-top: 20px;
+}
+
+.car-name h1 {
+    font-size: 40px;
+}
+
+/* .car-data,
+.car-container {
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
+} */
+
+.car-data {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid white;
+    padding: 3%;
+    /* box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1); */
+    border-radius: 15px;
+    margin-top: 7%;
+}
+
+.car-data,
+.car-details h3,
+.car-price h3 {
+    font-size: 22px;
+    font-weight: 100;
+}
+
+.car-image-container {
+    width: 55%;
+}
+
+.car-info {
+    width: 45%;
+}
+
+.car-image {
+    width: 85%;
+}
+
+@media only screen and (max-width: 1302px) and (min-width: 350px) {
+    .car-data {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20%;
+    }
+
+    .car-image-container {
+        width: 100%;
+    }
+
+    .car-image {
+        width: 100%;
+    }
+
+    .car-details {
+        font-size: 20px;
+    }
+
+    .car-info {
+        width: 100%;
+    }
+
+    .car-name h1 {
+        font-size: 24px;
+    }
+
+    .car-details h3 {
+        font-size: 20px;
+    }
 }
 </style>
   

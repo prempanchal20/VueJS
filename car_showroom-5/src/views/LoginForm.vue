@@ -4,7 +4,7 @@
             <h2>Login Form</h2>
         </div>
 
-        <vee-form id="login-form-details" :validation-schema="loginSchema">
+        <vee-form id="login-form-details" :validation-schema="loginSchema" @submit.prevent="loginUser">
             <label for="email">Email:</label>
             <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
                 v-model="loginUserData.email" />
@@ -16,10 +16,7 @@
             <ErrorMessage class="error-text" name="password" />
 
             <div class="buttons">
-                <button type="reset" class="cancel-btn" @click="onCancel">
-                    Cancel
-                </button>
-                <button type="submit" class="login-btn" @click.prevent="loginUser">
+                <button type="submit" class="login-btn" >
                     Login
                 </button>
             </div>
@@ -129,15 +126,24 @@ input[type="radio"] {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    margin: 2%;
 }
 
 #login-form-details {
     color: white;
+    margin-top: 20px;
 }
 
 .error-text {
     color: rgb(219, 81, 81);
+}
+
+
+.login-btn{
+    width:50%;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
 /* Responsive Styles */
