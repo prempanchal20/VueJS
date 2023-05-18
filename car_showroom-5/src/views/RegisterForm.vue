@@ -66,6 +66,7 @@
 <script>
 import { ErrorMessage } from "vee-validate";
 import axios from "axios";
+
 export default {
     name: "RegisterForm",
 
@@ -94,15 +95,21 @@ export default {
         };
     },
 
-    methods: {
+    methods: {        
         //---------- Axios API - Register User------------//
         registerUser() {
-            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => console.log(response))
+            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => {console.log(response)})
 
                 .catch(error => {
                     alert("User is not Register... Please try Again")
                 })
-            alert('User Registered')
+            alert(`"User Registered Successfully "\n
+                    "User's Name is-" ${userData.name}, 
+                    "User's Email Id is- " ${userData.details}, 
+                    "User's Password is- " ${userData.price}, 
+                    "User's Role is- " ${userData.image}
+                    "User's Gender is- ${userData.gender}"
+                    "User's DOB is-${userData.dob} "`)
         },
     }
 }

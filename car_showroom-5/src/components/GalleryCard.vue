@@ -26,14 +26,14 @@
                                 Available Soon
                             </button>
 
-                            <button v-else class="info-btn" @click="emitPrice(item.name, item.price)">
+                            <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn"
+                                @click="emitPrice(item.name, item.price)">
                                 Info
-                            </button>
+                            </RouterLink>
                         </div>
 
                         <div class="delete-icon">
-                            <button class="bi bi-trash" id="delete-icon"
-                                @click.prevent="deleteData(item.id, item.name)">
+                            <button class="bi bi-trash" id="delete-icon" @click.prevent="deleteData(item.id, item.name)">
                             </button>
                         </div>
                     </div>
@@ -72,6 +72,10 @@ export default {
         deleteData(itemID, itemName) {
             this.$emit("deleteData", itemID, itemName);
         },
+
+        navigateToRoute() {
+            this.$router.push('/CarDetails');
+        }
     },
 };
 </script>
@@ -220,11 +224,5 @@ body {
 #delete-icon {
     background-color: transparent;
     font-size: 20px;
-}
-
-@media only screen and (max-width: 958px) and (min-width: 350px) {
-    .car-content {
-        margin-top: 10%;
-    }
 }
 </style>

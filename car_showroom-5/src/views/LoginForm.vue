@@ -6,24 +6,30 @@
 
         <vee-form id="login-form-details" :validation-schema="loginSchema">
             <label for="email">Email:</label>
-            <vee-field type="email" id="email" name="email" placeholder="Enter your mail id" />
+            <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
+                v-model="loginUserData.email" />
             <ErrorMessage class="error-text" name="email" />
 
             <label for="password">Password:</label>
-            <vee-field type="password" id="password" name="password" placeholder="Enter your password" />
+            <vee-field type="password" id="password" name="password" placeholder="Enter your password"
+                v-model="loginUserData.password" />
             <ErrorMessage class="error-text" name="password" />
 
             <div class="buttons">
-                <button type="reset" class="cancel-btn" @click="onCancel">Cancel</button>
-                <button type="submit" class="login-btn" @login="login">Login</button>
+                <button type="reset" class="cancel-btn" @click="onCancel">
+                    Cancel
+                </button>
+                <button type="submit" class="login-btn" @click.prevent="loginUser">
+                    Login
+                </button>
             </div>
         </vee-form>
     </section>
 </template>
 
-
 <script>
 import { ErrorMessage } from "vee-validate";
+import axios from "axios";
 
 export default {
     name: "LoginForm",
@@ -34,21 +40,35 @@ export default {
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",
             },
+
+            loginUserData: {
+                email: "",
+                password: "",
+            },
         };
     },
 
-
     methods: {
-        //---------- Axios API - Login User------------//
-        loginUser() {
-            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => console.log(response))
-                .catch(error => {
-                    alert("User is not Log in... Please try Again")
-                })
-            alert('User Login Sucessfully')
+        onCancel() {
+            this.login = false;
         },
-    }
-}
+
+        //---------- Axios API - Login User--------  ----//
+        loginUser() {
+            axios
+                .post("https://testapi.io/api/dartya//login", this.loginUserData)
+                .then((response) => {
+                    if (response.status == 200) {
+                        alert("Login Successfully..!!");
+                        this.$router.push('/home');
+                    }
+                })
+                .catch((error) => {
+                    alert("User is not Log in... Please try Again");
+                });
+        },
+    },
+};
 </script>
 
 <style scoped>
@@ -115,7 +135,6 @@ input[type="radio"] {
 #login-form-details {
     color: white;
 }
-
 
 .error-text {
     color: rgb(219, 81, 81);
