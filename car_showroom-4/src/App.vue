@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'fonts': fontFamily }">
+    <div class="fonts">
         <Navbar />
 
         <ul class="menu">
@@ -33,7 +33,6 @@ export default {
             data: "",
             editModel: false,
             isAddModel: true,
-            fontFamily: true,
         };
     },
 
