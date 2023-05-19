@@ -4,7 +4,7 @@
             <h2>Login Form</h2>
         </div>
 
-        <vee-form id="login-form-details" :validation-schema="loginSchema" @submit.prevent="loginUser">
+        <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUser">
             <label for="email">Email:</label>
             <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
                 v-model="loginUserData.email" />
@@ -16,7 +16,7 @@
             <ErrorMessage class="error-text" name="password" />
 
             <div class="buttons">
-                <button type="submit" class="login-btn" >
+                <button type="submit" class="login-btn">
                     Login
                 </button>
             </div>
@@ -46,17 +46,16 @@ export default {
     },
 
     methods: {
-        onCancel() {
-            this.login = false;
-        },
-
         //---------- Axios API - Login User--------  ----//
         loginUser() {
             axios
                 .post("https://testapi.io/api/dartya//login", this.loginUserData)
                 .then((response) => {
                     if (response.status == 200) {
-                        alert("Login Successfully..!!");
+                        alert(`"Login Successfully..!!"\n
+                    "User's Email Id is- " ${this.loginUserData.email}, 
+                    "User's Password is- " ${this.loginUserData.password},"`
+                        );
                         this.$router.push('/home');
                     }
                 })
@@ -74,7 +73,7 @@ export default {
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-    margin-top: 15%;
+    margin-top: 5%;
     border-radius: 20px;
 }
 
@@ -140,8 +139,8 @@ input[type="radio"] {
 }
 
 
-.login-btn{
-    width:50%;
+.login-btn {
+    width: 50%;
     padding: 10px 20px;
     border-radius: 10px;
 }

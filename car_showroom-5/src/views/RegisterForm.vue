@@ -4,7 +4,7 @@
             <h2>Registration Form</h2>
         </div>
 
-        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit.prevent="registerUser">
+        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit="registerUser">
 
             <label for="text">Name:</label>
             <vee-field type="name" id="name" name="name" placeholder="Enter your name" v-model="userData.name" />
@@ -54,7 +54,7 @@
             <ErrorMessage class="error-text" name="dob" />
 
             <div class="buttons">
-                <button type="submit" class="register-btn" >Register</button>
+                <button type="submit" class="register-btn">Register</button>
             </div>
         </vee-form>
     </section>
@@ -92,21 +92,27 @@ export default {
         };
     },
 
-    methods: {        
+    methods: {
         //---------- Axios API - Register User------------//
         registerUser() {
-            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then(response => {console.log(response)})
+            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then((response) => {
+                if (response.status == 200) {
+                    alert("Register Successfully..!!");
+                    this.$router.push('/login');
+                }
+            })
 
                 .catch(error => {
                     alert("User is not Register... Please try Again")
                 })
             alert(`"User Registered Successfully "\n
-                    "User's Name is-" ${userData.name}, 
-                    "User's Email Id is- " ${userData.details}, 
-                    "User's Password is- " ${userData.price}, 
-                    "User's Role is- " ${userData.image}
-                    "User's Gender is- ${userData.gender}"
-                    "User's DOB is-${userData.dob} "`)
+                    "User's Name is-" ${this.userData.name}, 
+                    "User's Email Id is- " ${this.userData.email}, 
+                    "User's Password is- " ${this.userData.password}, 
+                    "User's Role is- " ${this.userData.role}
+                    "User's Gender is- ${this.userData.gender}"
+                    "User's DOB is-${this.userData.dob} "`)
+            this.$router.push('/login');
         },
     }
 }
@@ -159,7 +165,7 @@ input[type="radio"] {
     border-radius: 10px;
     cursor: pointer;
     float: right;
-    width:50%;
+    width: 50%;
 }
 
 
@@ -177,7 +183,7 @@ input[type="radio"] {
 
 .buttons {
     display: flex;
-    justify-content:center ;
+    justify-content: center;
     margin-top: 20px;
 }
 

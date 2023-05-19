@@ -74,7 +74,7 @@ export default {
     },
 
     props: ["editModel", "editCar", "isAddModel", "editData"],
-    
+
     methods: {
         onCancel() {
             this.$emit("onCancel");

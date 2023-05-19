@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ 'fonts': fontFamily }">
+    <div class="fonts">
         <Navbar />
         <RouterView />
     </div>
@@ -8,12 +8,6 @@
 <script>
 export default {
     name: "App",
-
-    data() {
-        return {
-            fontFamily: true,
-        };
-    },
 };
 </script>
 

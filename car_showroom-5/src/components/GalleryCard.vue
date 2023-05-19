@@ -1,5 +1,5 @@
 <template>
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <section class="car-content" v-for="item in data" :key="item.id">
         <div class="car-card">
             <div class="car-box">
@@ -11,7 +11,7 @@
                     <div class="car-name">
                         <h3>{{ item.name }}</h3>
                     </div>
-                    
+
                     <div class="description">
                         <p>{{ truncatedDescription(item.details) }}</p>
                     </div>
@@ -26,8 +26,7 @@
                                 Available Soon
                             </button>
 
-                            <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn"
-                                >
+                            <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn">
                                 Info
                             </RouterLink>
                         </div>
@@ -48,7 +47,7 @@ export default {
     name: "GalleryCard",
 
     props: ['data'],
-    emits: [ "editData", "deleteData"],
+    emits: ["editData", "deleteData"],
 
     methods: {
         truncatedDescription(details) {

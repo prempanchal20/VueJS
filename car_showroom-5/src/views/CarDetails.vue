@@ -2,29 +2,26 @@
     <div>
         <button class="back-btn" @click="goBack"> <i class="bi bi-chevron-left">
             </i>Back</button>
+        <div class="car-data">
+            <div class="car-image-container">
+                <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
+            </div>
 
-        <!-- <div class="car-container"> -->
-            <div class="car-data">
-                <div class="car-image-container">
-                    <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
+            <div class="car-info">
+                <div class="car-name">
+                    <h1>Car Name: {{ carDetail.name }}</h1>
                 </div>
 
-                <div class="car-info">
-                    <div class="car-name">
-                        <h1>Car Name: {{ carDetail.name }}</h1>
-                    </div>
+                <div class="car-details">
+                    <h3> Details: {{ carDetail.details }}</h3>
+                </div>
 
-                    <div class="car-details">
-                        <h3> Details: {{ carDetail.details }}</h3>
-                    </div>
-
-                    <div class="car-price">
-                        <h3>Price: ₹{{ carDetail.price }}</h3>
-                    </div>
+                <div class="car-price">
+                    <h3>Price: ₹{{ carDetail.price }}</h3>
                 </div>
             </div>
         </div>
-    <!-- </div> -->
+    </div>
 </template>
   
 <script>
@@ -94,23 +91,15 @@ export default {
     font-size: 40px;
 }
 
-/* .car-data,
-.car-container {
-    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
-        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-        5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
-} */
-
 .car-data {
     display: flex;
     width: 70%;
     margin: 0 auto;
     border: 1px solid white;
     padding: 3%;
-    /* box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    box-shadow: inset 15px 15px 15px rgba(0, 0, 0, 0.2),
         inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-        5px 5px 5px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1); */
+        15px 15px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     margin-top: 7%;
 }
