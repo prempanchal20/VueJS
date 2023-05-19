@@ -4,7 +4,7 @@
     </ul>
 
     <div class="cars-data">
-        <GalleryCard :data="data"  @editData="editData" @deleteData="deleteData" />
+        <GalleryCard :data="data" @editData="editData" @deleteData="deleteData" />
 
         <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
             @getFormData="getFormData" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />

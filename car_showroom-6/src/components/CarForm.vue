@@ -53,7 +53,7 @@ export default {
     data() {
         return {
             schema: {
-                name: "required",
+                name: "required|max:10",
                 details: "required|min:30|max:120",
                 url: "required|url",
                 price: "required",

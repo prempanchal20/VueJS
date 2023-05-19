@@ -1,5 +1,4 @@
 <template>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
     <transition-group name="car">
         <section class="car-content" v-for="item in data" :key="item.id">
@@ -228,6 +227,7 @@ body {
     font-size: 20px;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 

@@ -2,23 +2,25 @@
     <div class="fonts">
         <Navbar />
         <RouterView v-slot="{ Component }">
-            <transition name="route" mode="out-in" appear>
-                <component :is="Component"></component>
+            <transition name="route" appear>
+                <component :is="Component" />
             </transition>
         </RouterView>
     </div>
 </template>
 
 <script>
+
 export default {
     name: "App",
+
 };
 </script>
 
 <style>
 .menu {
     position: absolute;
-    top: 80px;
+    top: 70px;
     right: 10px;
 }
 
@@ -48,8 +50,8 @@ export default {
     transform: translateY(30%);
 }
 
-.route-enter-from:hover,
+/* .route-enter-from:hover,
 .route-leave-to:hover {
     transform: translateY(-50px);
-}
+} */
 </style>
