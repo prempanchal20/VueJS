@@ -1,9 +1,8 @@
 <template>
-    <ul class="menu">
-        <li><button @click="toggle">Add Car</button></li>
-    </ul>
-
     <div class="cars-data">
+        <ul class="menu">
+            <li><button @click="toggle">Add Car</button></li>
+        </ul>
         <GalleryCard :data="data" @editData="editData" @deleteData="deleteData" />
 
         <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
@@ -65,7 +64,7 @@ export default {
         carsData() {
             axios.get(
                 "https://testapi.io/api/dartya/resource/cardata"
-            ).catch((error) => alert("Coudn't call the GET API... Please try Again"))
+            ).catch((error) => alert("Coudn't Show The Data... Please try Again"))
                 .then(response => {
                     this.data = response.data.data
                 })
@@ -78,7 +77,7 @@ export default {
             ).then(response => this.carsData())
 
                 .catch(error => {
-                    alert("Coudn't Call The Post API... Please try Again")
+                    alert("Coudn't Add The Car... Please try Again")
                 })
 
             alert(`"Created Data"\n
@@ -102,7 +101,7 @@ export default {
             ).then(response => this.carsData())
 
                 .catch(error => {
-                    alert("Coudn't Call The Put API... Please try Again")
+                    alert("Coudn't Edit the Data... Please try Again")
                 })
 
             // Edit Data Alert
@@ -128,18 +127,10 @@ export default {
                     .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
                     .then((response) => this.carsData())
                     .catch(error => {
-                        alert("Coudn't Call The Delete API... Please try Again")
+                        alert("Coudn't Delete The Data... Please try Again")
                     })
             }
         },
     },
 };
 </script>
-
-<style>
-.menu {
-    position: absolute;
-    top: 80px;
-    right: 10px;
-}
-</style>

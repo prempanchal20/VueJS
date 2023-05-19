@@ -5,8 +5,8 @@ import VeeValidatePlugin from "./includes/validation";
 import router from "./router/router";
 
 const app = createApp(App);
+app.use(router);
 app.component("Navbar", Navbar);
 
 app.use(VeeValidatePlugin);
-app.use(router);
 app.mount("#app");

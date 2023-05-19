@@ -1,6 +1,6 @@
 <template>
-
     <transition-group name="car">
+       
         <section class="car-content" v-for="item in data" :key="item.id">
             <div class="car-card">
                 <div class="car-box">
@@ -229,20 +229,21 @@ body {
     border: none;
     cursor: pointer;
 }
-
-
-.car-enter-active,
-.car-leave-active {
-    transition: transform 1s;
+.menu {
+    position: absolute;
+    top: 65px;
+    right: 10px;
 }
 
-.car-enter-from,
-.car-leave-to {
-    transform: translateY(30%);
-}
-
-.car-enter-from:hover,
-.car-leave-to:hover {
-    transform: translateY(-50px);
+.menu button {
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 5px 15px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    margin-right: 50px;
+    margin-top: 20px;
 }
 </style>

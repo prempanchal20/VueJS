@@ -1,27 +1,29 @@
 <template>
-    <section class="login-form">
-        <div class="login-form-title">
-            <h2>Login Form</h2>
-        </div>
-
-        <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUser">
-            <label for="email">Email:</label>
-            <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
-                v-model="loginUserData.email" />
-            <ErrorMessage class="error-text" name="email" />
-
-            <label for="password">Password:</label>
-            <vee-field type="password" id="password" name="password" placeholder="Enter your password"
-                v-model="loginUserData.password" />
-            <ErrorMessage class="error-text" name="password" />
-
-            <div class="buttons">
-                <button type="submit" class="login-btn">
-                    Login
-                </button>
+    <div>
+        <div class="login-form">
+            <div class="login-form-title">
+                <h2>Login Form</h2>
             </div>
-        </vee-form>
-    </section>
+
+            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUser">
+                <label for="email">Email:</label>
+                <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
+                    v-model="loginUserData.email" />
+                <ErrorMessage class="error-text" name="email" />
+
+                <label for="password">Password:</label>
+                <vee-field type="password" id="password" name="password" placeholder="Enter your password"
+                    v-model="loginUserData.password" />
+                <ErrorMessage class="error-text" name="password" />
+
+                <div class="buttons">
+                    <button type="submit" class="login-btn">
+                        Login
+                    </button>
+                </div>
+            </vee-form>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -32,7 +34,7 @@ export default {
     name: "LoginForm",
     data() {
         return {
-        
+
             loginSchema: {
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",

@@ -1,5 +1,5 @@
 <template>
-    <section class="register-form">
+    <div class="register-form">
         <div class="register-form-title">
             <h2>Registration Form</h2>
         </div>
@@ -57,7 +57,7 @@
                 <button type="submit" class="register-btn">Register</button>
             </div>
         </vee-form>
-    </section>
+    </div>
 </template>
 
 <script>
