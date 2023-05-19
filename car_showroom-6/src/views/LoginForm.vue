@@ -30,9 +30,9 @@ import axios from "axios";
 
 export default {
     name: "LoginForm",
-
     data() {
         return {
+        
             loginSchema: {
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",

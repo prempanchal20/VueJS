@@ -1,26 +1,24 @@
 <template>
     <div>
-        <button class="back-btn" @click="goBack"> <i class="bi bi-chevron-left">
-            </i>Back</button>
-        <div class="car-data">
-            <div class="car-image-container">
-                <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
-            </div>
-
-            <div class="car-info">
-                <div class="car-name">
-                    <h1>Car Name: {{ carDetail.name }}</h1>
+        <button class="back-btn" @click="goBack">Back</button>
+        
+                <div class="car-data">
+                    <div class="car-image-container">
+                        <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
+                    </div>
+                    <div class="car-info">
+                        <div class="car-name">
+                            <h1>Car Name: {{ carDetail.name }}</h1>
+                        </div>
+                        <div class="car-details">
+                            <h3>Details: {{ carDetail.details }}</h3>
+                        </div>
+                        <div class="car-price">
+                            <h3>Price: ₹{{ carDetail.price }}</h3>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="car-details">
-                    <h3> Details: {{ carDetail.details }}</h3>
-                </div>
-
-                <div class="car-price">
-                    <h3>Price: ₹{{ carDetail.price }}</h3>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </template>
   
@@ -84,7 +82,7 @@ export default {
 .car-details,
 .car-price {
     color: white;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .car-name h1 {

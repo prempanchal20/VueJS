@@ -1,7 +1,11 @@
 <template>
     <div class="fonts">
         <Navbar />
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+            <transition name="route" mode="out-in" appear>
+                <component :is="Component"></component>
+            </transition>
+        </RouterView>
     </div>
 </template>
 
@@ -32,5 +36,20 @@ export default {
 
 .fonts {
     font-family: 'Poppins', sans-serif;
+}
+
+.route-enter-active,
+.route-leave-active {
+    transition: transform 1s;
+}
+
+.route-enter-from,
+.route-leave-to {
+    transform: translateY(30%);
+}
+
+.route-enter-from:hover,
+.route-leave-to:hover {
+    transform: translateY(-50px);
 }
 </style>
