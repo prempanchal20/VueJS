@@ -62,7 +62,7 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import { mapActions } from "pinia";
+import { mapState,mapActions } from 'pinia'
 import { useCarStore } from "../stores/carStore";
 export default {
     name: "RegisterForm",

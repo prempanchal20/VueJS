@@ -1,6 +1,6 @@
 <template>
     <transition-group name="car">
-        <section class="car-content" v-for="item in data" :key="item.id">
+        <section class="car-content" v-for="item in showData" :key="item.id">
             <div class="car-card">
                 <div class="car-box">
                     <div class="car-container">
@@ -44,16 +44,15 @@
 </template>
 
 <script>
-import { mapState } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import { useCarStore } from "../stores/carStore";
 export default {
 
     name: "GalleryCard",
-    // props: ["data"],
     emits: ["editData", "deleteData"],
 
     computed: {
-        ...mapState(useCarStore, ['data'])
+        ...mapState(useCarStore, ['showData'])
     },
 
     methods: {
@@ -65,6 +64,7 @@ export default {
                 return details;
             }
         },
+
         editData(cars) {
             this.$emit("editData", cars);
         },

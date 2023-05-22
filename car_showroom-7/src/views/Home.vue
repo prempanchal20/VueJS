@@ -11,7 +11,6 @@
 </template>
 
 <script>
-
 import CarForm from "../components/CarForm.vue";
 import GalleryCard from "../components/GalleryCard.vue";
 import { useCarStore } from "../stores/carStore";
@@ -38,6 +37,8 @@ export default {
     },
 
     methods: {
+        ...mapActions(useCarStore, ['carsData']),
+
         editData(data) {
             this.editCar = data;
             this.editModel = true;
@@ -58,8 +59,6 @@ export default {
         deleteData(itemId, itemName) {
             this.deleteData(itemId, itemName);
         },
-
-        ...mapActions(useCarStore, ['carsData']),
     },
 };
 </script>

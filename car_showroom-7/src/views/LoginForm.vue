@@ -28,28 +28,37 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import { mapActions } from "pinia";
+import { mapState, mapActions } from 'pinia'
 import { useCarStore } from "../stores/carStore";
+
 export default {
     name: "LoginForm",
-    data() {
-        return {
 
+    computed: {
+        ...mapState(useCarStore, ['loginUserData'])
+    },
+
+    data: () => {
+        return {
             loginSchema: {
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",
             },
 
-            loginUserData: {
-                email: "",
-                password: "",
-            },
+            // loginUserData: {
+            //     email: "",
+            //     password: "",
+            // },
         };
     },
 
-    methods:{
-        ...mapActions(useCarStore, ["loginUser"]),
-    },
+    methods: {
+        ...mapActions(useCarStore, ['loginUser']),
+
+        loginData() {
+            this.loginUser()
+        }
+    }
 };
 </script>
 

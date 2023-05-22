@@ -22,26 +22,23 @@
 </template>
   
 <script>
+import { mapState, mapActions } from 'pinia'
+import { useCarStore } from "../stores/carStore";
 export default {
 
-    data() {
-        return {
-            carDetail: {
-                name: "",
-                details: "",
-                image: "",
-                price: "",
-            },
-        };
-    },
     created() {
-        this.fetchData;
+        this.fetchData(this.$route.params.id);
+    },
+
+    computed: {
+        ...mapState(useCarStore, ['carDetail'])
     },
 
     methods: {
         goBack() {
             this.$router.push('/home');
         },
+        ...mapActions(useCarStore, ['fetchData']),
     },
 };
 </script>

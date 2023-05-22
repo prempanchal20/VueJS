@@ -43,6 +43,8 @@
 <script>
 import GalleryCard from "./GalleryCard.vue";
 import { ErrorMessage } from "vee-validate";
+import { useCarStore } from "../stores/carStore";
+import { mapActions } from "pinia";
 
 export default {
     name: "CarForm",
@@ -78,6 +80,8 @@ export default {
     props: ["editModel", "editCar", "isAddModel", "editData"],
 
     methods: {
+        ...mapActions(useCarStore, ['carsData']),
+
         onCancel() {
             this.$emit("onCancel");
         },

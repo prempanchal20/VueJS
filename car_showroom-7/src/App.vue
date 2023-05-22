@@ -23,7 +23,7 @@ export default {
 
 .routew-enter-active,
 .routew-leave-active {
-    transition: all 1s ease-in;
+    transition: all 0.8s ease-in;
 }
 
 .routew-enter-from,

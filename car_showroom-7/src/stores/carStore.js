@@ -5,8 +5,12 @@ import axios from "axios";
 export const useCarStore = defineStore("api", {
   state: () => {
     return {
-      data: [],
+      showData: [],
+      carDetail: [],
       editData: [],
+      loginUserData: [],
+      loginUser: [],
+      userData: [],
       onCancel: true,
       editModel: true,
       isAddModel: true,
@@ -22,22 +26,20 @@ export const useCarStore = defineStore("api", {
       axios
         .get("https://testapi.io/api/dartya/resource/cardata")
         .then((response) => {
-          this.data = response.data.data;
+          this.showData = response.data.data;
         })
         .catch((error) => alert("Coudn't Show The Data... Please try Again"));
     },
 
     // GET Method by ID - Axios API
-    async fetchData() {
-      await axios
-        .get(
-          `https://testapi.io/api/dartya/resource/cardata/${this.$route.params.id}`
-        )
+    fetchData(carID) {
+      axios
+        .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
         .then((response) => {
           this.carDetail = response.data;
         })
         .catch((error) => {
-          alert("Coudn't Show The Data... Please try Again");
+          alert(error);
         });
     },
 
@@ -102,16 +104,17 @@ export const useCarStore = defineStore("api", {
     },
 
     //---------- Axios API - Login User--------  ----//
-    async loginUser() {
-      await axios
+    loginUser() {
+      console.log(this.loginUserData);
+      axios
         .post("https://testapi.io/api/dartya//login", this.loginUserData)
         .then((response) => {
-          if (response.status == 200) {
-            alert(`"Login Successfully..!!"\n
-                "User's Email Id is- " ${this.loginUserData.email}, 
-                "User's Password is- " ${this.loginUserData.password},"`);
-            this.$router.push("/home");
+          if (response.status === 200) {
+            alert(`Login Successfully..!!\n
+                User's Email Id is- ${this.loginUserData.email}, 
+                User's Password is- ${this.loginUserData.password},"`);
           }
+          this.$router.push("/home");
         })
         .catch((error) => {
           alert("User is not Log in... Please try Again");
