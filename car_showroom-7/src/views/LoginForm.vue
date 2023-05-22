@@ -28,8 +28,8 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import axios from "axios";
-
+import { mapActions } from "pinia";
+import { useCarStore } from "../stores/carStore";
 export default {
     name: "LoginForm",
     data() {
@@ -47,24 +47,8 @@ export default {
         };
     },
 
-    methods: {
-        //---------- Axios API - Login User--------  ----//
-        loginUser() {
-            axios
-                .post("https://testapi.io/api/dartya//login", this.loginUserData)
-                .then((response) => {
-                    if (response.status == 200) {
-                        alert(`"Login Successfully..!!"\n
-                    "User's Email Id is- " ${this.loginUserData.email}, 
-                    "User's Password is- " ${this.loginUserData.password},"`
-                        );
-                        this.$router.push('/home');
-                    }
-                })
-                .catch((error) => {
-                    alert("User is not Log in... Please try Again");
-                });
-        },
+    methods:{
+        ...mapActions(useCarStore, ["loginUser"]),
     },
 };
 </script>

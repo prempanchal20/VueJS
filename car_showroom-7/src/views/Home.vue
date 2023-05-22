@@ -11,12 +11,14 @@
 </template>
 
 <script>
+
 import CarForm from "../components/CarForm.vue";
 import GalleryCard from "../components/GalleryCard.vue";
-import axios from "axios";
+import { useCarStore } from "../stores/carStore";
+import { mapActions } from "pinia";
 
 export default {
-    name: "App",
+    name: "Home",
 
     components: {
         GalleryCard,
@@ -36,7 +38,6 @@ export default {
     },
 
     methods: {
-
         editData(data) {
             this.editCar = data;
             this.editModel = true;
@@ -58,79 +59,7 @@ export default {
             this.deleteData(itemId, itemName);
         },
 
-        //----------------Axios APIs - GET, Post, Put, Delete----------------//
-
-        // GET Method - Axios API
-        carsData() {
-            axios.get(
-                "https://testapi.io/api/dartya/resource/cardata"
-            ).catch((error) => alert("Coudn't Show The Data... Please try Again"))
-                .then(response => {
-                    this.data = response.data.data
-                })
-        },
-
-        // Post Method - Axios API
-        getFormData(carData) {
-            axios.post(
-                "https://testapi.io/api/dartya/resource/cardata", carData
-            ).then(response => this.carsData())
-
-                .catch(error => {
-                    alert("Coudn't Add The Car... Please try Again")
-                })
-
-            alert(`"Created Data"\n
-                     "Car Name is-" ${carData.name}, 
-                     "Car Description is- " ${carData.details}, 
-                     "Car Price is- " ${carData.price}, 
-                     "Car URL is- " ${carData.image}`);
-            this.onCancel()
-        },
-
-        // Put Method - Axios API
-        async alertUpdateData(carData) {
-            await axios.put(
-                `https://testapi.io/api/dartya/resource/cardata/${carData.id}`,
-                {
-                    name: carData.name,
-                    price: carData.price,
-                    image: carData.image,
-                    details: carData.details,
-                }
-            ).then(response => this.carsData())
-
-                .catch(error => {
-                    alert("Coudn't Edit the Data... Please try Again")
-                })
-
-            // Edit Data Alert
-            alert(`"Edited Data"\n
-                    "Car Name is-" ${carData.name}, 
-                    "Car Description is- " ${carData.details}, 
-                    "Car Price is- " ${carData.price}, 
-                    "Car URL is- " ${carData.image}`);
-            this.carsData()
-            this.onCancel()
-        },
-
-        // DELETE Method - Axios API
-        async deleteData(itemId, itemName) {
-
-            // Delete Data Alert
-            const deleteAlert = window.confirm(
-                `Are You Sure Want to Delete ${itemName}`
-            );
-
-            if (deleteAlert == true) {
-                await axios
-                    .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
-                    .then((response) => this.carsData())
-                    .catch(error => {
-                        alert("Coudn't Delete The Data... Please try Again")
-                    })
-            }
-        },
+        ...mapActions(useCarStore, ['carsData']),
     },
 };
 </script>

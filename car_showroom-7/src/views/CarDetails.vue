@@ -22,7 +22,6 @@
 </template>
   
 <script>
-import axios from 'axios';
 export default {
 
     data() {
@@ -36,20 +35,10 @@ export default {
         };
     },
     created() {
-        this.fetchData();
+        this.fetchData;
     },
 
     methods: {
-        fetchData() {
-            axios.get(`https://testapi.io/api/dartya/resource/cardata/${this.$route.params.id}`)
-                .then(response => {
-                    this.carDetail = response.data;
-                })
-                .catch(error => {
-                    alert(error);
-                });
-        },
-
         goBack() {
             this.$router.push('/home');
         },

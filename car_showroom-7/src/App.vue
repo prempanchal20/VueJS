@@ -1,7 +1,6 @@
 <template>
     <div class="fonts">
         <Navbar />
-    
         <RouterView v-slot="{ Component }">
             <Transition name="routew" appear mode="out-in">
                 <component :is="Component" />

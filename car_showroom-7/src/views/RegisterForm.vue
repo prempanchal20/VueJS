@@ -62,8 +62,8 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import axios from "axios";
-
+import { mapActions } from "pinia";
+import { useCarStore } from "../stores/carStore";
 export default {
     name: "RegisterForm",
 
@@ -93,28 +93,8 @@ export default {
     },
 
     methods: {
-        //---------- Axios API - Register User------------//
-        registerUser() {
-            axios.post("https://testapi.io/api/dartya/resource/users", this.userData).then((response) => {
-                if (response.status == 200) {
-                    alert("Register Successfully..!!");
-                    this.$router.push('/login');
-                }
-            })
-
-                .catch(error => {
-                    alert("User is not Register... Please try Again")
-                })
-            alert(`"User Registered Successfully "\n
-                    "User's Name is-" ${this.userData.name}, 
-                    "User's Email Id is- " ${this.userData.email}, 
-                    "User's Password is- " ${this.userData.password}, 
-                    "User's Role is- " ${this.userData.role}
-                    "User's Gender is- ${this.userData.gender}"
-                    "User's DOB is-${this.userData.dob} "`)
-            this.$router.push('/login');
-        },
-    }
+        ...mapActions(useCarStore, ["registerUser"]),
+    },
 }
 </script>
 

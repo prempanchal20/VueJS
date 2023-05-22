@@ -1,6 +1,5 @@
 <template>
     <transition-group name="car">
-       
         <section class="car-content" v-for="item in data" :key="item.id">
             <div class="car-card">
                 <div class="car-box">
@@ -34,8 +33,7 @@
 
                             <div class="delete-icon">
                                 <button class="bi bi-trash" id="delete-icon"
-                                    @click.prevent="deleteData(item.id, item.name)">
-                                </button>
+                                    @click.prevent="deleteData(item.id, item.name)"></button>
                             </div>
                         </div>
                     </div>
@@ -46,11 +44,17 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+import { useCarStore } from "../stores/carStore";
 export default {
-    name: "GalleryCard",
 
-    props: ['data'],
+    name: "GalleryCard",
+    // props: ["data"],
     emits: ["editData", "deleteData"],
+
+    computed: {
+        ...mapState(useCarStore, ['data'])
+    },
 
     methods: {
         truncatedDescription(details) {
@@ -70,8 +74,8 @@ export default {
         },
 
         navigateToRoute() {
-            this.$router.push('/CarDetails');
-        }
+            this.$router.push("/CarDetails");
+        },
     },
 };
 </script>
@@ -146,7 +150,6 @@ body {
 .card:hover p {
     color: rgba(255, 255, 255, 1);
 }
-
 
 .info-btn {
     padding: 8px 40px;
@@ -229,6 +232,7 @@ body {
     border: none;
     cursor: pointer;
 }
+
 .menu {
     position: absolute;
     top: 65px;
