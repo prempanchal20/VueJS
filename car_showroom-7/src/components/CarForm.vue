@@ -72,14 +72,16 @@ export default {
     },
 
     computed: {
-        ...mapState(useCarStore, ['isAddModel', 'editModel']),
+        ...mapState(useCarStore, ['isAddModel',]),
+
 
         buttonName() {
             return this.isAddModel ? 'Submit' : 'Update';
         }
     },
 
-    props: ["editModel", "editCar", "isAddModel", "editData"],
+    props: ["editCar",
+        "editData"],
 
     methods: {
         ...mapActions(useCarStore, ['carsData', 'getFormData', 'alertUpdateData']),

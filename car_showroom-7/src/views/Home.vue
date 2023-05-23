@@ -5,8 +5,7 @@
         </ul>
         <GalleryCard :data="data" @editData="editData" />
 
-        <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
-            @getFormData="getFormData" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />
+        <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar" @onCancel="onCancel" />
     </div>
 </template>
 
@@ -14,7 +13,7 @@
 import CarForm from "../components/CarForm.vue";
 import GalleryCard from "../components/GalleryCard.vue";
 import { useCarStore } from "../stores/carStore";
-import { mapActions } from "pinia";
+import { mapActions, mapWritableState } from "pinia";
 
 export default {
     name: "Home",
@@ -27,9 +26,10 @@ export default {
     data() {
         return {
             data: "",
-            editModel: false,
-            isAddModel: true,
         };
+    },
+    computed: {
+        ...mapWritableState(useCarStore, ['editModel', 'isAddModel']),
     },
 
     created() {

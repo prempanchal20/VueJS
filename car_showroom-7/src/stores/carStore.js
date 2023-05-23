@@ -10,6 +10,8 @@ export const useCarStore = defineStore("api", {
       carDetail: [],
       getCarsData: [],
       deleteData: true,
+      isAddModel: true,
+      editModel: false,
     };
   },
 
@@ -42,7 +44,6 @@ export const useCarStore = defineStore("api", {
         .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
         .then((response) => {
           this.carDetail = response.data;
-          // this.apiResponses.push(response.data);
         })
         .catch((error) => {
           alert(error);
@@ -60,6 +61,8 @@ export const useCarStore = defineStore("api", {
         "Car Price is- " ${carData.price}, 
         "Car URL is- " ${carData.image}`);
           this.carsData();
+          this.isAddModel = false;
+          this.editModel = false;
         })
 
         .catch((error) => {
@@ -83,6 +86,7 @@ export const useCarStore = defineStore("api", {
                   "Car Price is- " ${carData.price}, 
                   "Car URL is- " ${carData.image}`);
           this.carsData();
+          this.editModel = false;
         })
         .catch((error) => {
           alert("Coudn't Edit the Data... Please try Again");
