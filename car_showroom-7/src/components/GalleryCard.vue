@@ -1,6 +1,6 @@
 <template>
     <transition-group name="car">
-        <section class="car-content" v-for="item in showData" :key="item.id">
+        <section class="car-content" v-for="item in getShowData" :key="item.id">
             <div class="car-card">
                 <div class="car-box">
                     <div class="car-container">
@@ -53,11 +53,11 @@ export default {
     emits: ["editData"],
 
     computed: {
-        ...mapState(useCarStore, ['showData'])
+        ...mapState(useCarStore, ['getShowData'])
     },
 
     methods: {
-        ...mapActions(useCarStore, ["alertUpdateData",'deleteData']),
+        ...mapActions(useCarStore, ["alertUpdateData", 'deleteData']),
 
         truncatedDescription(details) {
             let maxLength = 50;
@@ -238,7 +238,6 @@ body {
 
 .menu {
     position: absolute;
-    top: 65px;
     right: 10px;
 }
 

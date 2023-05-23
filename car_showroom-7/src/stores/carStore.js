@@ -13,6 +13,16 @@ export const useCarStore = defineStore("api", {
     };
   },
 
+  getters: {
+    getShowData(state) {
+      return state.showData;
+    },
+
+    getCarDetail(state) {
+      return state.carDetail;
+    },
+  },
+
   actions: {
     //----------------Axios APIs - GET, Post, Put, Delete----------------//
 
@@ -32,6 +42,7 @@ export const useCarStore = defineStore("api", {
         .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
         .then((response) => {
           this.carDetail = response.data;
+          // this.apiResponses.push(response.data);
         })
         .catch((error) => {
           alert(error);
@@ -42,17 +53,18 @@ export const useCarStore = defineStore("api", {
     getFormData(carData) {
       axios
         .post("https://testapi.io/api/dartya/resource/cardata", carData)
-        .then((response) => this.carsData())
+        .then((response) => {
+          alert(`"Created Data"\n
+        "Car Name is-" ${carData.name}, 
+        "Car Description is- " ${carData.details}, 
+        "Car Price is- " ${carData.price}, 
+        "Car URL is- " ${carData.image}`);
+          this.carsData();
+        })
 
         .catch((error) => {
           alert("Coudn't Add The Car... Please try Again");
         });
-
-      alert(`"Created Data"\n
-               "Car Name is-" ${carData.name}, 
-               "Car Description is- " ${carData.details}, 
-               "Car Price is- " ${carData.price}, 
-               "Car URL is- " ${carData.image}`);
     },
 
     // Put Method - Axios API
@@ -70,8 +82,8 @@ export const useCarStore = defineStore("api", {
                   "Car Description is- " ${carData.details}, 
                   "Car Price is- " ${carData.price}, 
                   "Car URL is- " ${carData.image}`);
+          this.carsData();
         })
-
         .catch((error) => {
           alert("Coudn't Edit the Data... Please try Again");
         });
@@ -86,7 +98,10 @@ export const useCarStore = defineStore("api", {
       if (deleteAlert == true) {
         axios
           .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
-          .then((response) => this.carsData())
+          .then((response) => {
+            this.carsData();
+            // this.apiResponses.push(response.data);
+          })
           .catch((error) => {
             alert("Coudn't Delete The Data... Please try Again");
           });
@@ -102,6 +117,7 @@ export const useCarStore = defineStore("api", {
             alert(`Login Successfully..!!\n
                 User's Email Id is- ${loginUserData.email}, 
                 User's Password is- ${loginUserData.password},"`);
+            // this.apiResponses.push(response.data);
           }
           router.push("/home");
         })
@@ -122,6 +138,7 @@ export const useCarStore = defineStore("api", {
                 "User's Role is- " ${userData.role}
                 "User's Gender is- ${userData.gender}"
                 "User's DOB is-${userData.dob} "`);
+            // this.apiResponses.push(response.data);
             router.push("/login");
           }
         })

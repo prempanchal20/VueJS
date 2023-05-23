@@ -4,17 +4,17 @@
 
         <div class="car-data">
             <div class="car-image-container">
-                <img :src="carDetail.image" :alt="carDetail.name" class="car-image">
+                <img :src="getCarDetail.image" :alt="carDetail.name" class="car-image">
             </div>
             <div class="car-info">
                 <div class="car-name">
-                    <h1>Car Name: {{ carDetail.name }}</h1>
+                    <h1>Car Name: {{ getCarDetail.name }}</h1>
                 </div>
                 <div class="car-details">
-                    <h3>Details: {{ carDetail.details }}</h3>
+                    <h3>Details: {{ getCarDetail.details }}</h3>
                 </div>
                 <div class="car-price">
-                    <h3>Price: ₹{{ carDetail.price }}</h3>
+                    <h3>Price: ₹{{ getCarDetail.price }}</h3>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@ export default {
     },
 
     computed: {
-        ...mapState(useCarStore, ['carDetail'])
+        ...mapState(useCarStore, ['carDetail','getCarDetail'])
     },
 
     methods: {
