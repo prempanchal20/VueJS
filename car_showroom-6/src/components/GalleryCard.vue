@@ -1,6 +1,6 @@
 <template>
     <transition-group name="car">
-       
+
         <section class="car-content" v-for="item in data" :key="item.id">
             <div class="car-card">
                 <div class="car-box">
@@ -229,9 +229,9 @@ body {
     border: none;
     cursor: pointer;
 }
+
 .menu {
     position: absolute;
-    top: 65px;
     right: 10px;
 }
 
