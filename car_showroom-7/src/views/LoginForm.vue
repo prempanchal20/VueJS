@@ -5,20 +5,24 @@
                 <h2>Login Form</h2>
             </div>
 
-            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUser">
+            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUserT">
                 <label for="email">Email:</label>
                 <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
                     v-model="loginUserData.email" />
                 <ErrorMessage class="error-text" name="email" />
 
                 <label for="password">Password:</label>
+
                 <vee-field type="password" id="password" name="password" placeholder="Enter your password"
                     v-model="loginUserData.password" />
                 <ErrorMessage class="error-text" name="password" />
-
+                
                 <div class="buttons">
+
                     <button type="submit" class="login-btn">
+
                         Login
+
                     </button>
                 </div>
             </vee-form>
@@ -28,15 +32,11 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import { mapState, mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import { useCarStore } from "../stores/carStore";
 
 export default {
     name: "LoginForm",
-
-    computed: {
-        ...mapState(useCarStore, ['loginUserData'])
-    },
 
     data: () => {
         return {
@@ -44,20 +44,24 @@ export default {
                 email: "required|email",
                 password: "required|min:8|max:12|regex:^(?=.*\\d)(?=.*[^\\w\\d\\s]).+$",
             },
-
-            // loginUserData: {
-            //     email: "",
-            //     password: "",
-            // },
+            loginUserData: {},
         };
     },
 
     methods: {
         ...mapActions(useCarStore, ['loginUser']),
 
-        loginData() {
-            this.loginUser()
-        }
+        loginUserT() {
+            let response = this.loginUser(this.loginUserData);
+            if (response.status == 200) {
+                this.$el.querySelector("button[type=reset]").click();
+                this.$router.push({
+                    name: "home",
+                });
+            } else {
+                return;
+            }
+        },
     }
 };
 </script>
@@ -133,7 +137,6 @@ input[type="radio"] {
     color: rgb(219, 81, 81);
 }
 
-
 .login-btn {
     width: 50%;
     padding: 10px 20px;
@@ -141,6 +144,7 @@ input[type="radio"] {
 }
 
 /* Responsive Styles */
+
 @media (max-width: 500px) {
     .container {
         max-width: 100%;

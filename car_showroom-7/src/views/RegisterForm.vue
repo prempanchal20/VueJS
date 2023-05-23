@@ -4,7 +4,7 @@
             <h2>Registration Form</h2>
         </div>
 
-        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit="registerUser">
+        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit="registerUserT">
 
             <label for="text">Name:</label>
             <vee-field type="name" id="name" name="name" placeholder="Enter your name" v-model="userData.name" />
@@ -62,8 +62,9 @@
 
 <script>
 import { ErrorMessage } from "vee-validate";
-import { mapState,mapActions } from 'pinia'
+import { mapActions } from 'pinia'
 import { useCarStore } from "../stores/carStore";
+
 export default {
     name: "RegisterForm",
 
@@ -94,6 +95,18 @@ export default {
 
     methods: {
         ...mapActions(useCarStore, ["registerUser"]),
+
+        registerUserT() {
+            let response = this.registerUser(this.userData);
+            if (response.status == 201) {
+                this.$router.push({
+                    name: "login",
+                });
+                this.$el.querySelector("button[type=reset]").click();
+            } else {
+                return;
+            }
+        },
     },
 }
 </script>

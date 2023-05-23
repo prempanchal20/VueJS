@@ -44,7 +44,7 @@
 import GalleryCard from "./GalleryCard.vue";
 import { ErrorMessage } from "vee-validate";
 import { useCarStore } from "../stores/carStore";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 
 export default {
     name: "CarForm",
@@ -55,7 +55,7 @@ export default {
     data() {
         return {
             schema: {
-                name: "required|max:10",
+                name: "required|max:20",
                 details: "required|min:30|max:120",
                 url: "required|url",
                 price: "required",
@@ -72,6 +72,8 @@ export default {
     },
 
     computed: {
+        ...mapState(useCarStore, ['isAddModel', 'editModel']),
+
         buttonName() {
             return this.isAddModel ? 'Submit' : 'Update';
         }
@@ -80,7 +82,7 @@ export default {
     props: ["editModel", "editCar", "isAddModel", "editData"],
 
     methods: {
-        ...mapActions(useCarStore, ['carsData']),
+        ...mapActions(useCarStore, ['carsData', 'getFormData', 'alertUpdateData']),
 
         onCancel() {
             this.$emit("onCancel");
@@ -88,18 +90,11 @@ export default {
 
         submitForm() {
             if (this.isAddModel) {
-                this.getFormData();
+                this.carsData()
+                this.getFormData(this.carData);
             } else {
-                this.alertUpdateData();
+                this.alertUpdateData(this.carData);
             }
-        },
-
-        getFormData() {
-            this.$emit('getFormData', this.carData);
-        },
-
-        alertUpdateData() {
-            this.$emit('alertUpdateData', this.carData);
         },
     },
 };

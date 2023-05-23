@@ -33,7 +33,7 @@
 
                             <div class="delete-icon">
                                 <button class="bi bi-trash" id="delete-icon"
-                                    @click.prevent="deleteData(item.id, item.name)"></button>
+                                    @click.prevent="deleteCarData(item.id, item.name)"></button>
                             </div>
                         </div>
                     </div>
@@ -46,16 +46,19 @@
 <script>
 import { mapActions, mapState } from 'pinia'
 import { useCarStore } from "../stores/carStore";
+
 export default {
 
     name: "GalleryCard",
-    emits: ["editData", "deleteData"],
+    emits: ["editData"],
 
     computed: {
         ...mapState(useCarStore, ['showData'])
     },
 
     methods: {
+        ...mapActions(useCarStore, ["alertUpdateData",'deleteData']),
+
         truncatedDescription(details) {
             let maxLength = 50;
             if (details?.length > maxLength) {
@@ -65,12 +68,12 @@ export default {
             }
         },
 
-        editData(cars) {
-            this.$emit("editData", cars);
+        editData(carData) {
+            this.$emit("editData", carData);
         },
 
-        deleteData(itemID, itemName) {
-            this.$emit("deleteData", itemID, itemName);
+        deleteCarData(itemID, itemName) {
+            this.deleteData(itemID, itemName);
         },
 
         navigateToRoute() {

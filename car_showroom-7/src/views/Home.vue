@@ -3,7 +3,7 @@
         <ul class="menu">
             <li><button @click="toggle">Add Car</button></li>
         </ul>
-        <GalleryCard :data="data" @editData="editData" @deleteData="deleteData" />
+        <GalleryCard :data="data" @editData="editData" />
 
         <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar"
             @getFormData="getFormData" @onCancel="onCancel" @alertUpdateData="alertUpdateData" />
@@ -54,10 +54,6 @@ export default {
         onCancel() {
             this.isAddModel = false;
             this.editModel = false;
-        },
-
-        deleteData(itemId, itemName) {
-            this.deleteData(itemId, itemName);
         },
     },
 };
