@@ -77,7 +77,25 @@ export default {
                 role: "required",
                 gender: "required",
                 age: "required|min_value:1|age",
-                dob: "required",
+                dob: (value) => {
+                    if (!value) {
+                        return "Please provide a date of birth.";
+                    }
+                    else {
+                        const inputDOB = new Date(value);
+                        const today = new Date();
+                        const lastDOB = new Date("15-08-1947");
+                        const dateInFutureError = "Future Date is Invalid";
+                        const dateInPastError = "Date cannot be earlier than 15-08-1947";
+                        if (inputDOB >= today) {
+                            return dateInFutureError;
+                        } else if (inputDOB <= lastDOB) {
+                            return dateInPastError;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
             },
 
             userData: {

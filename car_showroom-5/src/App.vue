@@ -12,23 +12,7 @@ export default {
 </script>
 
 <style>
-.menu {
-    position: absolute;
-    top: 80px;
-    right: 10px;
-}
 
-.menu button {
-    border: 1px solid white;
-    border-radius: 8px;
-    padding: 5px 15px;
-    cursor: pointer;
-    background-color: transparent;
-    color: white;
-    font-size: 20px;
-    margin-right: 50px;
-    margin-top: 20px;
-}
 
 .fonts {
     font-family: 'Poppins', sans-serif;

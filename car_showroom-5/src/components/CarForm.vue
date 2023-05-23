@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vee-form class="modal" :validation-schema="schema"  @submit="submitForm">
+        <vee-form class="modal" :validation-schema="schema">
             <div class="modal-content">
 
                 <h2 v-if="!isAddModel">Edit car</h2>
@@ -30,8 +30,12 @@
                     <div class="button">
                         <button type="reset" class="reset" @click="onCancel">Cancel</button>
 
-                        <button type="submit" class="submit">
-                            {{ buttonName }}
+                        <button type="submit" class="submit" v-if="isAddModel" @click.prevent="getFormData">
+                            Submit
+                        </button>
+
+                        <button type="submit" class="submit" @click.prevent="alertUpdateData" v-else>
+                            Update
                         </button>
                     </div>
                 </div>
@@ -53,7 +57,7 @@ export default {
     data() {
         return {
             schema: {
-                name: "required|max:15",
+                name: "required",
                 details: "required|min:30|max:120",
                 url: "required|url",
                 price: "required",
@@ -67,12 +71,6 @@ export default {
                 id: this.editCar.id,
             },
         };
-    },
-
-    computed: {
-        buttonName() {
-            return this.isAddModel ? 'Submit' : 'Update';
-        }
     },
 
     props: ["editModel", "editCar", "isAddModel", "editData"],
