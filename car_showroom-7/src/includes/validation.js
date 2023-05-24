@@ -50,7 +50,6 @@ export default {
             confirm: `Password does not Match `,
             min_value: `This ${ctx.field} Field Must be Greater than 1`,
             age: `This ${ctx.field} Field Must be Greater than 1`,
-            dob: `This ${ctx.field} Field Must be in dd/mm/yyyy Format`,
           };
 
           const message = messages[ctx.rule.name]

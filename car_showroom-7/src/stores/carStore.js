@@ -39,7 +39,7 @@ export const useCarStore = defineStore("api", {
     },
 
     // GET Method by ID - Axios API
-    fetchData(carID) {
+    getCarbyID(carID) {
       axios
         .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
         .then((response) => {

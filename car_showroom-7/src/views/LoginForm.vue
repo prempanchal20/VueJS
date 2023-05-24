@@ -5,7 +5,7 @@
                 <h2>Login Form</h2>
             </div>
 
-            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUserT">
+            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUserData">
                 <label for="email">Email:</label>
                 <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
                     v-model="loginUserData.email" />
@@ -51,7 +51,7 @@ export default {
     methods: {
         ...mapActions(useCarStore, ['loginUser']),
 
-        loginUserT() {
+        loginUserData() {
             let response = this.loginUser(this.loginUserData);
             if (response.status == 200) {
                 this.$el.querySelector("button[type=reset]").click();
