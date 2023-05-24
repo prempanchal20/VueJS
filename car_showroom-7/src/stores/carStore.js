@@ -11,7 +11,7 @@ export const useCarStore = defineStore("api", {
       getCarsData: [],
       deleteData: true,
       isAddModel: true,
-      editModel: false,
+      openEditModel: false,
     };
   },
 
@@ -51,7 +51,7 @@ export const useCarStore = defineStore("api", {
     },
 
     // Post Method - Axios API
-    getFormData(carData) {
+    addCarFormData(carData) {
       axios
         .post("https://testapi.io/api/dartya/resource/cardata", carData)
         .then((response) => {
@@ -62,7 +62,7 @@ export const useCarStore = defineStore("api", {
         "Car URL is- " ${carData.image}`);
           this.carsData();
           this.isAddModel = false;
-          this.editModel = false;
+          this.openEditModel = false;
         })
 
         .catch((error) => {
@@ -71,7 +71,7 @@ export const useCarStore = defineStore("api", {
     },
 
     // Put Method - Axios API
-    alertUpdateData(carData) {
+    editCarFormData(carData) {
       axios
         .put(`https://testapi.io/api/dartya/resource/cardata/${carData.id}`, {
           name: carData.name,
@@ -86,7 +86,7 @@ export const useCarStore = defineStore("api", {
                   "Car Price is- " ${carData.price}, 
                   "Car URL is- " ${carData.image}`);
           this.carsData();
-          this.editModel = false;
+          this.openEditModel = false;
         })
         .catch((error) => {
           alert("Coudn't Edit the Data... Please try Again");

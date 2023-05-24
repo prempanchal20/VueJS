@@ -1,11 +1,11 @@
 <template>
     <div class="cars-data">
         <ul class="menu">
-            <li><button @click="toggle">Add Car</button></li>
+            <li><button @click="addCarBtn">Add Car</button></li>
         </ul>
         <GalleryCard :data="data" @editData="editData" />
 
-        <CarForm v-if="editModel" :editModel="editModel" :isAddModel="isAddModel" :editCar="editCar" @onCancel="onCancel" />
+        <CarForm v-if="openEditModel" :openEditModel="openEditModel" :isAddModel="isAddModel" :editCar="editCar" @onCancel="onCancel" />
     </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
         };
     },
     computed: {
-        ...mapWritableState(useCarStore, ['editModel', 'isAddModel']),
+        ...mapWritableState(useCarStore, ['openEditModel', 'isAddModel']),
     },
 
     created() {
@@ -41,19 +41,19 @@ export default {
 
         editData(data) {
             this.editCar = data;
-            this.editModel = true;
+            this.openEditModel = true;
             this.isAddModel = false;
         },
 
-        toggle() {
-            this.editModel = true;
+        addCarBtn() {
+            this.openEditModel = true;
             this.isAddModel = true;
             this.editCar = {}
         },
 
         onCancel() {
             this.isAddModel = false;
-            this.editModel = false;
+            this.openEditModel = false;
         },
     },
 };

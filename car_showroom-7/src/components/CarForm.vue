@@ -84,7 +84,7 @@ export default {
         "editData"],
 
     methods: {
-        ...mapActions(useCarStore, ['carsData', 'getFormData', 'alertUpdateData']),
+        ...mapActions(useCarStore, ['carsData', 'addCarFormData', 'editCarFormData']),
 
         onCancel() {
             this.$emit("onCancel");
@@ -93,9 +93,9 @@ export default {
         submitForm() {
             if (this.isAddModel) {
                 this.carsData()
-                this.getFormData(this.carData);
+                this.addCarFormData(this.carData);
             } else {
-                this.alertUpdateData(this.carData);
+                this.editCarFormData(this.carData);
             }
         },
     },

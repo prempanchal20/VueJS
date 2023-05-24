@@ -57,7 +57,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(useCarStore, ["alertUpdateData", 'deleteData']),
+        ...mapActions(useCarStore, ["editCarFormData", 'deleteData']),
 
         truncatedDescription(details) {
             let maxLength = 50;
