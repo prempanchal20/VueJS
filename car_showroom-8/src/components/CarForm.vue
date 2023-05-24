@@ -80,8 +80,7 @@ export default {
         }
     },
 
-    props: ["editCar",
-        "editData"],
+    props: ["editCar", "editData"],
 
     methods: {
         ...mapActions(useCarStore, ['carsData', 'addCarFormData', 'editCarFormData']),

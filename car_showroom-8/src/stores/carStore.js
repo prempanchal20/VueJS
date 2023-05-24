@@ -35,11 +35,11 @@ export const useCarStore = defineStore("api", {
         .then((response) => {
           this.showData = response.data.data;
         })
-        .catch((error) => alert("Coudn't Show The Data... Please try Again"));
+        .catch((error) => alert("Couldn't Show The Data... Please try Again"));
     },
 
     // GET Method by ID - Axios API
-    fetchData(carID) {
+    getCarbyID(carID) {
       axios
         .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
         .then((response) => {
@@ -66,7 +66,7 @@ export const useCarStore = defineStore("api", {
         })
 
         .catch((error) => {
-          alert("Coudn't Add The Car... Please try Again");
+          alert("Couldn't Add The Car... Please try Again");
         });
     },
 
@@ -89,7 +89,7 @@ export const useCarStore = defineStore("api", {
           this.openEditModel = false;
         })
         .catch((error) => {
-          alert("Coudn't Edit the Data... Please try Again");
+          alert("Couldn't Edit the Data... Please try Again");
         });
     },
 
@@ -104,10 +104,9 @@ export const useCarStore = defineStore("api", {
           .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
           .then((response) => {
             this.carsData();
-            // this.apiResponses.push(response.data);
           })
           .catch((error) => {
-            alert("Coudn't Delete The Data... Please try Again");
+            alert("Couldn't Delete The Data... Please try Again");
           });
       }
     },
@@ -121,7 +120,6 @@ export const useCarStore = defineStore("api", {
             alert(`Login Successfully..!!\n
                 User's Email Id is- ${loginUserData.email}, 
                 User's Password is- ${loginUserData.password},"`);
-            // this.apiResponses.push(response.data);
           }
           router.push("/home");
         })
@@ -142,13 +140,58 @@ export const useCarStore = defineStore("api", {
                 "User's Role is- " ${userData.role}
                 "User's Gender is- ${userData.gender}"
                 "User's DOB is-${userData.dob} "`);
-            // this.apiResponses.push(response.data);
             router.push("/login");
           }
         })
         .catch((error) => {
           alert("User is not Register... Please try Again");
         });
+    },
+
+    // GET User method - Axios API
+    checkUser() {
+      const authToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`;
+
+      axios.defaults.headers.common["Authorization"] = "Bearer " + authToken;
+
+      try {
+        const response = axios.get(
+          "https://testapi.io/api/dartya/resource/users"
+        );
+        const checkData = response.data.data;
+
+        if (response.status == 200) {
+          alert("User Logged In..!!");
+          return false;
+        }
+
+        if (userData.password == password) {
+          this.name = userData.name;
+          this.email = userData.email;
+          this.password = userData.password;
+          this.role == userData.role;
+          this.dob = userData.dob;
+          this.gender = userData.gender;
+          this.login = true;
+
+          try {
+            const response = axios.post("https://reqres.in/api/login", {
+              email: "eve.holt@reqres.in",
+              password: "cityslicka",
+            });
+
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("loggedIn", true);
+          } catch (error) {
+            localStorage.setItem("token");
+            localStorage.setItem("loggedIn", true);
+          }
+        }
+      } catch (error) {
+        localStorage.setItem("token", authToken);
+        localStorage.setItem("loggedIn", true);
+      }
+      router.push("/home");
     },
   },
 });

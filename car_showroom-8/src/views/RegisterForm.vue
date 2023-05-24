@@ -4,7 +4,7 @@
             <h2>Registration Form</h2>
         </div>
 
-        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit="registerUserT">
+        <vee-form id="register-form-details" :validation-schema="registerSchema" @submit="registerUserData">
 
             <label for="text">Name:</label>
             <vee-field type="name" id="name" name="name" placeholder="Enter your name" v-model="userData.name" />
@@ -50,7 +50,8 @@
             <ErrorMessage class="error-text" name="age" />
 
             <label for="dob">Date of Birth:</label>
-            <vee-field type="date" id="dob" name="dob" v-model="userData.dob" />
+            <vee-field type="date" id="dob" name="dob" v-model="userData.dob" :max="getCurrentDate()" />
+
             <ErrorMessage class="error-text" name="dob" />
 
             <div class="buttons">
@@ -78,25 +79,7 @@ export default {
                 role: "required",
                 gender: "required",
                 age: "required|min_value:1|age",
-                dob: (value) => {
-                    if (!value) {
-                        return "Please provide a date of birth.";
-                    }
-                    else {
-                        const inputDOB = new Date(value);
-                        const today = new Date();
-                        const lastDOB = new Date("15-08-1947");
-                        const dateInFutureError = "Future Date is Invalid";
-                        const dateInPastError = "Date cannot be earlier than 15-08-1947";
-                        if (inputDOB >= today) {
-                            return dateInFutureError;
-                        } else if (inputDOB <= lastDOB) {
-                            return dateInPastError;
-                        } else {
-                            return true;
-                        }
-                    }
-                }
+                dob: "required"
             },
 
             userData: {
@@ -112,10 +95,34 @@ export default {
     },
 
     methods: {
+        getCurrentDate() {
+            const today = new Date();
+            return today.toISOString().split('T')[0];
+        },
+
+        validateDOB(value) {
+            if (!value) {
+                return "Please provide a date of birth";
+            } else {
+                const inputDOB = new Date(value);
+                const today = new Date();
+                const lastDOB = new Date("1947-08-15");
+                const dateInFutureError = "Future Date is Invalid";
+                const dateInPastError = "Date cannot be earlier than 15-08-1947";
+                if (inputDOB >= today) {
+                    return dateInFutureError;
+                } else if (inputDOB <= lastDOB) {
+                    return dateInPastError;
+                } else {
+                    return true;
+                }
+            }
+        },
+
         ...mapActions(useCarStore, ["registerUser"]),
 
-        registerUserT() {
-            let response = this.registerUser(this.userData);
+        registerUserData() {
+            const response = this.registerUser(this.userData);
             if (response.status == 201) {
                 this.$router.push({
                     name: "login",

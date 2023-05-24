@@ -16,7 +16,7 @@
                 <vee-field type="password" id="password" name="password" placeholder="Enter your password"
                     v-model="loginUserData.password" />
                 <ErrorMessage class="error-text" name="password" />
-                
+
                 <div class="buttons">
 
                     <button type="submit" class="login-btn">
@@ -62,6 +62,20 @@ export default {
                 return;
             }
         },
+
+        // ----------------------- Authentication -----------------------//
+
+        // isAuthenticated() {
+        //     const user = loginUserData.find(loginUserData => loginUserData.email === this.email && loginUserData.password === this.password);
+        //     console.log(user);
+        // },
+
+        // loginRegisterUserData() {
+        //     router.beforeEach(async (to) => {
+        //         if (!isAuthenticated && to.name !== 'login'
+        //         ) { return { name: 'login' } }
+        //     })
+        // },
     }
 };
 </script>

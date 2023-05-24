@@ -27,7 +27,7 @@ import { useCarStore } from "../stores/carStore";
 export default {
 
     created() {
-        this.fetchData(this.$route.params.id);
+        this.getCarbyID(this.$route.params.id);
     },
 
     computed: {
@@ -35,10 +35,12 @@ export default {
     },
 
     methods: {
+        
         goBack() {
             this.$router.push('/home');
         },
-        ...mapActions(useCarStore, ['fetchData']),
+
+        ...mapActions(useCarStore, ['getCarbyID']),
     },
 };
 </script>
