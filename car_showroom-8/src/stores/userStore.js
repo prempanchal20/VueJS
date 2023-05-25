@@ -1,28 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-// localStorage.setItem(
-//   "user_authentication",
-//   JSON.stringify({ token: "", isLoggedIn: false })
-// );
-
 export const useUserStore = defineStore("user", {
   state: () => {
-    return {
-      name: "",
-      email: "",
-      password: "",
-      role: "",
-      age: "",
-      dob: "",
-      gender: "",
-      login: "",
-    };
+    return { userValid: false };
   },
-
   actions: {
     //---------- Axios API - Register User-------------//
-
     async registerUser(userData) {
       try {
         const response = await axios.post(
@@ -38,8 +22,22 @@ export const useUserStore = defineStore("user", {
                   User's Gender is- ${userData.gender},
                   User's DOB is- ${userData.dob}`);
         }
+        return response;
       } catch (error) {
         alert("User is not Register... Please try Again");
+      }
+    },
+
+    async postlogIn() {
+      try {
+        const response = await axios.post("https://reqres.in/api/login", {
+          email: "eve.holt@reqres.in",
+          password: "cityslicka",
+        });
+        this.userValid = true;
+        return response.data;
+      } catch (error) {
+        alert(error);
       }
     },
 
@@ -80,7 +78,6 @@ export const useUserStore = defineStore("user", {
               email: "eve.holt@reqres.in",
               password: "cityslicka",
             });
-
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("loggedIn", true);
           } catch (error) {
@@ -93,14 +90,5 @@ export const useUserStore = defineStore("user", {
         localStorage.setItem("loggedIn", true);
       }
     },
-
-    // Logout
-    // logout() {
-    //   if (confirm("Do you really want to log out?")) {
-    //     localStorage.setItem("token", "");
-    //     localStorage.setItem("loggedIn", false);
-    //     alert("Logged Out Successfully");
-    //   }
-    // },
   },
 });

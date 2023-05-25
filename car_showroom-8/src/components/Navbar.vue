@@ -7,10 +7,10 @@
 
       <div class="nav-menu">
         <div class="navbar-links">
-          <RouterLink class="home" to="/">Home</RouterLink>
-          <RouterLink class="login" to="/login">Login</RouterLink>
-          <button v-if="login == 'true'" @click="logout" class="logout-btn">Logout</button>
-          <RouterLink class="register" to="/register">Register</RouterLink>
+          <RouterLink v-if="userValid" class="home" to="/">Home</RouterLink>
+          <RouterLink v-else class="login" to="/login">Login</RouterLink>
+          <RouterLink v-if="userValid" to="/login" @click="logout" class="logout-btn">Logout</RouterLink>
+          <RouterLink v-else class="register" to="/register">Register</RouterLink>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
 
 
 <script>
-import { mapWritableState, mapActions } from "pinia";
+import { mapWritableState, mapActions, mapState } from "pinia";
 import { RouterLink } from "vue-router";
 import { useUserStore } from "../stores/userStore";
 
@@ -28,23 +28,11 @@ export default {
 
   computed: {
     ...mapWritableState(useUserStore, ["login"]),
+    ...mapState(useUserStore, ['userValid']),
   },
-  
+
   methods: {
     ...mapActions(useUserStore, ["logout"]),
-
-    // Logout
-    // logout() {
-    //   if (confirm("Do you really want to log out ?") == true) {
-    //     localStorage.setItem('user_authentication',
-    //       JSON.stringify({
-    //         token: "",
-    //         isLoggedIn: false
-    //       })
-    //     )
-    //     router.push("/login");
-    //   }
-    // }
   }
 };
 </script>
@@ -93,7 +81,8 @@ export default {
 
 .home,
 .login,
-.register {
+.register,
+.logout-btn {
   border: none;
   background-color: transparent;
   font-size: 20px;

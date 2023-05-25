@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <div class="login-form">
             <div class="login-form-title">
                 <h2>Login Form</h2>
@@ -25,13 +25,13 @@
                 </div>
             </vee-form>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
 import { useUserStore } from "../stores/userStore";
 import { ErrorMessage } from "vee-validate";
-import { mapActions } from 'pinia'
+import { mapActions, mapWritableState } from 'pinia'
 
 export default {
     name: "LoginForm",
@@ -45,21 +45,19 @@ export default {
             loginUserData: {},
         };
     },
-
+    computed: {
+        ...mapWritableState(useUserStore, ['userValid'])
+    },
     methods: {
-        ...mapActions(useUserStore, ['checkUser']),
+        ...mapActions(useUserStore, ['postlogIn']),
 
         async user() {
-            const userValid = await this.checkUser(this.loginUserData)
-            if (userValid == true) {
-                this.$router.push({
-                    name: "Home",
-                });
-            } else {
-                return;
-            }
-        },
-    }
+            await this.postlogIn(this.loginUserData)
+            this.$router.push({
+                name: "Home",
+            });
+        }
+    },
 };
 </script>
 

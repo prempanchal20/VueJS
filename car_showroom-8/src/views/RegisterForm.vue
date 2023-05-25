@@ -1,5 +1,5 @@
 <template>
-    <div class="register-form">
+    <section class="register-form">
         <div class="register-form-title">
             <h2>Registration Form</h2>
         </div>
@@ -58,7 +58,7 @@
                 <button type="submit" class="register-btn">Register</button>
             </div>
         </vee-form>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -121,15 +121,12 @@ export default {
 
         ...mapActions(useUserStore, ["registerUser"]),
 
-        registerUserData() {
-            const response = this.registerUser(this.userData);
+        async registerUserData() {
+            const response = await this.registerUser(this.userData);
             if (response.status == 201) {
                 this.$router.push({
-                    name: "login",
+                    name: "Login",
                 });
-                this.$el.querySelector("button[type=reset]").click();
-            } else {
-                return;
             }
         },
     },
