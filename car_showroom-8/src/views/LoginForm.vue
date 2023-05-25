@@ -5,7 +5,7 @@
                 <h2>Login Form</h2>
             </div>
 
-            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="loginUserT">
+            <vee-form id="login-form-details" :validation-schema="loginSchema" @submit="user">
                 <label for="email">Email:</label>
                 <vee-field type="email" id="email" name="email" placeholder="Enter your mail id"
                     v-model="loginUserData.email" />
@@ -20,9 +20,7 @@
                 <div class="buttons">
 
                     <button type="submit" class="login-btn">
-
                         Login
-
                     </button>
                 </div>
             </vee-form>
@@ -31,9 +29,9 @@
 </template>
 
 <script>
+import { useUserStore } from "../stores/userStore";
 import { ErrorMessage } from "vee-validate";
 import { mapActions } from 'pinia'
-import { useCarStore } from "../stores/carStore";
 
 export default {
     name: "LoginForm",
@@ -49,33 +47,18 @@ export default {
     },
 
     methods: {
-        ...mapActions(useCarStore, ['loginUser']),
+        ...mapActions(useUserStore, ['checkUser']),
 
-        loginUserT() {
-            let response = this.loginUser(this.loginUserData);
-            if (response.status == 200) {
-                this.$el.querySelector("button[type=reset]").click();
+        async user() {
+            const userValid = await this.checkUser(this.loginUserData)
+            if (userValid == true) {
                 this.$router.push({
-                    name: "home",
+                    name: "Home",
                 });
             } else {
                 return;
             }
         },
-
-        // ----------------------- Authentication -----------------------//
-
-        // isAuthenticated() {
-        //     const user = loginUserData.find(loginUserData => loginUserData.email === this.email && loginUserData.password === this.password);
-        //     console.log(user);
-        // },
-
-        // loginRegisterUserData() {
-        //     router.beforeEach(async (to) => {
-        //         if (!isAuthenticated && to.name !== 'login'
-        //         ) { return { name: 'login' } }
-        //     })
-        // },
     }
 };
 </script>

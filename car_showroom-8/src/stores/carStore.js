@@ -1,7 +1,5 @@
-// Options Store
 import { defineStore } from "pinia";
 import axios from "axios";
-import router from "../router/router";
 
 export const useCarStore = defineStore("api", {
   state: () => {
@@ -109,89 +107,6 @@ export const useCarStore = defineStore("api", {
             alert("Couldn't Delete The Data... Please try Again");
           });
       }
-    },
-
-    //---------- Axios API - Login User--------  ----//
-    async loginUser(loginUserData) {
-      await axios
-        .post("https://testapi.io/api/dartya//login", loginUserData)
-        .then((response) => {
-          if (response.status === 200) {
-            alert(`Login Successfully..!!\n
-                User's Email Id is- ${loginUserData.email}, 
-                User's Password is- ${loginUserData.password},"`);
-          }
-          router.push("/home");
-        })
-        .catch((error) => {
-          alert("User is not Log in... Please try Again");
-        });
-    },
-
-    async registerUser(userData) {
-      await axios
-        .post("https://testapi.io/api/dartya/resource/users", userData)
-        .then((response) => {
-          if (response.status === 201) {
-            alert(`"User Registered Successfully "\n
-                "User's Name is-" ${userData.name}, 
-                "User's Email Id is- " ${userData.email}, 
-                "User's Password is- " ${userData.password}, 
-                "User's Role is- " ${userData.role}
-                "User's Gender is- ${userData.gender}"
-                "User's DOB is-${userData.dob} "`);
-            router.push("/login");
-          }
-        })
-        .catch((error) => {
-          alert("User is not Register... Please try Again");
-        });
-    },
-
-    // GET User method - Axios API
-    checkUser() {
-      const authToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`;
-
-      axios.defaults.headers.common["Authorization"] = "Bearer " + authToken;
-
-      try {
-        const response = axios.get(
-          "https://testapi.io/api/dartya/resource/users"
-        );
-        const checkData = response.data.data;
-
-        if (response.status == 200) {
-          alert("User Logged In..!!");
-          return false;
-        }
-
-        if (userData.password == password) {
-          this.name = userData.name;
-          this.email = userData.email;
-          this.password = userData.password;
-          this.role == userData.role;
-          this.dob = userData.dob;
-          this.gender = userData.gender;
-          this.login = true;
-
-          try {
-            const response = axios.post("https://reqres.in/api/login", {
-              email: "eve.holt@reqres.in",
-              password: "cityslicka",
-            });
-
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("loggedIn", true);
-          } catch (error) {
-            localStorage.setItem("token");
-            localStorage.setItem("loggedIn", true);
-          }
-        }
-      } catch (error) {
-        localStorage.setItem("token", authToken);
-        localStorage.setItem("loggedIn", true);
-      }
-      router.push("/home");
     },
   },
 });

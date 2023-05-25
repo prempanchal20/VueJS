@@ -64,7 +64,7 @@
 <script>
 import { ErrorMessage } from "vee-validate";
 import { mapActions } from 'pinia'
-import { useCarStore } from "../stores/carStore";
+import { useUserStore } from '../stores/userStore'
 
 export default {
     name: "RegisterForm",
@@ -119,7 +119,7 @@ export default {
             }
         },
 
-        ...mapActions(useCarStore, ["registerUser"]),
+        ...mapActions(useUserStore, ["registerUser"]),
 
         registerUserData() {
             const response = this.registerUser(this.userData);

@@ -9,7 +9,6 @@ const app = createApp(App);
 app.use(router);
 app.component("Navbar", Navbar);
 
-// Pinia Instance
 const pinia = createPinia();
 app.use(pinia);
 

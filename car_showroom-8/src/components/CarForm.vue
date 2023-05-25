@@ -72,7 +72,7 @@ export default {
     },
 
     computed: {
-        ...mapState(useCarStore, ['isAddModel',]),
+        ...mapState(useCarStore, ['isAddModel']),
 
 
         buttonName() {

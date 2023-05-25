@@ -9,12 +9,45 @@
         <div class="navbar-links">
           <RouterLink class="home" to="/">Home</RouterLink>
           <RouterLink class="login" to="/login">Login</RouterLink>
+          <button v-if="login == 'true'" @click="logout" class="logout-btn">Logout</button>
           <RouterLink class="register" to="/register">Register</RouterLink>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+
+<script>
+import { mapWritableState, mapActions } from "pinia";
+import { RouterLink } from "vue-router";
+import { useUserStore } from "../stores/userStore";
+
+export default {
+  name: "Navbar",
+
+  computed: {
+    ...mapWritableState(useUserStore, ["login"]),
+  },
+  
+  methods: {
+    ...mapActions(useUserStore, ["logout"]),
+
+    // Logout
+    // logout() {
+    //   if (confirm("Do you really want to log out ?") == true) {
+    //     localStorage.setItem('user_authentication',
+    //       JSON.stringify({
+    //         token: "",
+    //         isLoggedIn: false
+    //       })
+    //     )
+    //     router.push("/login");
+    //   }
+    // }
+  }
+};
+</script>
 
 <style>
 * {

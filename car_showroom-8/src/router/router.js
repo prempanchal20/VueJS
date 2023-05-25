@@ -6,7 +6,7 @@ import NotFound from "../views/NotFound.vue";
 import CarDetails from "../views/CarDetails.vue";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", component: Home, name: "Home" },
   { path: "/home", redirect: "/" },
   { path: "/register", component: RegisterForm },
   { path: "/login", component: LoginForm },
