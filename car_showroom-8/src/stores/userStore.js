@@ -33,6 +33,7 @@ export const useUserStore = defineStore("user", {
         const logoutAlert = window.confirm(`Are You Sure Want to Logout..?`);
         if (logoutAlert == true) {
           this.userValid = false;
+          localStorage.setItem("loggedIn", false);
           return logoutAlert;
         }
       } catch (error) {

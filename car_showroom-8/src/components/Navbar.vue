@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 * {
   padding: 0;
   margin: 0;
@@ -67,12 +67,6 @@ export default {
   justify-content: space-between;
 }
 
-.navbar-links button {
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-}
-
 .navbar-logo button {
   border: none;
   background-color: transparent;
@@ -86,20 +80,23 @@ export default {
   justify-content: flex-end;
 }
 
+.navbar-links button {
+  font-size: 20px;
+  color: white;
+  padding-left: 30px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
 .home,
 .login,
-.register,
-.logout-btn {
+.register {
   border: none;
   background-color: transparent;
   font-size: 20px;
   color: white;
   padding-left: 30px;
 }
-
-
-
-
 
 @media only screen and (max-width: 950px) {
 
