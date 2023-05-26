@@ -9,7 +9,7 @@
         <div class="navbar-links">
           <RouterLink v-if="userValid" class="home" to="/">Home</RouterLink>
           <RouterLink v-else class="login" to="/login">Login</RouterLink>
-          <button v-if="userValid" to="/login" @click="logoutBtn" class="logout-btn">Logout</button>
+          <button v-if="userValid" @click="logoutBtn" class="logout-btn">Logout</button>
           <RouterLink v-else class="register" to="/register">Register</RouterLink>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useUserStore, ["logout", "logout"]),
+    ...mapActions(useUserStore, ["logout"]),
 
     async logoutBtn() {
       const response = await this.logout();

@@ -3,7 +3,9 @@ import axios from "axios";
 
 export const useUserStore = defineStore("user", {
   state: () => {
-    return { userValid: JSON.parse(localStorage.getItem("loggedIn")) };
+    return {
+      userValid: JSON.parse(localStorage.getItem("loggedIn")),
+    };
   },
   actions: {
     //---------- Axios API - Register User-------------//
@@ -22,12 +24,12 @@ export const useUserStore = defineStore("user", {
                   User's Gender is- ${userData.gender},
                   User's DOB is- ${userData.dob}`);
         }
+
         return response;
       } catch (error) {
         alert("User is not Register... Please try Again");
       }
     },
-
     async logout() {
       try {
         const logoutAlert = window.confirm(`Are You Sure Want to Logout..?`);

@@ -252,4 +252,16 @@ body {
     margin-right: 50px;
     margin-top: 20px;
 }
+
+
+.car-enter-active,
+.car-leave-active {
+    transition: all 0.8s ease-in;
+}
+
+.car-enter-from,
+.car-leave-to {
+    opacity: 1;
+    transform: translateY(100px);
+}
 </style>
