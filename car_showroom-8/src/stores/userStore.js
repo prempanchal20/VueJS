@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useUserStore = defineStore("user", {
   state: () => {
-    return { userValid: false };
+    return { userValid: JSON.parse(localStorage.getItem("loggedIn")) };
   },
   actions: {
     //---------- Axios API - Register User-------------//
@@ -33,6 +33,7 @@ export const useUserStore = defineStore("user", {
         const logoutAlert = window.confirm(`Are You Sure Want to Logout..?`);
         if (logoutAlert == true) {
           this.userValid = false;
+          return logoutAlert;
         }
       } catch (error) {
         alert("User Is Not Logout Successfully... Please try Again..!!");
@@ -66,7 +67,6 @@ export const useUserStore = defineStore("user", {
                    User's Email Id is- ${loginUserData.email},
                    User's Password is- ${loginUserData.password}"`);
             this.userValid = true;
-            localStorage.setItem("token", authToken);
             this.login = true;
 
             try {
@@ -74,7 +74,11 @@ export const useUserStore = defineStore("user", {
                 email: "eve.holt@reqres.in",
                 password: "cityslicka",
               });
+
               this.userValid = true;
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("loggedIn", true);
+
               return response.data;
             } catch (error) {
               alert("You are Not Login Successfully... Please try again..!!");
@@ -83,8 +87,7 @@ export const useUserStore = defineStore("user", {
           }
         }
       } catch (error) {
-        localStorage.setItem("token", authToken);
-        localStorage.setItem("loggedIn", true);
+        error;
       }
     },
   },
