@@ -1,7 +1,6 @@
 <template>
-    <div>
+    <section>
         <button class="back-btn" @click="goBack">Back</button>
-
         <div class="car-data">
             <div class="car-image-container">
                 <img :src="getCarDetail.image" :alt="carDetail.name" class="car-image">
@@ -18,7 +17,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
   
 <script>
@@ -31,11 +30,11 @@ export default {
     },
 
     computed: {
-        ...mapState(useCarStore, ['carDetail','getCarDetail'])
+        ...mapState(useCarStore, ['carDetail', 'getCarDetail'])
     },
 
     methods: {
-        
+
         goBack() {
             this.$router.push('/home');
         },

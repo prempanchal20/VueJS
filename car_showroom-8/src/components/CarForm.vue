@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section>
         <vee-form class="modal" :validation-schema="schema" @submit="submitForm">
             <div class="modal-content">
 
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </vee-form>
-    </div>
+    </section>
 </template>
 
 <script>

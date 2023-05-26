@@ -213,7 +213,11 @@ input[type="radio"] {
 /* Responsive Styles */
 @media (max-width: 500px) {
     .container {
-        max-width: 100%;
+        max-width: 80%;
+    }
+
+    .register-form {
+        margin-top: 20%;
     }
 }
 </style>

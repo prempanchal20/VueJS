@@ -101,7 +101,7 @@ export default {
 @media only screen and (max-width: 950px) {
 
   .button-home {
-    width: 30%;
+    width: 40%;
 
   }
 
@@ -117,6 +117,10 @@ export default {
   .login,
   .register,
   .logout-btn {
+    font-size: 16px;
+  }
+
+  .navbar-links button {
     font-size: 16px;
   }
 
