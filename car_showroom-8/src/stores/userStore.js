@@ -45,10 +45,6 @@ export const useUserStore = defineStore("user", {
 
     // GET User method - Axios API
     async checkUser(loginUserData) {
-      const authToken = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`;
-
-      axios.defaults.headers.common["Authorization"] = "Bearer " + authToken;
-
       try {
         const response = await axios.get(
           "https://testapi.io/api/dartya/resource/users"
@@ -84,7 +80,11 @@ export const useUserStore = defineStore("user", {
 
               return response.data;
             } catch (error) {
-              alert("You are Not Login Successfully... Please try again..!!");
+              localStorage.setItem(
+                "token",
+                `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
+              );
+              localStorage.setItem("loggedIn", true);
             }
             return true;
           }

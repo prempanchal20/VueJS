@@ -20,7 +20,12 @@ const routes = [
   { path: "/:pathMatch(.*)*", name: "carDetails", component: NotFound },
 
   // Dynamic Route
-  { path: "/details/:id", name: "details", component: CarDetails },
+  {
+    path: "/details/:id",
+    meta: { private: true },
+    name: "details",
+    component: CarDetails,
+  },
 ];
 
 const router = createRouter({
