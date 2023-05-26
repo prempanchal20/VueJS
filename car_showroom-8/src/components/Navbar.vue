@@ -111,7 +111,8 @@ export default {
 
   .home,
   .login,
-  .register {
+  .register,
+  .logout-btn {
     font-size: 16px;
   }
 

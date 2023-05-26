@@ -28,16 +28,14 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    async postlogIn() {
+    async logout() {
       try {
-        const response = await axios.post("https://reqres.in/api/login", {
-          email: "eve.holt@reqres.in",
-          password: "cityslicka",
-        });
-        this.userValid = true;
-        return response.data;
+        const logoutAlert = window.confirm(`Are You Sure Want to Logout..?`);
+        if (logoutAlert == true) {
+          this.userValid = false;
+        }
       } catch (error) {
-        alert(error);
+        alert("User Is Not Logout Successfully... Please try Again..!!");
       }
     },
 
@@ -67,22 +65,21 @@ export const useUserStore = defineStore("user", {
             alert(`Login Successfully..!!
                    User's Email Id is- ${loginUserData.email},
                    User's Password is- ${loginUserData.password}"`);
-
+            this.userValid = true;
             localStorage.setItem("token", authToken);
             this.login = true;
+
+            try {
+              const response = await axios.post("https://reqres.in/api/login", {
+                email: "eve.holt@reqres.in",
+                password: "cityslicka",
+              });
+              this.userValid = true;
+              return response.data;
+            } catch (error) {
+              alert("You are Not Login Successfully... Please try again..!!");
+            }
             return true;
-          }
-        } else {
-          try {
-            const response = await axios.post("https://reqres.in/api/login", {
-              email: "eve.holt@reqres.in",
-              password: "cityslicka",
-            });
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("loggedIn", true);
-          } catch (error) {
-            localStorage.setItem("token", "aToken");
-            localStorage.setItem("loggedIn", true);
           }
         }
       } catch (error) {

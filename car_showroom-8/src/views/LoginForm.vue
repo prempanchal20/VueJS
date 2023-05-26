@@ -49,13 +49,15 @@ export default {
         ...mapWritableState(useUserStore, ['userValid'])
     },
     methods: {
-        ...mapActions(useUserStore, ['postlogIn']),
+        ...mapActions(useUserStore, ['checkUser']),
 
         async user() {
-            await this.postlogIn(this.loginUserData)
-            this.$router.push({
-                name: "Home",
-            });
+            const response = await this.checkUser(this.loginUserData)
+            if (response) {
+                this.$router.push({
+                    name: "Home",
+                });
+            }
         }
     },
 };

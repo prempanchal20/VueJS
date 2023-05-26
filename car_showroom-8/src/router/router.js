@@ -14,7 +14,7 @@ const routes = [
     name: "Home",
     meta: { private: true },
   },
-  // { path: "/home", redirect: "/" },
+
   { path: "/register", component: RegisterForm, name: "Register" },
   { path: "/login", component: LoginForm, name: "Login" },
   { path: "/:pathMatch(.*)*", name: "carDetails", component: NotFound },
