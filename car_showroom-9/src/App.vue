@@ -1,0 +1,34 @@
+<template>
+    <section class="fonts">
+        <Navbar />
+        <RouterView v-slot="{ Component }">
+            <Transition name="routew" mode="out-in">
+                <component :is="Component" />
+            </Transition>
+        </RouterView>
+    </section>
+</template>
+
+<script>
+export default {
+    name: "App",
+};
+
+</script>
+
+<style>
+.fonts {
+    font-family: 'Poppins', sans-serif;
+}
+
+.routew-enter-active,
+.routew-leave-active {
+    transition: all 0.8s ease-in;
+}
+
+.routew-enter-from,
+.routew-leave-to {
+    opacity: 1;
+    transform: translateY(100px);
+}
+</style>
