@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "buildStage": "vite build --mode stage",
+    "buildProduction": "vite build --mode production"
   },
   "dependencies": {
     "@vee-validate/rules": "^4.8.6",
