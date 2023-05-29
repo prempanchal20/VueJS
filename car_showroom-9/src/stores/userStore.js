@@ -66,7 +66,6 @@ export const useUserStore = defineStore("user", {
                    User's Email Id is- ${loginUserData.email},
                    User's Password is- ${loginUserData.password}"`);
             this.userValid = true;
-            this.login = true;
 
             try {
               const response = await axios.post("https://reqres.in/api/login", {
