@@ -12,17 +12,11 @@ export const useUserStore = defineStore("user", {
     async registerUser(userData) {
       try {
         const response = await axios.post(
-          "https://testapi.io/api/dartya/resource/users",
+          `${import.meta.env.VITE_USER_API}`,
           userData
         );
         if (response.status === 201) {
-          alert(`User Registered Successfully 
-                  User's Name is- ${userData.name}, 
-                  User's Email Id is- ${userData.email}, 
-                  User's Password is- ${userData.password}, 
-                  User's Role is- ${userData.role},
-                  User's Gender is- ${userData.gender},
-                  User's DOB is- ${userData.dob}`);
+          alert(`User ${userData.name} Registered Successfully `);
         }
 
         return response;
@@ -46,9 +40,7 @@ export const useUserStore = defineStore("user", {
     // GET User method - Axios API
     async checkUser(loginUserData) {
       try {
-        const response = await axios.get(
-          "https://testapi.io/api/dartya/resource/users"
-        );
+        const response = await axios.get(`${import.meta.env.VITE_USER_API}`);
         const data = await response.data.data;
 
         if (response.status == 200) {
@@ -62,9 +54,7 @@ export const useUserStore = defineStore("user", {
             alert("Invalid Credentials..!!");
             return false;
           } else {
-            alert(`Login Successfully..!!
-                   User's Email Id is- ${loginUserData.email},
-                   User's Password is- ${loginUserData.password}"`);
+            alert(`Login Successfully..!!`);
             this.userValid = true;
 
             try {

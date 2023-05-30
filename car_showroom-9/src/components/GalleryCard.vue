@@ -1,46 +1,48 @@
 <template>
-    <transition-group name="car">
-        <section class="car-content" v-for="item in getShowData" :key="item.id">
-            <div class="car-card">
-                <div class="car-box">
-                    <div class="car-container">
-                        <div class="car-images">
-                            <img :src="item.image" alt="car - image" />
-                        </div>
-
-                        <div class="car-name">
-                            <h3>{{ item.name }}</h3>
-                        </div>
-
-                        <div class="description">
-                            <p>{{ truncatedDescription(item.details) }}</p>
-                        </div>
-
-                        <div class="buttons-icon">
-                            <div class="edit-icon">
-                                <button class="bi bi-pencil" id="edit-icon" @click.prevent="editData(item)"></button>
+    <section class="car-content">
+        <transition-group name="car">
+            <div v-for="item in getShowData" :key="item.id">
+                <div class="car-card">
+                    <div class="car-box">
+                        <div class="car-container">
+                            <div class="car-images">
+                                <img :src="item.image" alt="car - image" />
                             </div>
 
-                            <div class="info-button">
-                                <button v-if="item.price === ''" class="avilable-btn">
-                                    Available Soon
-                                </button>
-
-                                <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn">
-                                    Info
-                                </RouterLink>
+                            <div class="car-name">
+                                <h3>{{ item.name }}</h3>
                             </div>
 
-                            <div class="delete-icon">
-                                <button class="bi bi-trash" id="delete-icon"
-                                    @click.prevent="deleteCarData(item.id, item.name)"></button>
+                            <div class="description">
+                                <p>{{ truncatedDescription(item.details) }}</p>
+                            </div>
+
+                            <div class="buttons-icon">
+                                <div class="edit-icon">
+                                    <button class="bi bi-pencil" id="edit-icon" @click.prevent="editData(item)"></button>
+                                </div>
+
+                                <div class="info-button">
+                                    <button v-if="item.price === ''" class="avilable-btn">
+                                        Available Soon
+                                    </button>
+
+                                    <RouterLink :to="{ name: 'details', params: { id: item.id } }" v-else class="info-btn">
+                                        Info
+                                    </RouterLink>
+                                </div>
+
+                                <div class="delete-icon">
+                                    <button class="bi bi-trash" id="delete-icon"
+                                        @click.prevent="deleteCarData(item.id, item.name)"></button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </transition-group>
+        </transition-group>
+    </section>
 </template>
 
 <script>

@@ -69,6 +69,7 @@ export default {
 .car-price {
     color: white;
     margin-top: 30px;
+    word-break: break-all;
 }
 
 .car-name h1 {

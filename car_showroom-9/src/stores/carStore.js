@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-
-export const useCarStore = defineStore("api", {
+const useCarStore = defineStore("api", {
   state: () => {
     return {
       showData: [],
@@ -29,7 +28,7 @@ export const useCarStore = defineStore("api", {
     // GET Method - Axios API
     carsData() {
       axios
-        .get("https://testapi.io/api/dartya/resource/cardata")
+        .get(`${import.meta.env.VITE_CAR_API}`)
         .then((response) => {
           this.showData = response.data.data;
         })
@@ -39,7 +38,7 @@ export const useCarStore = defineStore("api", {
     // GET Method by ID - Axios API
     getCarbyID(carID) {
       axios
-        .get(`https://testapi.io/api/dartya/resource/cardata/${carID}`)
+        .get(`${import.meta.env.VITE_CAR_API}/${carID}`)
         .then((response) => {
           this.carDetail = response.data;
         })
@@ -110,3 +109,4 @@ export const useCarStore = defineStore("api", {
     },
   },
 });
+export { useCarStore };
