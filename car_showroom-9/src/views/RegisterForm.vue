@@ -100,25 +100,6 @@ export default {
             return today.toISOString().split('T')[0];
         },
 
-        validateDOB(value) {
-            if (!value) {
-                return "Please provide a date of birth";
-            } else {
-                const inputDOB = new Date(value);
-                const today = new Date();
-                const lastDOB = new Date("1947-08-15");
-                const dateInFutureError = "Future Date is Invalid";
-                const dateInPastError = "Date cannot be earlier than 15-08-1947";
-                if (inputDOB >= today) {
-                    return dateInFutureError;
-                } else if (inputDOB <= lastDOB) {
-                    return dateInPastError;
-                } else {
-                    return true;
-                }
-            }
-        },
-
         ...mapActions(useUserStore, ["registerUser"]),
 
         async registerUserData() {

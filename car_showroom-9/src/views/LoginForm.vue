@@ -102,10 +102,12 @@ input[type="radio"] {
     background-color: #4caf50;
     color: white;
     padding: 10px 20px;
-    border: none;
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
 .cancel-btn {
@@ -113,7 +115,6 @@ input[type="radio"] {
     background-color: red;
     color: white;
     padding: 10px 20px;
-    border: none;
     border-radius: 4px;
     cursor: pointer;
     float: left;
@@ -132,12 +133,6 @@ input[type="radio"] {
 
 .error-text {
     color: rgb(219, 81, 81);
-}
-
-.login-btn {
-    width: 50%;
-    padding: 10px 20px;
-    border-radius: 10px;
 }
 
 /* Responsive Styles */
