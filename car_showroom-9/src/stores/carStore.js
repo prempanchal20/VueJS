@@ -50,7 +50,7 @@ const useCarStore = defineStore("api", {
     // Post Method - Axios API
     addCarFormData(carData) {
       axios
-        .post("https://testapi.io/api/dartya/resource/cardata", carData)
+        .post(`${import.meta.env.VITE_CAR_API}`, carData)
         .then((response) => {
           alert(`"Created Data"\n
         "Car Name is-" ${carData.name}, 
@@ -70,7 +70,7 @@ const useCarStore = defineStore("api", {
     // Put Method - Axios API
     editCarFormData(carData) {
       axios
-        .put(`https://testapi.io/api/dartya/resource/cardata/${carData.id}`, {
+        .put(`${import.meta.env.VITE_CAR_API}/${carData.id}`, {
           name: carData.name,
           price: carData.price,
           image: carData.image,
@@ -98,7 +98,7 @@ const useCarStore = defineStore("api", {
 
       if (deleteAlert == true) {
         axios
-          .delete(`https://testapi.io/api/dartya/resource/cardata/${itemId}`)
+          .delete(`${import.meta.env.VITE_CAR_API}/${itemId}`)
           .then((response) => {
             this.carsData();
           })
