@@ -57,6 +57,7 @@ export const useUserStore = defineStore("user", {
             alert(`Login Successfully..!!`);
             this.userValid = true;
 
+            // Backup Login Credentials incase above API does not work
             try {
               const response = await axios.post("https://reqres.in/api/login", {
                 email: "eve.holt@reqres.in",
