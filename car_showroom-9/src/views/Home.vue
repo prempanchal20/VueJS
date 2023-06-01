@@ -3,7 +3,7 @@
         <ul class="menu">
             <li><button @click="addCarBtn">Add Car</button></li>
         </ul>
-        <GalleryCard :data="data" @editData="editData" />
+        <GalleryCard @editData="editData" />
 
         <CarForm v-if="openEditModel" :openEditModel="openEditModel" :isAddModel="isAddModel" :editCar="editCar"
             @onCancel="onCancel" />
